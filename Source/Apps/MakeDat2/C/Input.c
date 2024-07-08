@@ -102,9 +102,9 @@ void CalcBuf2Str(char *str, byte *cbuf)
 {    /* Calculator X-buffer -->  string buffer */
 int  ii, nn, tt;
 
-    tt = 13 - cbuf[0];  /*  ±°©ª¸ªÁ ¥¦³Á´ª¹¯°« ´°¹¬ª  */
+    tt = 13 - cbuf[0];  
     nn = 0;
-    if (cbuf[1] == 0x0C) str[nn++] = '-';  /*  ©¯¡¬ ¹ª³­¡  */
+    if (cbuf[1] == 0x0C) str[nn++] = '-';  
     if (cbuf[1] == 0x04) str[nn++] = '+';
 
     for (ii=13; ii >= 2; ii--)
@@ -112,7 +112,7 @@ int  ii, nn, tt;
        if (cbuf[ii] > 0x20) str[nn++] = cbuf[ii];
        if (ii == tt) str[nn++] = '.';
     };
-//    if (str[nn-1] == '.') nn--;   /*  µ¢²¡´¾ ¥¦³Á´ª¹¯µÀ ´°¹¬µ  */
+    /* if (str[nn-1] == '.') nn--; */
     str[nn] = 0;
 }
 
@@ -125,7 +125,7 @@ int  xx;
 TCHSTS   tsts;
 CALWRAM  Calram;
 
-//    strcpy(tbuf, text);
+    /* strcpy(tbuf, text); */
 
     LibClrBox(2, yy, 130, 10);
 

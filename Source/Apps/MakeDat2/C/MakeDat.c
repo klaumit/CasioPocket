@@ -32,10 +32,10 @@ void main()
 
         for (len = 0; len < 1; ) {
             InputCalc("File length:", flen, 36);
-            len = atol(flen);             /*  переведем в целое число  */
-//            sscanf(flen, "%ld", &len);    
+            len = atol(flen);             
+            /* sscanf(flen, "%ld", &len); */
         }
-        ltoa(len, flen, 10);              /*  напечатаем число */
+        ltoa(len, flen, 10);              
         LibPutProStr(IB_PFONT2, 120, 36, flen, 39);
 
         InputText("Fill code:", code, 52);
@@ -46,7 +46,6 @@ void main()
         LibPutFarData(132, 62, 28);     /* write data icon */
         LibPutDisp();
 
-        /*  Здесь начинается создание файла данных  */
         if (!LibGetAllEntry(fname,
                           &(fb.fsb_main_entry_), &(fb.fsb_sub_entry_)))
         {
@@ -81,7 +80,7 @@ void main()
         fi.kind = FILE_KIND_BIN;    /* binary file */
         LibFileReadEx(&fb, &fi, 0xC00/FILE_BLOCK_SIZE+1);
 
-//    InputCalc("Exit:", flen, 77);
+    /* InputCalc("Exit:", flen, 77); */
     LibJumpMenu();
 }
 
