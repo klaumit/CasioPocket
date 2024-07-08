@@ -1,3 +1,0 @@
-$(LUP)\com_lib\p\libc.lib
--L$(LUP)\lib -lp/doslib
-
