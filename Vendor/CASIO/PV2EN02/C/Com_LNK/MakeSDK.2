@@ -31,10 +31,10 @@ LINKINF = $(LINK1) $(TARSEG) $(DEBUG_FLAG) -o$(ODIR)\$(HEX) $(ALLOBJS)
 
 all: $(HEX)
 
-$(APLOBJS): $(HEADFILE) $(COMHEAD) makefile ..\com_lnk\makeSDK.1 ..\com_lnk\makeSDK.2
+$(APLOBJS): $(HEADFILE) $(COMHEAD) makefile $(PVC)\com_lnk\makeSDK.1 $(PVC)\com_lnk\makeSDK.2
 
 $(HEX): $(ALLOBJS) $(CLDIR)\libc.lib
-	lld @${$(LINKINF)} @..\COM_LNK\LINK2$(MODEL).DAT
+	lld @${$(LINKINF)} @$(PVC)\COM_LNK\LINK2$(MODEL).DAT
 	@HEADSET $(ODIR)\$@ -v$(VERSION) -pP$(SECRET) -dU -m$(MCODE) -s$(SCODE) $(MICONBMP) $(LICONBMP)
 #	@if exist $*.BIN DEL $*.BIN
 #	@hex2bin $@ $*.bin
