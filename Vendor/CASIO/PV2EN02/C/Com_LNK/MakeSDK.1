@@ -21,9 +21,10 @@ LHDIR = $(PVC)\com_lib\h
 CHDIR = $(PVC)\com_h
 CODIR = $(PVC)\com_obj\$(MODEL)
 CLDIR = $(PVC)\com_lib\$(MODEL)
+XHDIR = $(LUP)\include
 HDIR  = h
 
-CFLAG = -m$(MODEL) -a -v0 -O -c -cs $(DEBUG_FLAG) -I$(HDIR) -I$(CHDIR) -I$(LHDIR)
+CFLAG = -m$(MODEL) -a -v0 -O -c -cs $(DEBUG_FLAG) -I$(HDIR) -I$(XHDIR) -I$(CHDIR) -I$(LHDIR)
 CC    = lcc86
 VPATH = c
 

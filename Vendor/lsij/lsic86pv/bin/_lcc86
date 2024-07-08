@@ -1,8 +1,8 @@
 # _lcc86: configuration file of LSI C-86 on Windows
 -DLSI_C -v2 -O
--XC:\lsij\lsic86pv\bin
--IC:\lsij\lsic86pv\include
--LC:\lsij\lsic86pv\lib
+-X%LUP%\bin
+-I%LUP%\include
+-L%LUP%\lib
 -T$TEMP
 -acdos.obj $LCC86 &
 -lknjlib -ldoslib
