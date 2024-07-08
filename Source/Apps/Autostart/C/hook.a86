@@ -1,0 +1,107 @@
+;;;
+;;; hook.a86
+;;;
+;;; interrupt hooking rountine for AutoExec project
+;;;
+;;; Author: J. Steingraeber
+;;; Date: 2003/02/11
+;;;
+;;; Released to the Public Domain
+
+
+
+;;; how does this work?
+;;;
+;;; simple ;-)
+;;; we hook interrupt for ELP BIOS to catch light off call
+;;; immediately before PV is taken to sleep mode
+;;;
+;;; in this case we simulate PVOS behaviour by calling
+;;; the relevant routines (PV goes to sleep mode)
+;;; 
+;;; when PV comes back from sleep mode we set the flag
+;;; for menu mode switch and hook the MODE BIOS for exactly
+;;; one call
+;;;
+;;; in the mode bios call we fake the called mode from menu
+;;; mode to our own choice, and voila, our Add-In starts
+
+	
+hook_TEXT	CSEG PARA
+
+	.186
+
+;;; newint22
+;;; new ISR for ELP BIOS interrupt
+;;; checks IRET return address for power off case
+;;; and hooks MODEBIO when found to fake the modeswitch to menu
+newint22_::
+	push bp
+	mov bp,sp
+	;; first test: do we come from PVOS BIOS code segment
+	cmp [bp+4].w,0xD000	; are we called from BIOS segment?
+	jnz fwdint22		; no, so jump to original bios call
+	;; second test: is the next instruction MOV AL,00
+	push bx
+	push es
+	les bx,[bp+2]
+	cmp es:[bx].w,0x00B0	; is next instruction MOV AL,00 ?
+	jnz fwdint22pop		; no, so it's not 
+	;; simulate ELP BIOS call
+	pushf
+	callf cs:[orgint22vec_+1]
+	;; simulate power off call
+	sti
+	mov al,0
+	les bx,[bp+2]
+	callf es:[bx+3]
+	;; set flag to force mode switch
+	push 0
+	pop es
+	mov es:[0x0586].w,1
+	;; hook MODE BIOS
+	mov bx,es:[0xCA*4]
+	mov cs:[modehookvec+1].w,bx
+	mov bx,es:[0xCA*4+2]
+	mov cs:[modehookvec+3].w,bx
+	mov es:[0xCA*4].w,newintCA
+	push cs
+	pop bx
+	mov es:[0xCA*4+2].w,bx
+	;; fake return addr to skip simulated instructions
+	add [bp+2].w,7
+	;; return to PVOS
+	pop es
+	pop bx
+	pop bp
+	iret
+fwdint22pop:
+	pop es
+	pop bx
+fwdint22:
+	pop bp
+orgint22vec_::
+	jmpf 0x1234,0x5678	; installer will insert old vector here
+
+newintCA:			; MODE BIOS hook routine
+	;; restore vector; we only want to hook this one call
+	push bx
+	push ds
+	push es
+	
+	push 0
+	pop ds
+	les bx,cs:[modehookvec+1]
+	mov [0xCA*4],bx
+	mov [0xCA*4+2],es
+
+	pop es
+	pop ds
+	pop bx
+mode_::
+	mov bx,0x0E00		; mode and submode, changed by installer
+modehookvec:
+	jmpf 0x1234,0x5678	; call original vector
+hookend_::
+		
+	END
