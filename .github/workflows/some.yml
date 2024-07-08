@@ -1,0 +1,25 @@
+name: My Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+        name: All NuGet packages
+        path: nupkg
