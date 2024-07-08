@@ -1,0 +1,52 @@
+#for PocketViewer2 SDK
+
+MCODE = 08
+SCODE = FF
+TARSEG	= -TTEXT 80000
+CNVSEG  =
+
+ifdef MICON
+MICONBMP = -bI$(MICON)
+else
+MICONBMP =
+endif
+
+ifdef LICON
+LICONBMP = -bL$(LICON)
+else
+LICONBMP =
+endif
+
+LINK1 = -Fh -TDATA 19000 -TSYS_EXTDATA 18000 -TSYS_DATA 18400 -TXSTACK 1E000 -TFAR_BSS 08000 -M
+
+COMHEAD = $(CHDIR)\define.h $(CHDIR)\libc.h $(LHDIR)\l_define.h $(LHDIR)\l_libc.h 
+COMOBJS = $(CODIR)\libdata.obj
+STARTUP = $(CODIR)\start.obj
+
+ALLOBJS = $(STARTUP) $(COMOBJS) $(APLOBJS)
+
+HEX = $(TARGET).hex
+
+LINKINF = $(LINK1) $(TARSEG) $(DEBUG_FLAG) -o$(ODIR)\$(HEX) $(ALLOBJS)
+
+all: $(HEX)
+
+$(APLOBJS): $(HEADFILE) $(COMHEAD) makefile ..\com_lnk\makeSDK.1 ..\com_lnk\makeSDK.2
+
+$(HEX): $(ALLOBJS) $(CLDIR)\libc.lib
+	lld @${$(LINKINF)} @..\COM_LNK\LINK2$(MODEL).DAT
+	@HEADSET $(ODIR)\$@ -v$(VERSION) -pP$(SECRET) -dU -m$(MCODE) -s$(SCODE) $(MICONBMP) $(LICONBMP)
+#	@if exist $*.BIN DEL $*.BIN
+#	@hex2bin $@ $*.bin
+ifdef DEBUG
+	@if exist $(ODIR)\$*.lin copy $(ODIR)\$*.lin ForDebug.LIN> nul
+	@if exist $(ODIR)\$*.dbg copy $(ODIR)\$*.dbg ForDebug.DBG> nul
+	@if exist $(ODIR)\$*.map copy $(ODIR)\$*.map ForDebug.MAP> nul
+	@hex2bin $(ODIR)\$@ ..\BIN\$*.bin
+	@PUTNAME ..\BIN\$*.bin $(PROGNAME)
+#	copy $*.bin ..\BIN > NUL
+else
+	@hex2bin $(ODIR)\$@ ..\USER_BIN\$*.bin
+	@PUTNAME ..\USER_BIN\$*.bin $(PROGNAME)
+#	copy $*.bin ..\USER_BIN > NUL
+endif

@@ -1,0 +1,3 @@
+..\com_lib\p\libc.lib
+-LC:\lsij\lsic86pv\lib -lp/doslib
+

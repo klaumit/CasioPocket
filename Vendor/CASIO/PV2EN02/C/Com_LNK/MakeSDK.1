@@ -1,0 +1,31 @@
+#for PecketViewer2 SDK
+
+.SUFFIXES:
+.SUFFIXES: .obj .c
+
+ifdef PMODEL
+MODEL = p
+else
+MODEL = s
+endif
+
+ifdef DEBUG
+DEBUG_FLAG = -g3
+ODIR  = ForDEBUG
+else
+DEBUG_FLAG =
+ODIR  = obj
+endif
+
+LHDIR = ..\com_lib\h
+CHDIR = ..\com_h
+CODIR = ..\com_obj\$(MODEL)
+CLDIR = ..\com_lib\$(MODEL)
+HDIR  = h
+
+CFLAG = -m$(MODEL) -a -v0 -O -c -cs $(DEBUG_FLAG) -I$(HDIR) -I$(CHDIR) -I$(LHDIR)
+CC    = lcc86
+VPATH = c
+
+.c.obj:
+	$(CC) $(CFLAG) -o$@ $<
