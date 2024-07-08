@@ -17,10 +17,10 @@ DEBUG_FLAG =
 ODIR  = obj
 endif
 
-LHDIR = ..\com_lib\h
-CHDIR = ..\com_h
-CODIR = ..\com_obj\$(MODEL)
-CLDIR = ..\com_lib\$(MODEL)
+LHDIR = $(PVC)\com_lib\h
+CHDIR = $(PVC)\com_h
+CODIR = $(PVC)\com_obj\$(MODEL)
+CLDIR = $(PVC)\com_lib\$(MODEL)
 HDIR  = h
 
 CFLAG = -m$(MODEL) -a -v0 -O -c -cs $(DEBUG_FLAG) -I$(HDIR) -I$(CHDIR) -I$(LHDIR)
