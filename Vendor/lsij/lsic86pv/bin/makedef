@@ -1,0 +1,28 @@
+#Default rules for km-make
+
+.SUFFIXES: .obj .sof .a86 .asm .asz .psm .psz .src .mac .c .y
+
+YFLAGS =
+CFLAGS =
+AFLAGS =
+YACC = yacc
+CC = lcc86
+CC80 = lcc80
+
+.y.c:
+	$(YACC) $(YFLAGS) $<
+
+#For 8086 Compilers
+
+.y.obj:
+	$(YACC) $(YFLAGS) $<
+	$(CC) $(CFLAGS) -c -o $@ $*.c
+	del $*.c
+.c.obj:
+	$(CC) $(CFLAGS) -c $<
+.asm.obj:
+	masm $</mx;
+.a86.obj:
+	r86 $(AFLAGS) -o $@ $<
+.obj.exe .c.exe:
+	$(CC) $(CFLAGS) -o $@ $#
