@@ -20,7 +20,7 @@ jobs:
       run: .\mk.bat
 
     - name: Make
-      working-directory: ./Source/Apps Sample1
+      working-directory: ./Source/Apps/Sample1
       run: .\mk.bat
 
     - name: Upload

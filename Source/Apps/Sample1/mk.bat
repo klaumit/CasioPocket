@@ -1,5 +1,5 @@
 @echo off
-CALL ..\..\PATHSET.BAT
+CALL ..\..\..\Vendor\PATHSET.BAT
 @echo\
 @echo --- MAKE START ---
 kmmake PMODEL=1
