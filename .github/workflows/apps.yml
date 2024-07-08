@@ -17,11 +17,11 @@ jobs:
 
     - name: Make
       working-directory: ./Source/Apps/Sample
-      run: mk.bat
+      run: .\mk.bat
 
     - name: Make
       working-directory: ./Source/Apps Sample1
-      run: mk.bat
+      run: .\mk.bat
 
     - name: Upload
       uses: actions/upload-artifact@v4
