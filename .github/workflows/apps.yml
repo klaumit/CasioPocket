@@ -27,4 +27,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: All binary results
-        path: dist
+        path: ./Source/Bin
