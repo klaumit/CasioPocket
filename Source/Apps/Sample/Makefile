@@ -1,6 +1,6 @@
 #Makefile for PocketViewer2 Sample Program
 
-include $(PVC)\COM_LNK\MakeSDK.1
+include ..\COM_LNK\MakeSDK.1
 
 ### -------- Define Make Application -------- ###
 
@@ -28,6 +28,6 @@ HEADFILE = 	$(HDIR)\sample.h
 
 ### ----------------------------------------- ###
 
-include $(PVC)\COM_LNK\MakeSDK.2
+include ..\COM_LNK\MakeSDK.2
 
 
