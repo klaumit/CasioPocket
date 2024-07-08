@@ -16,11 +16,11 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Make
-      working-directory: .\Source\Apps\Sample
+      working-directory: ./Source/Apps/Sample
       run: mk.bat
 
     - name: Make
-      working-directory: .\Source\Apps\Sample1
+      working-directory: ./Source/Apps Sample1
       run: mk.bat
 
     - name: Upload
