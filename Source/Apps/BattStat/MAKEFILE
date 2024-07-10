@@ -1,0 +1,41 @@
+#Makefile for BattStat Program
+
+include $(PVC)\COM_LNK\MakeSDK.1
+
+### -------- Define Make Application -------- ###
+
+#== TargetName ==
+TARGET  = BattStat
+
+#== Program Name ==
+PROGNAME = "BattStat"
+
+#== ProgramVersion(EX. 0100->Ver1.00) ==
+VERSION = 0025
+
+#== MenuIcon (Xsize=45dot,Ysize=28dot) ==
+MICON = menuicon\icon.bmp
+
+#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==
+LICON = menuicon\Licon.bmp
+
+#== CompileObjectFile ==
+APLOBJS =	$(ODIR)\BattStat.obj \
+		$(ODIR)\GetBatt.obj  \
+		$(ODIR)\gui.obj \
+		$(ODIR)\utils.obj \
+		$(ODIR)\gui_msg.obj 
+
+
+#== IncludeHeaderFile ==
+HEADFILE = 	$(HDIR)\GetBatt.h \
+		$(HDIR)\gui.h \
+		$(HDIR)\utils.h \
+		$(HDIR)\Graphics.h \
+		$(HDIR)\gui_msg.h
+
+
+### ----------------------------------------- ###
+
+include $(PVC)\COM_LNK\MakeSDK.2
+
