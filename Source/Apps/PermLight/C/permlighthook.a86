@@ -1,0 +1,38 @@
+;;;
+;;; permlighthook
+;;;
+;;; let light stay on permanently
+;;;
+;;; this hooks the TIMER interrupt vector and resets the light on
+;;; on counter permantently
+;;;
+;;; Author: J. Steingraeber
+;;; Date: 2002-12-29
+;;;
+;;; Released to the Public Domain
+
+permlighthook_TEXT	CSEG
+
+	.186
+
+	RS 0x01C0		; start address within segment
+	
+;;; permlighthook
+;;;
+;;; hook routine installed in memory
+permlighthook_::
+	pushf
+	push ds
+	push 0
+	pop ds
+	cmp [0x05FC].b,0
+	jz permlightnoset
+	mov [0x05FD].b,10
+permlightnoset:
+	pop ds
+	popf
+permlightjmpf_::	
+	jmpf $			; original int vector will go here
+permlighthook_end_::	
+		
+	END
