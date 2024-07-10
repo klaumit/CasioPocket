@@ -1,0 +1,44 @@
+;;;
+;;; hook.a86
+;;;
+;;; interrupt hooking rountine for AutoExec project
+;;;
+;;; Author: J. Steingraeber
+;;; Date: 2006/04/01
+;;;
+;;; Released to the Public Domain
+
+
+
+;;; how does this work?
+;;;
+;;; simple ;-)
+;;; we hook interrupt for MODEBIO BIOS to catch IB_MJUMP call
+;;; if destination mode is MENU then we replace by users
+;;; selected mode (aka Add-In)
+;;;
+;;; special case: jump to main mode 0x0E (Menu) with
+;;; sub mode 0xFF (fake value, does not occure normally)
+;;; calls the real (original) menu
+	
+hook_TEXT	CSEG PARA
+
+	.186
+
+;;; newintCA
+;;; new ISR for MODEBIO BIOS interrupt
+newintCA_::			; MODE BIOS hook routine
+	cmp ah,0x04		; IB_MJUMP
+	jnz orgintCAvec_
+	cmp bh,0x0E		; IB_MMENUMD
+	jnz orgintCAvec_
+	xor bl,0xFF		; test for special value
+	jz orgintCAvec_
+	xor bl,0xFF
+mode_::
+	mov bx,0x0E00		; mode and submode, changed by installer
+orgintCAvec_::
+	jmpf 0x1234,0x5678	; installer will insert old vector here
+hookend_::
+		
+	END

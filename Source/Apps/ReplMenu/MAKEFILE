@@ -1,0 +1,32 @@
+#Makefile for PocketViewer2 Sample Program
+
+include $(PVC)\com_lnk\MakeSDK.1
+
+### -------- Define Make Application -------- ###
+
+#== TargetName ==
+TARGET  = ReplMenu
+
+#== Program Name ==
+PROGNAME = "ReplMenu"
+
+#== ProgramVersion(EX. 0100->Ver1.00) ==
+VERSION = 0103
+
+#== MenuIcon (Xsize=45dot,Ysize=28dot) ==
+MICON = menuicon\icon.bmp
+
+#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==
+LICON = menuicon\Licon.bmp
+
+#== CompileObjectFile ==
+APLOBJS =	$(ODIR)\ReplMenu.obj \
+		$(ODIR)\hook.obj
+
+#== IncludeHeaderFile ==
+HEADFILE =
+
+### ----------------------------------------- ###
+
+include $(PVC)\com_lnk\MakeSDK.2
+
