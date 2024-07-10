@@ -1,0 +1,201 @@
+;;;
+;;; modehook
+;;;
+;;; PV interrupt hooking
+;;; 
+;;; Author: J. Steingraeber
+;;; Date: 2001/06/25
+;;;
+;;; Released to the public domain
+
+	;; this one we must intercept to avoid crash
+	MODEINT EQU 0CAh
+
+	IB_MJUMP EQU 04h	; Jump to ANOTHER MODE
+	IB_MCALL EQU 05h	; Call ANOTHER MODE
+	IB_OPENSYNCJP EQU 0Ah	; Jump to SYNCHRONIZE MODE(OPEN)
+
+DATA    DSEG
+        
+oldmodeintvec: dw 0,0		; old interrupt vector
+hookroutine: dw 0,0		; address of hook routine
+	
+modehook_TEXT	CSEG
+
+	.186
+
+;;; releasehook
+;;; resets interrupt vectors for gdsbio and mode interrupt
+;;; 
+;;; call from "C" as
+;;; 
+;;;   releasemodehook();
+;;; 
+releasemodehook_::
+	push ax
+	push ds
+	push es
+	
+        pushf			; store interrupt flag
+        cli			; disable interrupts
+	
+	mov ax,DATA		; paranoid setting
+	mov ds,ax	
+        xor ax,ax
+        mov es,ax
+	mov ax,newmodeisr
+	cmp ax,es:[MODEINT*4]
+	jnz noresetvec
+	push cs
+	pop ax
+	cmp ax,es:[MODEINT*4+2]
+	jnz noresetvec
+	
+resetvec:
+	;; reset mode int vector
+        mov ax,[oldmodeintvec]
+        mov es:[MODEINT*4],ax
+        mov ax,[oldmodeintvec+2]
+        mov es:[MODEINT*4+2],ax
+
+	;; mark int vectors as unused
+	xor ax,ax
+	mov [oldmodeintvec].w,ax
+	mov [oldmodeintvec+2].w,ax
+	
+noresetvec:
+        popf			; restore interrupt flag
+	
+	pop es
+	pop ds
+	pop ax	
+	retf
+
+;;; sethook
+;;; sets interrupt vectors for gdsbio and mode interrupt
+;;; and address of hook routine
+;;; 
+;;; call from "C" as
+;;;
+;;;   setmodehook(&hookroutine);
+;;;
+;;; with
+;;;
+;;; void far hookroutine();
+;;; 
+setmodehook_::
+	mov [hookroutine].w,ax
+	mov [hookroutine+2].w,bx
+	call enablehook
+	retf
+
+;;; enablehook
+;;; sets the interrupt vectors
+enablehook:
+	push ax
+	push ds
+	push es
+	
+        pushf			; store interrupt flag
+        cli			; disable interrupts
+
+	mov ax,DATA
+	mov ds,ax	
+        xor ax,ax
+        mov es,ax
+	mov ax,newmodeisr
+	cmp ax,es:[MODEINT*4]
+	jnz setvec
+	push cs
+	pop ax
+	cmp ax,es:[MODEINT*4+2]
+	jz nosetvec
+	
+setvec:
+	;; set mode int vector
+        mov ax,es:[MODEINT*4]
+        mov [oldmodeintvec],ax
+        mov ax,es:[MODEINT*4+2]
+        mov [oldmodeintvec+2],ax
+	mov ax,newmodeisr
+	mov es:[MODEINT*4].w,ax
+	push cs
+	pop ax
+	mov es:[MODEINT*4+2],ax
+
+nosetvec:
+        popf			; restore interrupt flag
+	
+	pop es
+	pop ds
+	pop ax	
+	ret
+
+;;; newmodeisr
+;;;
+;;; we need to trap this in case MODEBIOS is called to switch mode
+;;; 
+newmodeisr:
+	push bp
+	mov bp,sp
+	
+	pushf			; orig mode int will return with iret
+	push cs			; so we need flags, CS
+	push returnaddress	; and IP as return address
+	
+	push ax			; this will hold SEG of orig mode vec
+	push ax			; this will hold OFS of orig mode vec
+	
+	push ax
+	push bx
+	push ds
+	mov ax,DATA
+	mov ds,ax
+	mov bx,sp
+	mov ax,[oldmodeintvec+2].w
+	mov ss:[bx+8],ax
+	mov ax,[oldmodeintvec].w
+	mov ss:[bx+6],ax
+	pop ds
+	pop bx
+	pop ax
+	
+	cmp ah,IB_MJUMP
+	jz callhook
+	cmp ah,IB_MCALL
+	jz callhook
+	cmp ah, IB_OPENSYNCJP
+	jnz skiphook
+callhook:
+	pusha
+	push ds
+	push es
+	mov ax,DATA
+	mov ds,ax
+	callf [hookroutine].d
+	pop es
+	pop ds
+	popa	
+skiphook:	
+	;; before we finally call orig  mode int we need to reset vectors
+	;; because we may not return from this call
+	callf releasemodehook_
+
+	retf			; this removes the two "extra" push ax
+returnaddress:
+	;; we have survived modebios call, so set our own vector
+	call enablehook
+
+	;; it's not documented if MODEBIOS does return flags
+	;; assume worst case and put it's return flags onto our stack
+	push ax
+	pushf
+	pop ax
+	mov ss:[bp+6],ax
+	pop ax
+	
+	mov sp,bp
+	pop bp
+	iret
+
+	END
