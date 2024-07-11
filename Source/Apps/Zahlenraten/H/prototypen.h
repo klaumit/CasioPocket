@@ -1,0 +1,19 @@
+/* Prototypen */
+int Titel();
+int Auswertung();
+int rechne();
+int Warte();
+int Anleitung();
+int Testbutton();
+int ClearScreen();
+int Rahmen();
+int DialogBox();
+int DisplaySetup();
+int DispKeyboard();
+int gamestart();
+int sieg();
+int kleiner();
+int groesser();
+int onscreen();
+int GetSeed();
+void randomg(void);
