@@ -1,0 +1,36 @@
+#Makefile for PocketViewer2 Domino
+
+include $(PVC)\COM_LNK\MakeSDK.1
+
+### -------- Define Make Application -------- ###
+
+#== TargetName ==
+TARGET  = Domino
+
+#== Program Name ==
+PROGNAME = "Domino"
+
+#== ProgramVersion(EX. 0100->Ver1.00) ==
+VERSION = 0120
+
+#== MenuIcon (Xsize=45dot,Ysize=28dot) ==
+MICON = menuicon\icon.bmp
+
+#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==
+LICON = menuicon\Licon.bmp
+
+#== CompileObjectFile ==
+APLOBJS =	$(ODIR)\domino.obj   \
+            $(ODIR)\dmGame.obj   \
+            $(ODIR)\dmDisply.obj \
+            $(ODIR)\dmGlobal.obj \
+            $(ODIR)\dmMenu.obj   \
+            $(ODIR)\dmLang.obj
+            
+           
+#== IncludeHeaderFile ==
+HEADFILE = 	$(HDIR)\domino.h
+
+### ----------------------------------------- ###
+
+include $(PVC)\COM_LNK\MakeSDK.2
