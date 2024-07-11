@@ -1,0 +1,86 @@
+;;;
+;;; leverpush
+;;;
+;;; get the leverpush state
+;;;
+;;; Author: J. Steingraeber
+;;; Date: 2001/06/10
+;;;
+;;; Released to the public domain
+;;;
+;;; USAGE (our of C)
+;;;
+;;; int far getleverpush();
+;;;
+;;; int i;
+;;;
+;;; i = getleverpush();
+;;;
+;;; switch (i)
+;;; {
+;;;   case 1:
+;;;     /* leverpush UP */
+;;;     [...]
+;;;     break;
+;;;
+;;;   case 2:
+;;;     /* leverpush PRESSED */
+;;;     [...]
+;;;     break;
+;;;
+;;;   case 3:
+;;;     /* leverpush DOWN */
+;;;     [...]
+;;;     break;
+;;; }
+;;;
+leverpush_TEXT	CSEG
+	.186
+;;; GETLEVERPUSH
+;;; polls the state of the leverpush switch
+;;; returns AL = 0 not activated or routine not found
+;;;         AL = 1 leverpush switch up
+;;;         AL = 2 leverpush switch pressed
+;;;         AL = 3 leverpush switch dn
+getleverpush_::
+	push bx
+	push cx
+	push es
+	mov ax,50CBh
+	mov cx,0D000h
+	mov es,cx
+	mov bx,642Fh		; 250X and 450X
+	cmp ax,es:[bx]
+	jz haveaddress
+	mov bx,664Ch		; 750(+)
+	cmp ax,es:[bx]
+	jz haveaddress
+	mov bx,688Ch		; S250 and S450
+	cmp ax,es:[bx]
+	jz haveaddress
+	mov bx,6258h		; S460 and S660
+	cmp ax,es:[bx]
+	jz haveaddress
+	xor cx,cx
+	jmp glpexit
+haveaddress:
+	push cs
+	mov ax,glpresult
+	push ax			; put our return address onto the stack
+	inc bx
+	push cx			; D000
+	push bx			; put address of PVOS routine onto stack
+	retf			; this actually calls the routine
+glpresult:
+	xor cl,0FFh		; PVOS returns 0xFF to signal "no event"
+	jz glpexit
+	xor cl,0FFh
+glpexit:
+	xor ax,ax
+	mov al,cl
+	pop es
+	pop cx
+	pop bx
+	retf
+
+	END
