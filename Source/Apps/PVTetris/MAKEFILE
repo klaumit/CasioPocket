@@ -1,0 +1,31 @@
+#Makefile for PocketViewer2 Sample Program
+
+include $(PVC)\COM_LNK\MakeSDK.1
+
+### -------- Define Make Application -------- ###
+
+#== TargetName ==
+TARGET  =PVTetris
+
+#== Program Name ==
+PROGNAME = "PVTetris"
+
+#== ProgramVersion(EX. 0100->Ver1.00) ==
+VERSION = 0100
+
+#== MenuIcon (Xsize=45dot,Ysize=28dot) ==
+MICON = menuicon\icon.bmp
+
+#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==
+LICON = menuicon\Licon.bmp
+
+#== CompileObjectFile ==
+APLOBJS =	$(ODIR)\PVTetris.obj  \
+		$(ODIR)\data.obj
+
+#== IncludeHeaderFile ==
+HEADFILE = 	$(HDIR)\PVTetris.h
+
+### ----------------------------------------- ###
+
+include $(PVC)\COM_LNK\MakeSDK.2
