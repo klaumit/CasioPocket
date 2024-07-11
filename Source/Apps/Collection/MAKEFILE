@@ -1,0 +1,57 @@
+#Makefile for Collection Program
+
+include $(PVC)\COM_LNK\MakeSDK.1
+
+### -------- Define Make Application -------- ###
+
+#== TargetName ==
+TARGET  = Collection
+
+#== Program Name ==
+PROGNAME = "Collection"
+
+#== ProgramVersion(EX. 0101->Ver2.00) ==
+VERSION = 0200
+
+#== MenuIcon (Xsize=45dot,Ysize=28dot) ==
+MICON = menuicon\icon.bmp
+
+#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==
+LICON = menuicon\Licon.bmp
+
+#== CompileObjectFile ==
+APLOBJS =	$(ODIR)\collectn.obj  \
+		$(ODIR)\mathe.obj \
+		$(ODIR)\BattStat.obj\
+		$(ODIR)\GetBatt.obj\
+		$(ODIR)\gui.obj\
+		$(ODIR)\gui_msg.obj\
+		$(ODIR)\utils.obj\
+		$(ODIR)\battle.obj\
+		$(ODIR)\btlboard.obj\
+		$(ODIR)\btldata.obj \
+		$(ODIR)\btlmisc.obj \
+		$(ODIR)\btlset.obj \
+		$(ODIR)\btllang.obj \
+		$(ODIR)\char.obj\
+		$(ODIR)\metro.obj \
+		$(ODIR)\hmenu.obj \
+		$(ODIR)\pplot.obj \
+		$(ODIR)\franka.obj 
+#		$(ODIR)\periodic.obj\
+
+#== IncludeHeaderFile ==
+HEADFILE = 	$(HDIR)\collectn.h  \
+		$(HDIR)\mathe.h \
+		$(HDIR)\GetBatt.h\
+		$(HDIR)\gui.h\
+		$(HDIR)\battle.h\
+		$(HDIR)\utils.h\
+		$(HDIR)\graphics.h\
+		$(HDIR)\metro.h\
+		$(HDIR)\franka.h
+
+### ----------------------------------------- ###
+
+include $(PVC)\COM_LNK\MakeSDK.2
+
