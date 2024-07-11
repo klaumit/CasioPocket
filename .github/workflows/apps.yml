@@ -24,6 +24,10 @@ jobs:
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/BallLine
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/Battle
       run: .\mk.bat
 
@@ -36,7 +40,23 @@ jobs:
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/Collection
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Domino
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Dumper
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/Escoba
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Filemanager
       run: .\mk.bat
 
     - name: Make
@@ -52,6 +72,14 @@ jobs:
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/IScratch
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Kassenbuch
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/LateSave
       run: .\mk.bat
 
@@ -61,6 +89,10 @@ jobs:
 
     - name: Make
       working-directory: ./Source/Apps/Mathe
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Maze
       run: .\mk.bat
 
     - name: Make
@@ -76,11 +108,27 @@ jobs:
       run: .\mk.bat
       
     - name: Make
+      working-directory: ./Source/Apps/PPlot
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/PVMail
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/PVRunner
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/PVTetris
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/PVToday
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/PVTron
       run: .\mk.bat
 
     - name: Make
@@ -93,6 +141,26 @@ jobs:
 
     - name: Make
       working-directory: ./Source/Apps/Sample1
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Sound
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/SoundLib
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/TestApp
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/ViewIcon
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Zahlenraten
       run: .\mk.bat
 
     - name: Upload
