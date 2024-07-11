@@ -1,18 +1,9 @@
 @echo off
-SET filename=Compilando Escoba ...
-echo %filename%
-CALL ..\..\PATHSET.BAT
-PATH=%PATH%;%Windir%\command
-
-echo --- FASE DE COMPILACION ---
+CALL ..\..\..\Vendor\PATHSET.BAT
+@echo\
+@echo --- MAKE START ---
 kmmake PMODEL=1
 if exist make.i del make.i
-
-echo\
-echo --- REFERENCIAS DEBUGGER ---
+@echo --- MAKE START (ForDebug)---
 kmmake PMODEL=1 DEBUG=1 > err
 if exist make.i del make.i
-
-Pause
-
-
