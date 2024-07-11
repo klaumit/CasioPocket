@@ -1,0 +1,4 @@
+ClearScreen(){
+	LibInitDisp();
+	LibPutDisp();
+}
