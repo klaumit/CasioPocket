@@ -1,0 +1,33 @@
+#Makefile for PocketViewer2 Sample Program
+
+include $(PVC)\COM_LNK\MakeSDK.1
+
+### -------- Define Make Application -------- ###
+
+#== TargetName ==
+TARGET  = helloworld
+
+#== Program Name ==
+PROGNAME = "helloworld"
+
+#== ProgramVersion(EX. 0100->Ver1.00) ==
+VERSION = 0107
+
+#== MenuIcon (Xsize=45dot,Ysize=28dot) ==
+MICON = menuicon\icon.bmp
+
+#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==
+LICON = menuicon\Licon.bmp
+
+#== CompileObjectFile ==
+APLOBJS =	$(ODIR)\hello.obj  \
+		
+
+#== IncludeHeaderFile ==
+
+
+### ----------------------------------------- ###
+
+include $(PVC)\COM_LNK\MakeSDK.2
+
+
