@@ -24,11 +24,19 @@ jobs:
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/Battle
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/BattStat
       run: .\mk.bat
 
     - name: Make
       working-directory: ./Source/Apps/BlackJak
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Escoba
       run: .\mk.bat
 
     - name: Make
@@ -40,11 +48,19 @@ jobs:
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/HelloWorld
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/LateSave
       run: .\mk.bat
 
     - name: Make
       working-directory: ./Source/Apps/MakeDat2
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/Mathe
       run: .\mk.bat
 
     - name: Make
@@ -61,6 +77,10 @@ jobs:
       
     - name: Make
       working-directory: ./Source/Apps/PVMail
+      run: .\mk.bat
+
+    - name: Make
+      working-directory: ./Source/Apps/PVToday
       run: .\mk.bat
 
     - name: Make
