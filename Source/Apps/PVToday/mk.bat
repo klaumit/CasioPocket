@@ -1,0 +1,9 @@
+@echo off
+CALL ..\..\..\Vendor\PATHSET.BAT
+@echo\
+@echo --- MAKE START ---
+kmmake PMODEL=1 DNAME=LANG_ENG
+if exist make.i del make.i
+@echo --- MAKE START (ForDebug)---
+kmmake PMODEL=1 DNAME=LANG_ENG DEBUG=1 > err
+if exist make.i del make.i

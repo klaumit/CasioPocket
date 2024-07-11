@@ -1,0 +1,276 @@
+/******************************************************************************
+*	[Title]		PVToday GraphicsData
+*	[Model] 	PocketViewer
+*	[Version]	Ver 2.10
+*
+*	Copyright (C) 2003 Jean-Michel GIRARD . All rights reserved.
+*       http://pocketcasio.free.fr
+******************************************************************************/
+#ifdef __HITACHI__
+#include <hitachi.h>
+#include <string.h>
+#include "libc.h"
+#define FAR /* nothing */
+#define NEAR /* nothing */
+#define far_strcpy strcpy
+#define far_strncpy strncpy
+#define far_strcmp strcmp
+#define far_strncmp strncmp
+#else
+#include        <stdrom.h>
+#include	"define.h"
+#include	"libc.h"
+#include	"L_define.h"
+#include	"L_libc.h"
+#define FAR far
+#define NEAR near
+#endif
+
+#include        "PVToday.h"
+
+const byte FAR bmpLeft[] =
+{
+  GSIZE(2, 11),
+  0x40, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0
+};
+
+const byte FAR bmpRight[] =
+{
+  GSIZE(2, 11),
+  0x80, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0, 0xC0
+};
+
+const byte FAR bmpButLeft[] =
+{
+  GSIZE(4, 15),
+  0x10, 0x60, 0x40, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80,0x40, 0x60, 0x10
+};
+
+const byte FAR bmpButRight[] =
+{
+  GSIZE(4, 15),
+  0x80, 0x60, 0x20, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10,0x20, 0x60, 0x80
+};
+
+/*********Skin graphics        ************************************************/
+const byte FAR bmpCalend[] =
+{
+  GSIZE(16, 22),
+  0xFF, 0xFF,0x80, 0x3F,0xFF, 0xFF,0x80, 0x01,0xAA, 0xAB,0x80, 0x01,0xAA, 0xEB,
+  0x80, 0xA1,0xAA, 0xEB,0x80, 0x01,0xAA, 0xAF,0x80, 0x09,0xAA, 0xAA,0xFF, 0xFC,
+  0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,
+  0x00, 0x00
+};
+
+const byte FAR bmpCalendLate[] =
+{
+  GSIZE(9, 11),
+  0x08, 0x7F,0x1C, 0x7F,0x22, 0x7F,0x7D, 0x7F,0x6D, 0x7F,0x75, 0x7F,0x7D, 0x7F,
+  0xFE, 0xFF,0xFF, 0xFF,0x14, 0x7F,0x08, 0x7F
+};
+
+const byte FAR bmpMail[] =
+{
+  GSIZE(16, 22),
+  0x03, 0xC0,0x04, 0x20,0x08, 0x10,0x10, 0x08,0x23, 0x04,0x45, 0xC2,0xCA, 0xB3,
+  0xB5, 0x5D,0x9B, 0xE9,0x8C, 0x31,0x88, 0x11,0x90, 0x09,0xA0, 0x05,0xC0, 0x03,
+  0xFF, 0xFF,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,
+  0x00, 0x00
+};
+
+const byte FAR bmpOwner[] =
+{
+  GSIZE(16, 22),
+  0xFF, 0xFF,0xFE, 0x01,0xC2, 0x01,0xC2, 0xFD,0xC2, 0x01,0xDA, 0xF1,0xDA, 0x01,
+  0x82, 0xFD,0xC2, 0x01,0x82, 0x01,0xC2, 0x01,0x82, 0x01,0xC2, 0x01,0xFF, 0xFF,
+  0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,
+  0x00, 0x00
+};
+
+const byte FAR bmpTask[] =
+{
+  GSIZE(16, 22),
+  0x1F, 0xC0,0xF0, 0x78,0x9F, 0xD8,0x80, 0x08,0x80, 0x18,0x80, 0x08,0x80, 0xD8,
+  0x81, 0xC8,0x9B, 0x98,0x9F, 0x08,0x8E, 0x18,0x84, 0x08,0x80, 0x18,0x80, 0x08,
+  0xD5, 0x58,0xFF, 0xF8,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,
+  0x00, 0x00
+};
+
+const byte FAR bmpClock[] =
+{
+  GSIZE(16, 22),
+  0x07, 0xC0,0x1F, 0xF0,0x31, 0x38,0x60, 0x1C,0x40, 0x3C,0xC0, 0x66,0x80, 0xC6,
+  0xA1, 0xEE,0xC1, 0xE2,0xC0, 0x06,0x40, 0x04,0x60, 0x0C,0x31, 0x18,0x1F, 0xF0,
+  0x07, 0xC0,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00,0x00, 0x00,0x00,
+  0x00,0x00,
+};
+
+const byte FAR bmpMemory[] =
+{
+  GSIZE(16, 22),
+  0x00, 0x00,0x7F, 0xF0,0x40, 0x1C,0x40, 0x14,0x40, 0x14,0x40, 0x1C,0x7F, 0xF0,
+  0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x55, 0x54,0x7F, 0xFC,
+  0x40, 0x04,0x40, 0x04,0x40, 0x04,0x7F, 0xFC,0x55, 0x54,0x00, 0x00,0x00, 0x00,
+  0x00, 0x00
+};
+
+const byte FAR *pbmpGraphs[]=
+{
+  bmpClock, bmpOwner, bmpCalend ,bmpTask, bmpMail, bmpMemory
+};
+
+const byte FAR bmpProgress[]=
+{
+  GSIZE(4, 11),
+  0x0F, 0xFF, 0x0F, 0x0F, 0x0F, 0x5F, 0xAF, 0x3F, 0xCF, 0xFF, 0x0F
+};
+
+const byte FAR bmpPower[] =
+{
+  GSIZE(12, 11),
+  0x30, 0x7F,	0xCC, 0x9F,	0x95, 0x2F,	0x8E, 0x4F,	0x94, 0x3F,
+  0x8F, 0x9F,	0x94, 0xAF,	0x8D, 0x4F,	0x95, 0x8F,	0x8C, 0x0F,
+  0xFC, 0x0F
+};
+
+/* V 1.20 , refresh button */
+const byte FAR bmpRefresh[] =
+{
+  GSIZE(9, 11),
+  0x08, 0x7F,	0x0C, 0x7F,	0x3E, 0x7F,	0x4C, 0x7F,	0x48, 0x7F,
+  0x41, 0x7F,	0x09, 0x7F,	0x19, 0x7F,	0x3E, 0x7F,	0x18, 0x7F,
+  0x08, 0x7F
+};
+
+
+/*********Local  declarations  ************************************************/
+static TCHTBL TchDispGraWFOK[] =
+{
+  { 59,134,59+42-1,134+14-1,
+    ACT_MAKE | ACT_MOVE_IN | ACT_MOVE_OUT | ACT_BREAK_IN,
+    0x9000, 0x0000
+  },
+
+  { 0, 0, 0, 0,ACT_NONE,OBJ_END,0x0000 }
+};
+
+T_ICON FAR TiconGraWFOK  = { &TchDispGraWFOK[0], NULL, NULL, 0x00 };
+
+/*********Function declaration ************************************************/
+void PVGraphWaitForOK(void);
+void PVGraphDrawButton(int iX1,int iY1,int iX2,int iY2, char * szCaption);
+void PVGraphPutMsgDlg(char * szCaption);
+
+/******************************************************************************
+*	[Titel]         PVGraphWaitForOK
+*	[Arguments]	None
+*	[ReturnVAL]	None
+*       Wait for a click on the OK button
+******************************************************************************/
+void PVGraphWaitForOK(void)
+{
+  TCHSTS  tsts;
+  byte    bLoopEnd;
+
+  /* Draw buttons  */
+  PVGraphDrawButton(59,134,42,14,SZ_OKBUTTON);
+
+  /* Init current touch scan */
+  LibTchStackPush(NULL);
+  LibTchStackPush( TchHardIcon );
+  LibTchStackPush( TchDispGraWFOK );
+
+  /* do while touch set */
+  LibPutDisp();
+  LibTchInit();
+  bLoopEnd = FALSE;
+  while(bLoopEnd==FALSE)
+  {
+    LibTchWait(&tsts);
+    switch(tsts.obj)
+    {
+      case OBJ_LPSW_PUSH:
+      case 0x9000:
+        bLoopEnd = (LibIconClick2( &TiconGraWFOK, &tsts ) == TRUE);
+        break;
+      case OBJ_HIC_ESC:
+        bLoopEnd = TRUE;
+        break;
+      default:
+        LibRepOff();
+        break;
+    }
+  }
+}
+
+/******************************************************************************
+*	[Titel]         PVGraphDrawButton
+*	[Arguments]     iX1,iY1,iX2,iY2 : coord of button
+*	[ReturnVAL]	None
+*       Drawn a button with round angles
+******************************************************************************/
+void PVGraphDrawButton(int iX1,int iY1,int iX2,int iY2, char * szCaption)
+{
+  int iSize;
+
+  iSize = LibGetProStrSize(IB_PFONT1,(byte*) szCaption);
+  LibClrBox(iX1,iY1,iX2,iY2);
+  LibPutGraph( iX1, iY1, bmpButLeft);
+  LibPutLineSub(iX1+3,iY1,(iX2+iX1)-3,iY1,IB_GDS_OR);
+  LibPutLineSub(iX1+3,iY2+iY1,(iX2+iX1)-3,iY2+iY1,IB_GDS_OR);
+  LibPutGraph( (iX2+iX1)-4, iY1, bmpButRight);
+  LibPutProStr(IB_PFONT1,iX1+(iX2-iSize)/2,iY1+4,(byte *) szCaption,iX2-2);
+}
+
+/******************************************************************************
+*	[Titel]         PVGraphPutMsgDlg
+*	[Arguments]     iX1,iY1,iX2,iY2 : coord of button
+*	[ReturnVAL]	None
+*       Show a window's message
+******************************************************************************/
+void PVGraphPutMsgDlg(char * szCaption)
+{
+  int iSize;
+  char szCap[255],szCap1[255];
+  char *szFind;
+
+  /* Open a new windows */
+  LibOpenWindow(0, 69, 159, 90);
+
+  /* Draw windows */
+  LibPutGraph( 0, 69+1, bmpLeft);
+  iSize = LibGetProStrSize(IB_PFONT1,(byte *) SZ_ERRORTITLE);
+  LibPutProStr(IB_PFONT2,80-iSize/2, 69+3, (byte *) SZ_ERRORTITLE, iSize);
+  LibPutGraph( 0+159-2, 69+1, bmpRight);
+  LibReverse(0+2, 69+1, 159-2-2, 11);
+  LibGdsBox(0,69+12,0+159-1,69+90);
+  LibPutFarData(8,69+20,10);
+
+  /* Show center text (test also for multi lines) */
+  szFind = strchr(szCaption,'@');
+  if (szFind != NULL)
+  {
+    strncpy(szCap,szCaption,szFind-szCaption);
+    strcpy(szCap1,szFind+1);
+  }
+  else
+  {
+    strcpy(szCap,szCaption);
+    strcpy(szCap1,"");
+  }
+  iSize = LibGetProStrSize(IB_PFONT1,(byte *) szCap);
+  iSize= (iSize>159?159:iSize);
+  LibPutProStr(IB_PFONT1,80-iSize/2,69+40,(byte *) szCap,iSize);
+  iSize = LibGetProStrSize(IB_PFONT1,(byte *) szCap1);
+  iSize= (iSize>159?159:iSize);
+  LibPutProStr(IB_PFONT1,80-iSize/2,69+40+11,(byte *) szCap1,iSize);
+
+  /* Wait for OK */
+  PVGraphWaitForOK();
+
+  /* Quit safely this form */
+  while(LibTchStackPop()!=NULL);
+  LibCloseWindow();
+  LibPutDisp();
+}
+
