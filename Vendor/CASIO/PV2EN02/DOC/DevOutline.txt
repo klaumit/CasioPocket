@@ -1,0 +1,207 @@
+<< Outline of Software Development >>
+
+				( Developmet Outline )
+					|
+				[Making of Development Directory]
+					|	C\
+					|
+				[Making of Program]
+					|	C\xxx\
+					|
+				[Debugging of Program]
+					|	SIM\SIM3022.EXE
+					|	SIM\PV750.CPJ
+					|
+				[Download Addin Program]
+					|	Tool\PVM.EXE
+					|	C\USER_Bin\*.BIN
+					|
+				     ( END )
+
+
+1.Outline of Directory
+
+	C:\
+	<CASIO>
+	|
+	+------	<PV2xxx>
+	|	|
+	|	+------	<BIOS>		BIOS binary file for Simulator
+	|	+------	<C>		C Program
+	|	|	|
+	|	|	+------	<BIN>		Binary for Simulator
+	|	|	+------	<COM_H>		Common Header
+	|	|	+------	<COM_LIB>	CASIO Library
+	|	|	+------	<COM_LNK>	Common Link Information
+	|	|	+------	<COM_OBJ>	Common Object
+	|	|	+------	<SAMPLE>	Sample Addin Program
+	|	|	+------	<USER_BIN>	Addin Program Binary Files
+	|	|
+	|	+------ <DOC>		Documents
+	|	+------	<SIM>		Simulator
+	|	+------	<TOOL>		Tools
+	|
+
+2.Making of Development Directory
+
+	1)The directory is made in C\. (The directory name is a development name.)
+
+	  Example:	<C>
+	  		:
+			+------	<SAMPLE>
+			+------	<USER_BIN>
+			+------	<GAME>		<- New Directory
+
+	2)Please copy all content of <SAMPLE> directory onto a new directory.
+
+	  Example:	<C\SAMPLE>			<C\GAME>
+			|				|
+			|MK.BAT			->	|MK.BAT
+			|MAKEFILE		->	|MAKEFILE
+			+------	<C>		->	+------	<C>		C souce files
+			+------	<H>		->	+------	<H>		C header files
+			+------	<Menuicon>	->	+------	<Menuicon>	Menu icon bmp
+			+------	<OBJ>		->	+------	<OBJ>		Addin compile object
+			+------	<ForDEBUG>	->	+------	<ForDEBUG>	compile object for simulator
+
+3.Making of Program
+
+	1)Please put the source file of C program on <C\NewDirectory\C>. 
+	  Please put the header file of C program on <C\NewDirectory\H>.
+	  Please do not change an individual size, and change the BMP file by the binary of black and white.
+
+	  Exsample:	<C\GAME>
+			|
+			|MK.BAT
+			|MAKEFILE
+			+------	<C>
+			|	|GAME.C
+			|	+
+			|
+			+------	<H>
+			|	|GAME.H
+			|	+
+			|
+			+------	<Menuicon>
+			|	|icon.bmp
+			|	|Licon.bmp
+			|	+
+			|
+			+------	<ForDEBUG>
+			+------	<OBJ>
+
+	2)"MAKEFILE" changes by the developed program.
+
+	  Exsample:
+		"MAKEFILE"
+		+---------------------------------------------------------------+
+		|#Makefile for PocketViewer Sample Program			|
+		|								|
+		|include ..\COM_LNK\MakeSDK.1					|<-Do not change.
+		|								|
+		|### -------- Define Make Application -------- ###		|
+		|								|
+		|#== TargetName ==						|
+		|TARGET  = GAME							|<-Change in this time
+		|								|
+		|#== Program Name ==						|
+		|PROGNAME = "Game"						|<-Change in this time
+		|								|
+		|#== ProgramVersion(Ver0.50) ==					|
+		|VERSION = 0050							|<-Change in this time
+		|								|
+		|#== MenuIcon (Xsize=45dot,Ysize=28dot) ==			|
+		|MICON = menuicon\icon.bmp					|
+		|								|
+		|#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==			|
+		|LICON = menuicon\Licon.bmp					|
+		|								|
+		|#== CompileObjectFile ==					|
+		|APLOBJS = $(ODIR)\game.obj					|<-Change in this time
+		|								|
+		|#== IncludeHeaderFile ==					|
+		|HEADFILE = $(HDIR)\game.h					|<-Change in this time
+		|								|
+		|### ----------------------------------------- ###		|
+		|								|
+		|include ..\COM_LNK\MakeSDK.2					|<-Do not change.
+		+---------------------------------------------------------------+
+		Change neither $(ODIR) nor $(HDIR).  
+
+
+	3)Please do the compilation and the link by using "MK.BAT".
+
+	4)The made program is output to <C\USER_BIN>. 
+
+	  Example:	<C\USER_BIN>
+	  		|GAME.BIN		<-Made Addin Program
+			|
+
+	(Attention)
+	When generating a file in the "Addin" program, write a generated file name with the document and so on.
+
+
+4.Debugging of Program
+
+	1)Please change the "SIM\PV750.CPJ" like the following example.
+
+	  Example:
+	
+		"SIM\PV750.CPJ"
+		[GENERAL]
+		ProjectName=PocketViewer
+		CurrentDir=C:\CASIO\PV2EM02\
+		SourceDir=C:\CASIO\PV2EM02\C\GAME\		<- It Changed from "SAMPLE" to "GAME"
+
+			:
+
+		[CSGROUP5]
+
+			:
+
+		CHIPNAME3=UserProgram1
+		CHIPFILE3=C\Bin\GAME.BIN		<- It Changed from "SAMPLE.BIN" to "GAME.BIN".
+		CHIPPROGAREA3=0
+		CHIPOFFSET3=140000
+		CHIPKIND3=1
+		CHIPCODE3=
+		CHIPBUS3=8
+
+			:
+
+	2)Please execute "SIM\SIM3022.EXE".
+
+	3)Operation of "SIM3022" (1)
+	   Please open "PV750.CPJ" by [File] and [Open Project].
+	   Next operation is [Source] and [Load Symbol File].(Example:Symbol file is "C\GAME\ForDEBUG.MAP".)
+	   Program run is [F9] key or [Run] and [Run].(PV emulation start.)
+	   Please refer to "DOC\Simdoc22_E.pdf" for details.
+
+	4)Operation of PV on "SIM3022" (1)
+	   At first, reset PV.
+	   Please interrupt emulation with the [ESC] key when PV becomes a clock display.  
+
+	5)Operation of "SIM3022" (2)
+	   Please click [File] and [Close Project],and select "No" at "Save Current Project?".
+	   Please operate above-mentioned 3) again.  
+
+	6)Operation of PV on "SIM3022" (2)
+	   Please do not reset PV this time,and click MENU when PV becomes a clock display.
+	   The Addin program can be executed from the Menu screen.  
+
+
+5.Download Addin Program
+
+	1)Please connect with Cradle cable between PC and PV,and execute "TOOL\PVM.EXE".
+
+	2)Operation of PV
+	   Please click the "Menu" icon, "MenuBar" and "Download" on PV.
+	   After that,PV enters in waiting mode for connecting to PC.
+
+	3)Operation of "PV Applications Manager"(PVM)
+	   Please click [Execute] and [Inport from PV].(PV enters the state of a remote control.)
+	   Next operation opens "C\USER_BIN\GAME.BIN" by [File] and [Add file].
+	   Please click [Execute] and [Inport from PV] if "C\USER_BIN\GAME.BIN" is loaded into "PV Applications Manager".  
+	   ("GAME.BIN" is an example of this time.)
+	   Please refer to "DOC\PVM.TXT" for details.
+

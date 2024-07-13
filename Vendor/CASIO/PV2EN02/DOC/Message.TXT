@@ -1,0 +1,483 @@
+ No	Message(english)
++--+---------------------------------------------------------------------------------+
+  0:Reminder
+  1:Schedule
+  2:To Do
+  3:Contacts
+  4:Memo
+  5:Expense
+  6:Conversion
+  7:Financial Cal
+  8:Quick-Memo
+  9:Game
+ 10:Pop Up Tools
+ 11:World Clock
+ 12:Quick Schedule
+ 13:Set city
+ 14:New
+ 15:Edit
+ 16:Search
+ 17:View
+ 18:System
+ 19:Option
+ 20:Cut
+ 21:Copy
+ 22:Paste
+ 23:Delete
+ 24:Item edit
+ 25:Item copy
+ 26:To secret area
+ 27:To open area
+ 28:Action Menu
+ 29:Spreadsheet
+ 30:PC sync		/* GY500/501/505 */
+ 31:All
+ 32:Full screen
+ 33:Sound
+ 34:Capacity
+ 35:Memory management
+ 36:Language
+ 37:Contrast
+ 38:Set date/time
+ 39:Format
+ 40:Touch Panel Alignment
+ 41:Data communication
+ 42:
+ 43:Yes
+ 44:No
+ 45:Power setting	/* ZX481 ONLY */
+ 46:Screen tap power on	/* ZX481 ONLY */
+ 47:Screen Options	/* GY500/501/505 */
+ 48:Secret
+ 49:List
+ 50:Use start-up screen	/* GY500/501/505 */
+ 51:Backlight time	/* GY500/501/505 */
+ 52:Rate table
+ 53:Rate edit
+ 54:Name edit
+ 55:Name edit
+ 56:All data items
+ 57:Single data item
+ 58:Category data items
+ 59:sec			/* GY500/501/505 */
+ 60:Set
+ 61:Set date
+ 62:Set time
+ 63:Auto power off
+ 64:Week format
+ 65:Keyboard
+ 66:Initial
+ 67:Initial
+ 68:
+ 69:English
+ 70:Espa·ol
+ 71:Deutsch
+ 72:Franºais
+ 73:Italiano
+ 74:Free
+ 75:Free
+ 76:Password edit
+ 77:Password
+ 78:Schedule alarm
+ 79:Reminder alarm
+ 80:To Do alarm
+ 81:Daily alarm
+ 82:Key tone
+ 83:Cut
+ 84:Up
+ 85:Lighter
+ 86:Darker
+ 87:Send
+ 88:Receive
+ 89:Tools
+ 90:
+ 91:
+ 92:
+ 93:
+ 94:Euro
+ 95:Odd
+ 96:Business <-> Personal
+ 97:General
+ 98:Rate
+ 99:Rounding
+100:Currency
+101:
+102:Model
+103:
+104:CODE
+105:SMBL
+106:NEXT
+107:CAPS
+108:SPACE
+109:Esc
+110:Clr
+111:Exe
+112:
+113:
+114:
+115:Date
+116:Time
+117:
+118:Month
+119:Week
+120:Type
+121:Weekly
+122:
+123:1-month
+124:2-month
+125:3-month
+126:
+127:
+128:To Do list
+129:Reminder list
+130:
+131:
+132:
+133:Multi-date item
+134:
+135:Highlight
+136:Unhighlight
+137:
+138:Appointment
+139:Specified data items
+140:
+141:
+142:
+143:Schedule data items
+144:Done data items
+145:To Do data items
+146:Reminder data items
+147:All Scheduler data items
+148:Description
+149:Start Date
+150:End Date
+151:
+152:
+153:
+154:Category
+155:
+156:
+157:
+158:
+159:Daily
+160:Day
+161:Monthly 1
+162:Monthly 2
+163:Yearly 1
+164:Yearly 2
+165:
+166:
+167:D
+168:W
+169:M1
+170:M2
+171:Y1
+172:Y2
+173:
+174:
+175:
+176:
+177:From
+178:To
+179:SU
+180:MO
+181:TU
+182:WE
+183:TH
+184:FR
+185:SA
+186:S
+187:M
+188:T
+189:W
+190:T
+191:F
+192:S
+193:
+194:
+195:Business
+196:Personal
+197:
+198:
+199:
+200:
+201:Address (B)
+202:Address (H)
+203:Fax (B)
+204:Phone (B)
+205:E-mail
+206:Company
+207:Fax (H)
+208:Phone (H)
+209:Mobile
+210:Note
+211:Position
+212:Department
+213:Name
+214:Free 1
+215:Free 2
+216:Free 3
+217:Free 4
+218:Free 5
+219:Free 6
+220:Free 7
+221:Free 8
+222:Free 9
+223:Free 10
+224:Free 11
+225:Free 12
+226:Free 13
+227:
+228:
+229:
+230:
+231:
+232:
+233:
+234:
+235:
+236:
+237:
+238:
+239:
+240:
+241:
+242:
+243:Prompt edit
+244:
+245:
+246:Untitled 1
+247:Untitled 2
+248:Untitled 3
+249:Untitled 4
+250:Untitled 5
+251:
+252:Font
+253:Memo?
+254:
+255:
+256:
+257:Move
+258:Amount
+259:Payment type
+260:Expense type
+261:Select type
+262:Label edit
+263:Total
+264:
+265:
+266:
+267:
+268:
+269:
+270:
+271:Menu edit
+272:
+273:Download
+274:OK to Delete@the selected data?
+275:
+276:OS Update					/*@take*/
+277:Operating system@will be updated.@Continue?	/*@take*/
+278:Alarm
+279:
+280:
+281:January
+282:February
+283:March
+284:April
+285:May
+286:June
+287:July
+288:August
+289:September
+290:October
+291:November
+292:December
+293:Jan
+294:Feb
+295:Mar
+296:Apr
+297:May
+298:Jun
+299:Jul
+300:Aug
+301:Sep
+302:Oct
+303:Nov
+304:Dec
+305:Sun
+306:Mon
+307:Tue
+308:Wed
+309:Thu
+310:Fri
+311:Sat
+312:Level1
+313:Level2
+314:Level3
+315:Level
+316:High score
+317:Congratulations!
+318:Batteries are getting@weak!@Replace them as@instructed in the@User's Guide.
+319:
+320:Data error!@Do you want to view@data before resetting?
+321:
+322:Data error!@Consult your User's@Guide for correct@procedure.
+323:Data item not@found!
+324:Memory is full!
+325:
+326:Input all@required data!
+327:Make sure you@are inputting@the date@correctly.
+328:Check your home time@setting and correct it@if necessary!
+329:Deleting!
+330:OK to delete all data@items?
+331:OK to delete the data@item?
+332:OK to delete all data@items in this category?@-category name-
+333:Complete!@This image will@appear whenever@you power up.	/* GY500/501/505 */
+334:
+335:
+336:
+337:Searching!
+338:The reset operation@deletes all data in@memory!@Do you want to@continue?
+339:The next step starts@data deletion and unit@reset!@Do you want to@continue?
+340:The unit is being@initialized.@Please wait.
+341:Data stored!
+342:Setting has been@made!
+343:
+344:
+345:Wrong password!
+346:Check the secret@memory area!
+347:Password matches!
+348:Password@registered!
+349:Transfer the data to@the open memory@area?
+350:Transfer the data to@the secret memory@area?
+351:This procedure@registers a password@and creates a secret@memory area.
+352:Register the@password?
+353:Performing@memory@management!
+354:This operation may@take a long time to@perform.@Do you want to@continue?
+355:Use the stylus to@touch the center of@each of the crosses@on the screen.
+356:Touch panel@alignment@complete!
+357:
+358:
+359:
+360:
+361:100 alarms are@already set!
+362:All dates you select@must be within the@same year.
+363:
+364:Unhighlight all dates in@the specified period?
+365:
+366:That alarm time@is already passed!
+367:That alarm time@is already used!
+368:Make sure you@are inputting the@time correctly.
+369:That date is@outside of the@specified period.
+370:
+371:You cannot specify@more than 60 repeats!
+372:
+373:OK to delete all@Scheduler data items?
+374:OK to delete all To Do@data items?
+375:OK to delete all done@data items?
+376:OK to delete all@Reminder data items?
+377:OK to delete all@Schedule data items?
+378:OK to delete all data@items within the@specified period?
+379:Move the memo to@the location below the@highlighted memo name?
+380:
+381:Please wait...
+382:Ready to receive!
+383:Ready to send!
+384:Receiving!
+385:Sending!
+386:Communication@error!
+387:Stopped!
+388:Data communication@in progress!
+389:QWERTY
+390:AZERTY
+391:QWERTZ
+392:
+393:Week 1
+394:Week 2
+395:Week 3
+396:Week 4
+397:Week 5
+398:Score
+399:Scheduler
+400:Period Total
+401:Version
+402:Clock
+403:Menu
+404:System tools
+405:Add in
+406:System Library
+407:PVOS
+408:Common Library
+409:Message & Font
+410:Graphic
+411:Swap
+412:
+413:Date?
+414:Time?
+415:Alarm Time?
+416:Description?
+417:Due Date?
+418:Alarm Date?
+419:
+420:Payment type?
+421:Expense type?
+422:Calendar
+423:
+424:
+425:
+426:Sunday
+427:Monday
+428:Tuesday
+429:Wednesday
+430:Thursday
+431:Friday
+432:Saturday
+433:min
+434:M/D/Y
+435:D/M/Y
+436:Y/M/D
+437:Set up parameters
+438:Parity
+439:Even
+440:
+441:None
+442:Bit length
+443:BPS
+444:New High Score
+445:Game-1
+446:Game-2
+447:OK
+448:
+449:Scheduler alarms
+450:Latest calls
+451:Memory maintenance@can increase memory@for new storage.
+452:Change Home Time city?@Doing so can affect@Schedule data and@alarms.
+453:That name is@already used!
+454:Start Date?
+455:End Date?
+456:7
+457:8
+458:4800
+459:9600
+460:
+461:
+462:Pocket Viewer
+463:BUSINESS NAVIGATOR
+464:SF/CSF/NX
+465:PV Model
+466:BN Model
+467:SF/CSF/NX Model
+468:- Send -
+469:- Receive -
+470:Contacts (B)
+471:Contacts (P)
+472:Calculator
+473:(Other)
+474:Contacts (1~5)
+475:Memo (1~5)
+476:This operation clears@the latest calls list.@Do you want to@continue?
+477:Save
+478:Screen copy
+479:Start-Up Screen	/* GY500/501/505 */
+480:Payment
