@@ -1,6 +1,6 @@
 #Makefile for PocketViewer2 Sample Program
 
-include ..\COM_LNK\MakeSDK.1
+include $(PVC)\COM_LNK\MakeSDK.1
 
 ### -------- Define Make Application -------- ###
 
@@ -28,4 +28,4 @@ APLOBJS =	$(ODIR)\periodic.obj  \
 
 ### ----------------------------------------- ###
 
-include ..\COM_LNK\MakeSDK.2
+include $(PVC)\COM_LNK\MakeSDK.2
