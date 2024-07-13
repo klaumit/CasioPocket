@@ -1,0 +1,29 @@
+#Makefile for "melons"
+
+include ..\COM_LNK\MakeSDK.1
+
+### -------- Define Make Application -------- ###
+
+#== TargetName ==
+TARGET  = chimpa
+
+#== Program Name ==
+PROGNAME = "chimpa"
+
+#== ProgramVersion(EX. 0100->Ver1.00) ==
+VERSION = 0100
+
+#== MenuIcon (Xsize=45dot,Ysize=28dot) ==
+MICON = menuicon\MICON.BMP
+
+#== ListMenuIcon (Xsize=27dot,Ysize=20dot) ==
+LICON = menuicon\LICON.BMP
+
+#== CompileObjectFile ==
+APLOBJS =	$(ODIR)\chimpa.obj	
+#== IncludeHeaderFile ==
+HEADFILE =	$(HDIR)\chimpa.h 	
+### ----------------------------------------- ###
+
+include ..\COM_LNK\MakeSDK.2
+
