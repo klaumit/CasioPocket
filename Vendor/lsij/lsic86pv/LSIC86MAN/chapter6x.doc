@@ -1,0 +1,458 @@
+{\rtf1\ansi \deff29\deflang1033{\fonttbl{\f1\froman\fcharset2\fprq2 Symbol;}{\f3\fmodern\fcharset0\fprq1 Courier;}{\f5\fswiss\fcharset0\fprq2 Arial;}{\f11\fmodern\fcharset0\fprq1 Courier New;}
+{\f29\froman\fcharset128\fprq1 \'82l\'82r \'96\'be\'92\'a9;}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;
+\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}{\stylesheet{\qj\nowidctlpar \f29\fs21\kerning2 \snext0 Normal;}{\*
+\cs10 \additive Default Paragraph Font;}{\s15\qj\nowidctlpar\tqc\tx4252\tqr\tx8504 \f29\fs21\kerning2 \sbasedon0\snext15 footer;}{\*\cs16 \additive\sbasedon10 page number;}{\s17\qj\nowidctlpar\tqc\tx4320\tqr\tx8640 \f29\fs21\kerning2 \sbasedon0\snext17 
+header;}}{\info{\title 981}{\author \'8fH\'93c\'8f\'b9\'94\'fc}{\operator tshimizu}{\creatim\yr1998\mo7\dy30\hr11\min7}{\revtim\yr1998\mo8\dy14\hr12\min31}{\version2}{\edmins27}{\nofpages14}{\nofwords3053}{\nofchars17406}{\*\company  }{\vern57431}}
+\paperw11906\paperh16838\margl1701\margr1701\margt1985\margb1701 \deftab851\widowctrl\ftnbj\aenddoc\pgnstart77\hyphcaps0\formshade \fet0\sectd \pgnrestart\pgnstarts77\linex0\headery851\footery992\colsx425\endnhere\titlepg {\header \pard\plain 
+\s17\qj\nowidctlpar\tqc\tx4320\tqr\tx8640\pvpara\phmrg\posxr\posy0 \f29\fs21\kerning2 {\field{\*\fldinst {\cs16 PAGE  }}{\fldrslt {\cs16\lang1024 87}}}{\cs16 
+\par }\pard \s17\qj\ri360\nowidctlpar\tqc\tx4320\tqr\tx8640 {\f5\fs20 Chapter 6    Programming for i8086\tab \tab }
+\par }{\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang{\pntxta )}}{\*\pnseclvl5
+\pndec\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl6\pnlcltr\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang
+{\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}\pard\plain \qj\nowidctlpar \f29\fs21\kerning2 {\f5\fs28 Chapter 6\tab Programming for i8086}{\b\f5\fs28 
+\par 
+\par }{\f5\fs22 This chapter describes how to use the functions depending on the type of hardware, internal data expressions, and function calls on the machine.
+\par This chapter is indented for programmers who are familiar with the machine language of i8086.  Programmers who wish to write C language subroutines in the assembly language must read this chapter thoroughly.
+\par 
+\par 
+\par }{\b\f5\fs24 6.1\tab Memory models
+\par }{\f5\fs22 
+The i8086 processor has a memory area of 1M bytes.  However, the program can refer to only an area of 64 Kbytes in this memory area.  Therefore, it is preferable to express the pointer type using 16 bits.  In the C language, whether the pointer points the
+ program or data can be determined based on program sentences.  Therefore, it is possible to allocate 64 Kbytes to each of the program and data areas.
+\par 
+\par However, this is not enough to write an application program.  In some cases, it is required to refer to a large data area even though the efficiency may lower.  To achieve this, this compiler provides several memory models to allow programmers to select o
+ptimal one suitable for the purpose.
+\par 
+\par Four types of memory models, S, P, D, and L, are available.
+\par 
+\par }\pard \qj\fi-1275\li1701\nowidctlpar {\f5\fs22 S model\tab Both the program and data are limited to 64 Kbytes.  Normally, this model is used.  The S model is the most efficient memory model in the program size and speed.
+\par 
+\par P model\tab Up to 64 Kbytes is allowed for the data, but up to 1 Mbytes is allowed for the program.  However, the size of the program in one module (file) is limited to 64 Kbytes.  This model is efficient next to the S model.
+\par 
+\par D model\tab Up to 64 K bytes is allowed for the program, but up to 1 M bytes is allowed for the total data capacity.  However, the size of each data (variable) is limited to 64 Kbytes.  The efficiency of this memory model is low when c
+ompared to the S and P models.
+\par \page L model\tab 
+Both the program and data can use up to 1 Mbytes.  However, the size of the program in each module (file) is limited to 64 Kbytes and the size of each data (variable) is also limited to 64 Kbytes.  The efficiency of this memory model is also low,
+ the same as the D model.
+\par }\pard \qj\nowidctlpar {\f5\fs24 
+\par 
+\par }{\b\f5\fs24 6.2\tab far, near
+\par }{\f5\fs22 In the LSI C, it is possible to handle large data using the S model or P model.  To achieve this, the keyword \ldblquote far\rdblquote  is provided.  Additionally, to improve the efficiency of the D model and L model, the keyword \ldblquote 
+near\rdblquote  is provided.  There are three kinds of methods available to use the keywords \ldblquote far\rdblquote  and \ldblquote near\rdblquote .
+\par 
+\par }\pard \qj\li284\nowidctlpar {\f5\fs22 {\field{\*\fldinst SYMBOL 183 \\f "Symbol" \\s 11}{\fldrslt\f1\fs22}}}{\f5\fs22  }{\f11\fs22 far}{\f5\fs22  function and }{\f11\fs22 near}{\f5\fs22  function
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 int far foo ();
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar {\f5\fs22 The above example shows that the function }{\f11\fs22 foo}{\f5\fs22  is called by the }{\f11\fs22 CALLF (far CALL)}{\f5\fs22  command.  In the P and L models, all functions become }{\f11\fs22 far }{\f5\fs22 
+functions automatically.
+\par 
+\par Using this format, far function can be defined in the S and D models.  At this time, the far function }{\f11\fs22 foo}{\f5\fs22  is normally placed in the }{\f11\fs22 TEXT}{\f5\fs22  segment in the same manner as n
+ormal functions, but returned to the function, which has called, by the }{\f11\fs22 RETF}{\f5\fs22  command instead of the }{\f11\fs22 RET}{\f5\fs22  command.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 static void near bar ();
+\par }\pard \qj\nowidctlpar {\fs22 
+\par }\pard \qj\li567\nowidctlpar {\f5\fs22 The function }{\f11\fs22 bar}{\f5\fs22  is called by the }{\f11\fs22 CALL (near CALL)}{\f5\fs22  command.  In the S and D models, all functions become near functions automatically.  
+\par 
+\par Using this format, near function can be defined in the P and L models.  At this time, the function }{\f11\fs22 bar }{\f5\fs22 is placed in the segment generated from the file name in the same manner as other functions in the file where the function }{
+\f11\fs22 bar }{\f5\fs22 is defined (see section 6.3, \ldblquote Segment name\rdblquote ), but the }{\f11\fs22 RET }{\f5\fs22 command is used instead of the }{\f11\fs22 RETF}{\f5\fs22  to exit the function.
+\par Since a pair of the near }{\f11\fs22 CALL}{\f5\fs22  and }{\f11\fs22 RET}{\f5\fs22  is used to call the function }{\f11\fs22 bar}{\f5\fs22 , the efficiency of code size and execution speed is improved.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar {\f5\fs22 However, the near function cannot be called from other modules (files).  Since other modules are different modules, that is, different segments, the near function cannot be called using the }{\f11\fs22 CALL}{
+\f5\fs22  command and returned using the }{\f11\fs22 RET}{\f5\fs22  command.
+\par Therefore, the near function must be defined as the static function.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li284\nowidctlpar {\f5\fs22 {\field{\*\fldinst SYMBOL 183 \\f "Symbol" \\s 11}{\fldrslt\f1\fs22}}}{\f5\fs22  }{\f11\fs22 far}{\f5\fs22  variable
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 \page }{\f3\fs22 int far x;
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar {\f5\fs22 The above example shows that the variable x is placed in the individual segment.  All variables are handled as near unless far is put.  The size of each far variable is limited to 64 Kbytes.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li284\nowidctlpar {\f5\fs22 {\field{\*\fldinst SYMBOL 183 \\f "Symbol" \\s 11}{\fldrslt\f1\fs22}}}{\f5\fs22  }{\f11\fs22 far}{\f5\fs22  pointer
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 int far *fp;
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar {\f5\fs22 The above example shows that the pointer variable}{\f11\fs22  fp}{\f5\fs22  can point any segment.
+\par In the S and P models, all pointers become near pointers unless otherwise specified.  In the D and L models, all pointers become far pointers un
+less otherwise specified.  The far pointer can be used in any model.  If large data is handled locally, only necessary pointers are explicitly declared as far and the S model is used to obtain higher efficiency.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar {\f5\fs22 If}{\f11\fs22  int}{\f5\fs22 
+ type data is added or subtracted to/from the far pointer or address of the far variable, the offset of the address is only changed.  To make calculations including segments, long type data must be added or subtracted.  As a result of calculation, the off
+set becomes 15 or less in the normalization format.
+\par 
+\par The following program shows an example using the far pointer.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 clear_graphic_memory ()
+\par \{
+\par \tab unsigned i;
+\par \tab char far *p;
+\par \tab 
+\par \tab p = (char far *) 0xA8000000;
+\par \tab for (i = 0; i < 32768; i++)
+\par \tab p [i] =0;
+\par \}
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar {\f5\fs22 When comparing far pointers, they are handled as 32-bit unsigned positive number.
+\par At this time, note that pointers cannot be compared correctly if both pointers are not normalized.  When OL is added to the pointer, the normalized address can be obtained.
+\par }\pard \qj\nowidctlpar {\f5\fs24 \page }{\b\f5\fs24 6.3\tab Segment name
+\par }{\f5\fs22 The compiler places programs and data in segments shown in Table 6.1.  }{\f11\fs22 x}{\f5\fs22 
+ in the Table shows the name of a file containing sources.  For example, when the program in the file foo.c is compiled using the P model, it is placed in the segment named }{\f11\fs22 foo_TEXT}{\f5\fs22 
+.  Additionally, n in the Table shows a segment appearing number and becomes like }{\f11\fs22 foo_1_DATA}{\f5\fs22  or }{\f11\fs22 foo_2_BSS}{\f5\fs22 .
+\par }{\f5\fs24 
+\par }\trowd \trgaph99\trleft284 \clbrdrt\brdrdb\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx2552\clbrdrt\brdrdb\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx4568\clbrdrt\brdrdb\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx6584\clbrdrt\brdrdb\brdrw15 \clbrdrb
+\brdrs\brdrw15 \cellx8600 \pard \qj\nowidctlpar\intbl {\fs20 \cell }{\f5\fs20 Segment name\cell Group name\cell Class name\cell }\pard \widctlpar\intbl {\fs20 \row }\trowd \trgaph99\trleft284 \cellx2552\clbrdrl\brdrs\brdrw15 \cellx4568\cellx6584\cellx8600
+ \pard \qj\nowidctlpar\intbl   {\f5\fs20 Program using S or D\cell TEXT\cell CGROUP\cell CODE\cell }\pard \widctlpar\intbl {\fs20 \row }\pard \qj\nowidctlpar\intbl {\f5\fs20 Program using P or L\cell x_TEXT\cell \cell CODE\cell }\pard \widctlpar\intbl {
+\fs20 \row }\pard \qj\nowidctlpar\intbl {\f5\fs20 Initialized data\cell DATA\cell DGROUP\cell DATA\cell }\pard \widctlpar\intbl {\fs20 \row }\pard \qj\nowidctlpar\intbl {\f5\fs20 Uninitialized data\cell BSS\cell DGROUP\cell DATA\cell }\pard 
+\widctlpar\intbl {\fs20 \row }\pard \qj\nowidctlpar\intbl {\f5\fs20 Initialized far data\cell x_n_DATA\cell \cell FAR_DATA\cell }\pard \widctlpar\intbl {\fs20 \row }\trowd \trgaph99\trleft284 \clbrdrb\brdrdb\brdrw15 \cellx2552\clbrdrl\brdrs\brdrw15 
+\clbrdrb\brdrdb\brdrw15 \cellx4568\clbrdrb\brdrdb\brdrw15 \cellx6584\clbrdrb\brdrdb\brdrw15 \cellx8600 \pard \qj\nowidctlpar\intbl {\f5\fs20 Uninitialized data\cell x_n_BSS\cell \cell FAR_BSS\cell }\pard \widctlpar\intbl {\fs20 \row }\pard 
+\qc\nowidctlpar {\f5\fs22 Table 6.1\tab Segment name
+\par }\pard \qj\nowidctlpar {\f5\fs24 
+\par }{\b\f5\fs24 
+\par 6.4\tab Internal data expression
+\par }{\f5\fs22 Table 6.2 shows the internal expressions of basic type data.
+\par 
+\par }\trowd \trgaph99\trleft284\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \clbrdrt\brdrdb\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx4678\clbrdrt\brdrdb\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx7088 \pard \qj\nowidctlpar\intbl {\f5\fs20 
+Data type\cell Number of bits\cell }\pard \widctlpar\intbl {\fs24 \row }\trowd \trgaph99\trleft284\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \cellx4678\clbrdrl\brdrs\brdrw15 \cellx7088 \pard \qj\nowidctlpar\intbl {\f11\fs20 
+char, signed char, unsigned char\cell 8\cell }\pard \widctlpar\intbl {\fs24 \row }\pard \qj\nowidctlpar\intbl {\f11\fs20 short, unsigned short\cell 16\cell }\pard \widctlpar\intbl {\fs24 \row }\pard \qj\nowidctlpar\intbl {\f11\fs20 int, unsigned int\cell 
+16\cell }\pard \widctlpar\intbl {\fs24 \row }\pard \qj\nowidctlpar\intbl {\f11\fs20 long, unsigned long\cell 32\cell }\pard \widctlpar\intbl {\fs24 \row }\pard \qj\nowidctlpar\intbl {\f11\fs20 float\cell 32 (= 1 + 8 + 23)\cell }\pard \widctlpar\intbl {
+\fs24 \row }\pard \qj\nowidctlpar\intbl {\f11\fs20 double\cell 64 (= 1 + 11 + 52)\cell }\pard \widctlpar\intbl {\fs24 \row }\pard \qj\nowidctlpar\intbl {\f11\fs20 long double\cell 80 (= 1 + 15 + 64)\cell }\pard \widctlpar\intbl {\fs24 \row }\pard 
+\qj\nowidctlpar\intbl {\f11\fs20 near pointer\cell 16\cell }\pard \widctlpar\intbl {\fs24 \row }\trowd \trgaph99\trleft284\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \clbrdrb\brdrdb\brdrw15 \cellx4678\clbrdrl\brdrs\brdrw15 \clbrdrb\brdrdb\brdrw15 
+\cellx7088 \pard \qj\nowidctlpar\intbl {\f11\fs20 far pointer\cell 32\cell }\pard \widctlpar\intbl {\fs24 \row }\pard \qj\li851\nowidctlpar {\f5\fs22 Table 6.2\tab Number of bits for basic type data
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par All data types are expressed in decimal and the lowest byte is placed at the smallest address (little endian).  Address boundaries are not adjusted.  The standard char is the same as unsigned char.  However, it can be changed to signed char using the }{
+\f11\fs22 -cs}{\f5\fs22  option in the compiler.  A negative number of singed }{\f11\fs22 int}{\f5\fs22  type data is expressed using two\rquote s complement.
+\par \page The floating-point type data is composed of three fields, sign bit, exponent part, and mantissa part.  The Table below shows the number of bits for each field.  All types of
+ data contain a sign bit of 1 bit.  If the sign bit is 0 and 1, it shows positive and negative data, respectively.  The exponent part is normally biased.  A bit pattern of }{\f11\fs22 0111\'85111}{\f5\fs22 
+ shows that the exponent part is 0.  In the float and double types, first 1 is omitted from the mantissa part and it is considered that the decimal point is located at the leftmost position.  In the long double type, first 1 is not omitted and it is consi
+dered that the decimal point is located between bit}{\f5\fs22\sub 63}{\f5\fs22  and bit}{\f5\fs22\sub 62}{\f5\fs22 .
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 The following shows internal expressions of several floating-point type data in hexadecimal.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\trowd \trgaph99\trleft284\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr
+\brdrs\brdrw15 \cellx1418\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx3812\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx6206\clbrdrt\brdrs\brdrw15 
+\clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx8600 \pard \qj\nowidctlpar\intbl {\fs22 \cell }\pard \qj\nowidctlpar\intbl {\f5\fs22 float\cell double\cell long double\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft284\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 
+\cellx1418\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx3812\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx6206\clbrdrt\brdrs\brdrw15 \clbrdrl
+\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx8600 \pard \qj\nowidctlpar\intbl {\f11\fs18 0\cell }\pard \qj\nowidctlpar\intbl {\f11\fs18 00000000\cell 0000000000000000\cell 00000000000000000000\cell }\pard \widctlpar\intbl {\f11\fs18 
+\row }\pard \qj\nowidctlpar\intbl {\f11\fs18 1\cell }\pard \qj\nowidctlpar\intbl {\f11\fs18 3F800000\cell 3FF0000000000000\cell 3FFF8000000000000000\cell }\pard \widctlpar\intbl {\f11\fs18 \row }\pard \qj\nowidctlpar\intbl {\f11\fs18 3\cell }\pard 
+\qj\nowidctlpar\intbl {\f11\fs18 40400000\cell 4008000000000000\cell 4000C000000000000000\cell }\pard \widctlpar\intbl {\f11\fs18 \row }\pard \qj\nowidctlpar\intbl {\f11\fs18 -3\cell }\pard \qj\nowidctlpar\intbl {\f11\fs18 C0400000\cell C008000000000000
+\cell C000C000000000000000\cell }\pard \widctlpar\intbl {\f11\fs18 \row }\trowd \trgaph99\trleft284\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \clbrdrt
+\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx1418\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx3812\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb
+\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx6206\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx8600 \pard \qj\nowidctlpar\intbl {\f11\fs18 0.25\cell }\pard \qj\nowidctlpar\intbl {\f11\fs18 3E800000\cell 
+3FD0000000000000\cell 3FFD8000000000000000\cell }\pard \widctlpar\intbl {\f11\fs18 \row }\pard \qj\nowidctlpar {\fs24 
+\par }\pard \qj\nowidctlpar {\f5\fs22 There are two types of pointer type data, near and far.  near pointer is used in the S and P models while far pointer is used in the D and L models.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+The near pointer points data in the data segment implicitly, and has only an offset of 16 bits.  The far pointer can point any address and have 32 bits in total, a segment of 16 bits and an offset of 16 bits.  The segment and offset are at the higher and 
+lower positions, respectively.
+\par }\pard \qj\nowidctlpar {\f5\fs24 
+\par 
+\par }\pard \qj\nowidctlpar {\b\f5\fs24 6.5\tab Register allocation
+\par }\pard \qj\nowidctlpar {\f5\fs22 The compiler allocates variables, the memory class of which is declared as register, to the registers.  In addition to this, variables declared as auto are also to be allocated to the registers in t
+he LSI C.  Since local variables without the memory class are considered as auto, they are allocated to the registers.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 If you do not wish to allocate a variable to the registers, you must put the volatile qualifier.  Variables, for which volatile is specified, are not allocated to the registers.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 The compiler reads a function onto the memory, checks usage of each variable, and excludes variables which refer to addresses (variables, to which & unary operator is applied) from the register allocation.  After 
+that, the compiler allocates the variables to optimal registers selected from registers AX, BX, CX, DX, SI, and DI.  If the variables are not allocated to the registers completely, excess variables are located on the memory.
+\par }\pard \qj\nowidctlpar {\f5\fs22 \page Normally, whether or not the variables are allocated to the registers does not affect the execution results of the program.  However, if the register variables are used in the function which calls the }{\f11\fs22 
+setjmp ()}{\f5\fs22  function, this register may contain an unexpected value when the function is returned by the }{\f11\fs22 longjump ()}{\f5\fs22  function.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 For example, if the following program is run, it is expected to display }{\f11\fs22 3142}{\f5\fs22 .
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 jmp_buf env;
+\par 
+\par bar ()
+\par \{
+\par \tab longjmp (env, i);
+\par \}
+\par 
+\par foo ()
+\par \{
+\par \tab int x;
+\par \tab x = 1234;
+\par \tab if (setjump (env) == 0) \{
+\par \tab x = 3142;
+\par \tab bar ();
+\par \tab \}
+\par 
+\par \tab printf (\ldblquote %d\\n\rdblquote , x);
+\par \}
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par As a result of program execution, however, 1234 is displayed actually.
+\par }\pard \qj\nowidctlpar {\f5\fs22 If the compiler allocates the variable x to the register automatically, the value in the register (value x) at calling of }{\f11\fs22 setjmp ()}{\f5\fs22  is registered and it is retrieved by the }{\f11\fs22 longjmp ()}{
+\f5\fs22  function.
+\par }\pard \qj\nowidctlpar {\f5\fs22 To solve such problem, local variables must be declared as volatile in the function which calls}{\f11\fs22  setjmp ().}{\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 Generally, there are no limitations on use of register variables other than the above problem.
+\par }\pard \qj\nowidctlpar {\f5\fs24 
+\par 
+\par }\pard \qj\nowidctlpar {\b\f5\fs24 6.6\tab Function call protocol
+\par }\pard \qj\nowidctlpar {\f5\fs22 This section describes how the function parameters are transferred and the function values are set.  If you wish to make a subroutine using the assembly language, you must read this section thoroughly.
+\par }\pard \qj\nowidctlpar {\f5\fs22 \page To call a function, the near }{\f11\fs22 CALL}{\f5\fs22  command is used for the S and D models while the far }{\f11\fs22 CALL}{\f5\fs22  command is used for the P and L models.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+The compiler adds an underscore (_) following the name of the function or external variable.  This may prevent the same spelling as that used for the assembler reserved words.  Therefore, to define a function or external variable using the assembly langua
+ge, an underscore (_) is added following its name.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 Regardless of the memory model, the function, which is called up, does not break values in registers SS, CS, SP, BP, DI, SI, DX, a
+nd CX.  If necessary, the data in the registers is pushed to the stack area at the beginning of the function, and then popped at the last to restore the data in the registers.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 When the parameters are stacked in the stack area, the data in the stack area is restored by the function which calls a function instead of the function which is called up.  Therefore, the }{\f11\fs22 RET n}{\f5\fs22 
+ command (command which returns with n added to SP) cannot be used.  The normal }{\f11\fs22 RET}{\f5\fs22  command must be used.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 To exchange the function parameters, the registers AX, BX, CX, and DX, and stack are used.  The following rules are applied to each parameter from the left the parameters to determine a register where the parameter is put.
+
+\par }\pard \qj\fi-567\li851\sl-100\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 1.\tab 
+If the parameter type is char, unsigned char, signed char, 1-byte structure, or 1-byte enumeration, that parameter is allocated to AL, BL, CL, or DL which is not used.  If all registers are not empty, one word is kept on the stack.
+\par }\pard \qj\fi-567\li851\sl-100\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 2.\tab If the parameter type is }{\f11\fs22 int}{\f5\fs22 , unsigned }{\f11\fs22 int}{\f5\fs22 , short, unsigned short, near pointer, 2-
+byte structure, or 2-byte enumeration, that parameter is allocated to AX, BX, CX, or DX which is not used.  If all registers are not empty, one word is kept on the stack.
+\par }\pard \qj\fi-567\li851\sl-100\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 3.\tab 
+If the parameter type is long, unsigned long, far pointer, 4-byte structure, or 4-byte enumeration, that parameter is allocated to BXAX or DXCX register pair which is not used.  If all registers are not empty, two words are kept on the stack.
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 At this time, BX and DX show an upper word while AX and CX show a lower word.
+\par }\pard \qj\fi-567\li851\sl-100\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 4.\tab If all above
+ rules are not applied to a parameter, this parameter is placed on the stack.  However, if the number of the data bytes is an odd number, additional one byte and the number of even bytes are kept.
+\par }\pard \qj\fi-567\li851\sl-100\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+If the function uses variable parameters, the above rules are not applied.  At this time, the stack area is used to exchange the parameters.  That is, it is the same as that the above rules are applied assuming that all registers are in use.
+\par }\pard \qj\fi-567\li851\sl-100\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 The function value is allocated to the register or stack area according to the following rules.
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 \page 1.\tab If the function type is }{\f11\fs22 char}{\f5\fs22 , }{\f11\fs22 unsigned char}{\f5\fs22 , }{\f11\fs22 signed char}{\f5\fs22 
+, 1-byte structure, or 1-byte enumeration, the function value is allocated to the AL register.
+\par }\pard \qj\fi-567\li851\sl-120\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 2.\tab If the function type is }{\f11\fs22 int}{\f5\fs22 , }{\f11\fs22 unsigned int}{\f5\fs22 , }{\f11\fs22 short}{\f5\fs22 , }{\f11\fs22 unsigned short, near pointer}{\f5\fs22 
+, 2-byte structure, or 2-byte enumeration, the function value is allocated to the AX register.
+\par }\pard \qj\fi-567\li851\sl-120\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 3.\tab If the function type is }{\f11\fs22 long}{\f5\fs22 , }{\f11\fs22 unsigned long}{\f5\fs22 , }{\f11\fs22 far pointer}{\f5\fs22 
+, 4-byte structure, or 4-byte enumeration, the function value is allocated to the BXAX register pair. At this time, BX and AX show an upper word and lower word, respectively.
+\par }\pard \qj\fi-567\li851\sl-120\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 4.\tab 
+If the above registers are not available, the function value is put at an address next to the address at which the last parameter on the stack is put.  This area must be kept by the function calling side.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 Since the current compiler does not transfer the address at which the function value is to be stored, the variable parameter function cannot return }{\f11\fs22 float}{\f5\fs22 , }{\f11\fs22 double}{\f5\fs22 , }{\f11\fs22 
+long double}{\f5\fs22 , and structure type data.  (This may be corrected in the future.)
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 The following shows a program example.  In this example, SP means a value of the stack pointer at the inlet of the function, and it is assumed that all the functions are near functions which are to be called by the near }{
+\f11\fs22 CALL}{\f5\fs22  command.  Therefore, if you use a far function, you need to add 2 to deviation against SP.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 char x (int a, char b, char c, char near *d, int e);
+\par }\pard \qj\li1702\nowidctlpar {\f11\fs22 a\tab = AX
+\par b\tab = BL
+\par c\tab = CL
+\par d\tab = DX
+\par e\tab = [SP + 2\'85SP + 3]
+\par function value \tab = AL
+\par }\pard \qj\fi-567\li851\sl-120\slmult0\nowidctlpar {\f11\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 long y (int a, long b, char c);
+\par }\pard \qj\li1702\nowidctlpar {\f11\fs22 a\tab = AX
+\par b\tab = DXCX
+\par c\tab = BL
+\par function value \tab = BXAX
+\par }\pard \qj\fi-567\li1702\sl-120\slmult0\nowidctlpar {\f11\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 float z (double a, int b, float c);
+\par }\pard \qj\li1702\nowidctlpar {\f11\fs22 a\tab = [SP + 2\'85SP + 9]
+\par b\tab = AX
+\par c\tab = [SP + 10\'85SP + 13]
+\par function value \tab = [SP + 14\'85SP + 17]
+\par }\pard \qj\fi-567\li1702\sl-120\slmult0\nowidctlpar {\f11\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 int printf (FILE *fp, char *fmt, \'85);
+\par }\pard \qj\li1702\nowidctlpar {\f11\fs22 fp\tab = [SP + 2\'85SP + 3]
+\par fmt\tab = [SP + 4\'85SP + 5]
+\par function value\tab = AX
+\par }\pard \qj\nowidctlpar {\f5\fs24 \page }{\b\f5\fs24 6.7\tab Assembly in-line function
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+In this compiler, it is possible to embed the assembly language in the C program.  For function containing few commands, the overhead due to execution of the CALL or RET command cannot be disregarded.  Therefore, the in-line develop
+ment may improve the efficiency.  This is called an assembly in-line function that has the following function call format.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li284\nowidctlpar {\f11\fs22 _asm_XXX (\ldblquote \\n \'85. }{\f5\fs22 assembly language command string}{\f11\fs22 \\n\rdblquote , }{\f5\fs22 parameter list}{\f11\fs22 )
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par Where, XXX is a desired alphanumeric character string and null can also be used.
+\par }\pard \qj\nowidctlpar {\f5\fs22 Assembly language command to be generated is put at the first parameter.  To write commands with more than 2 lines, \ldblquote }{\fs22 \\}{\f5\fs22 n\rdblquote 
+ is put halfway.  At this time, the compiler generates the character string at the first parameter directly instead 
+of generation of the CALL command.  Other portions are handled in the same manner as function call.  Therefore, the parameters can be transferred and the function values can also be returned.  Portions from the second parameter of the in-line function are
+ handled as normal function parameters.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 It is not possible to write assembler pseudo commands and commands that change the stack pointer in the in-line function.  Additionally, it is thought that few commands are to be written in the in-line function.  If 
+many commands are written, compilation may not be made correctly.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 As for a typical example, the following shows a program that handles the port input/output.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 char_asm_c (char *);
+\par char_asm_cc (char *, char);
+\par #define inp10() \tab \tab _asm_c(\ldblquote \\n\\tIN\\tAL,16\\n\rdblquote )
+\par #define outp11(c) \tab _asm_cc(\ldblquote \\n\\tOUT\\t17,AL\\n\rdblquote , c)
+\par 
+\par void put (char c)
+\par \{
+\par \tab while ((inp10 () & 1) == 0)
+\par \tab ;
+\par \tab outp11(c);
+\par \}
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par The above program generates the following codes.
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 \page }{\f3\fs22 put_::
+\par \tab PUSH\tab CX
+\par \tab MOV\tab CL, AL
+\par _2:
+\par \tab IN\tab AL, 16
+\par \tab TEST\tab AL, 1
+\par \tab JE\tab _2
+\par \tab MOV\tab AL, CL
+\par \tab OUT\tab 17, AL
+\par \tab POP\tab CX
+\par \tab RET
+\par 
+\par }\pard \qj\nowidctlpar {\f5\fs22 As shown in the above example, it is recommended to define the in-line function as macro for easy reading.
+\par In the above example, the port numbers are fixed.  The program is modified to transfer the port numbers using the parameters.
+\par To achieve this, two types of methods are available as described below.
+\par 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 1.\tab A part of the character string is changed to embed the port number.
+\par 2.\tab Port number is transferred through the DX register.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par 
+\par }{\b\f5\fs22 6.7.1\tab Embedding the port number in the character string
+\par }{\f5\fs22 This is achieved using the preprocessor function.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 char_asm_c (char *);
+\par char_asm_cc (char *, char);
+\par #define _qq_(s)\tab \tab #s
+\par #define _q_(s)\tab \tab _qq_(s)
+\par #define inp (p)\tab \tab _asm_c (\ldblquote \\n\\tIN\\tAL, \ldblquote  _q_(__eval__(p)))
+\par #define outp (p, c)\tab _asm_cc (\ldblquote \\n\\tOUT\\t\ldblquote  _q_(__eval__(p)) \ldblquote , AL\rdblquote , (c))
+\par 
+\par 
+\par void put (char c)
+\par \{
+\par \tab while ((inp (0x10) & 1) == 0)
+\par \tab ;
+\par \tab outp (0x11, c);
+\par \}
+\par }\pard \qj\nowidctlpar {\f3\fs22 \page }{\f5\fs22 If the definition is made as shown above, }{\f3\fs22 outp (0x11, c)}{\f5\fs22  is developed by the preprocessor as shown below.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 _asm_c (\ldblquote \\n\\tOUT\\t\rdblquote  \ldblquote 17\rdblquote  \ldblquote ,AL\rdblquote , c)
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par Additionally, it is further developed as shown below if character strings placed in parallel are connected.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 _asm_c (\ldblquote \\n\\tOUT\\t17,AL\rdblquote , c)
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }{\f3\fs22 inp ()}{\f5\fs22  is also developed in the same manner.
+\par 
+\par Note that data needs to be converted into decimal data using the}{\f11\fs22  __eval__}{\f5\fs22  macro since the hexadecimal and octal expressions of the assembly language and C language are different from each other.
+\par 
+\par }{\b\f5\fs22 6.7.2\tab Transferring the port number through the register
+\par }{\f5\fs22 Forth parameter in the function is allocated to the DX register.  This is used to transfer the port number. 
+ At this time, however, second and third parameters must be skipped.  In the LSI C-86, parameters can be omitted by writing the name of the in-line function in the function parameter.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 char _asm_ci ();
+\par char _asm_cci ();
+\par #define inp (p)\tab \tab _asm_ci (\ldblquote \\n\\tIN\\tAL, DX\ldblquote , _asm_ci, _asm_ci, _asm_ci, (p))
+\par #define outp (p, c)\tab _asm_cci (\ldblquote \\n\\tOUT\\tDX, AL\ldblquote , (c), _asm_ci, _asm_ci, (p))
+\par 
+\par void put (char c)
+\par \{
+\par \tab while ((inp (0x10) & 1) == 0)
+\par \tab ;
+\par \tab outp (0x11, c);
+\par \}
+\par }\pard \qj\nowidctlpar {\f5\fs22 \page }{\b\f5\fs24 6.8\tab #pragma
+\par }{\f11\fs22 #pragma}{\f5\fs22  is a command that gives the instruction to the compiler and has the following format.
+\par 
+\par }\pard \qj\li284\nowidctlpar {\f11\fs22 #pragma command
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par The following commands are applied.
+\par 
+\par 
+\par }\pard \qj\fi-1843\li2127\nowidctlpar {\f11\fs22 checksp}{\f5\fs22 \tab This command generates the code that inspects the stack overflow at the inlet of the function.
+\par 
+\par }{\f11\fs22 nochecksp}{\f5\fs22 \tab On the contrary to checksp, this command does not generate the code that inspects the stack overflow at the inlet of the function.
+\par 
+\par }{\f11\fs22 optimize time}{\f5\fs22 \tab This command instructs the compiler to focus on the object code execution speed.  That is, this command instructs that an object code with the faster speed is needed even though the object code is large.
+\par 
+\par }{\f11\fs22 optimize space}{\f5\fs22 \tab This command instructs the compiler to focus on the small object code.  That is, this command instructs that a small object code is needed even though the speed is slow.
+\par 
+\par }{\f11\fs22 recursive}{\f5\fs22 \tab This command sets the default function mode to recursive.
+\par 
+\par }{\f11\fs22 nonrec}{\f5\fs22 \tab This command sets the default function mode to nonrec.
+\par 
+\par }{\f11\fs22 regalo}{\f5\fs22 \tab This command allocates the variables to the registers.
+\par 
+\par }{\f11\fs22 noregalo}{\f5\fs22 \tab This command prohibits to allocate the variables to the registers.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par 
+\par The default settings are }{\f3\fs22 nochecksp, optimize space, recursive,}{\f5\fs22  and }{\f3\fs22 regalo}{\f5\fs22 .
+\par }{\f5\fs24 
+\par 
+\par }{\b\f5\fs24 6.9\tab Program example of connection between the C and assembly languages
+\par }{\f5\fs24 
+\par }{\f5\fs22 At the end of this chapter, a simple program example to connect the C and assembly languages is shown.  This program converts the decimal number into hexadecimal number, and displays it.
+\par }\pard \qj\sl-240\slmult0\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 bar.c:
+\par }\pard \qj\li851\sl-300\slmult0\nowidctlpar {\f3\fs22 \page #include <stdio.h>
+\par #include <stdlib.h>
+\par extern char foo (char);
+\par char\tab upperflag;
+\par int\tab main (int argc, char *argv [])
+\par \{
+\par \tab int\tab n;
+\par \tab n = atoi (argv [i]);
+\par \tab upperflag = argv [2][0] - \lquote 1\rquote ;
+\par \tab putchar (foo (n >> 12));
+\par \tab putchar (foo (n >> 8));
+\par \tab putchar (foo (n >> 4));
+\par \tab putchar (foo (n));
+\par \}
+\par 
+\par foo.a86:
+\par \tab CGROUP\tab GROUP\tab TEXT
+\par \tab TEXT\tab CSEG
+\par 
+\par \tab EXTERN \tab upperflag_
+\par 
+\par foo_::
+\par \tab AND\tab AL, 00FH
+\par \tab ADD\tab AL, 090H
+\par \tab DAA
+\par \tab ADC\tab AL, 040H
+\par \tab DAA
+\par 
+\par \tab CMP\tab [upperflag_].B, 0
+\par \tab JNE\tab _1
+\par \tab CMP\tab AL, \lquote A\rquote 
+\par }\pard \qj\fi851\li851\sl-300\slmult0\nowidctlpar {\f3\fs22 JB\tab _1
+\par \tab ADD\tab AL, \lquote a\rquote  - \lquote A\rquote 
+\par }\pard \qj\li851\sl-300\slmult0\nowidctlpar {\f3\fs22 \page \tab _1:
+\par }\pard \qj\li851\sl-300\slmult0\nowidctlpar {\f3\fs22 \tab RET
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 If a decimal number is given from the command line in this program, it is converted into the hexadecimal number.  This number is then displayed.
+\par The following shows a program in which the assembly language part is written using MASH.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par 
+\par 
+\par }\pard \qj\li851\sl-300\slmult0\nowidctlpar {\f3\fs22 foo.asm:
+\par \tab CGROUP\tab GROUP\tab TEXT
+\par 
+\par \tab \tab \tab PUBLIC\tab foo_
+\par \tab \tab \tab EXTERN\tab upperflag_:BYTE
+\par 
+\par \tab TEXT\tab \tab SEGMENT BYTE PUBLIC \lquote CODE\rquote 
+\par \tab \tab \tab ASSUME\tab CS: TEXT
+\par \tab 
+\par \tab foo_\tab \tab PROC\tab \tab NEAR
+\par \tab \tab \tab AND\tab \tab AL, 00FH
+\par \tab \tab \tab ADD\tab \tab AL, 090H
+\par \tab \tab \tab DAA
+\par \tab \tab \tab ADC\tab \tab AL, 040H
+\par \tab \tab \tab DAA
+\par 
+\par \tab \tab \tab CMP\tab \tab upperflag_, 0
+\par \tab \tab \tab JNE\tab \tab _1
+\par \tab \tab \tab CMP\tab \tab AL, \lquote A\rquote 
+\par \tab \tab \tab JB\tab \tab _1
+\par \tab \tab \tab \tab \tab ADD\tab AL, \lquote a\rquote  - \lquote A\rquote 
+\par \tab \tab \tab _1:
+\par 
+\par \tab \tab \tab RET
+\par \tab foo_\tab \tab ENDP
+\par \tab TEXT\tab \tab ENDS
+\par \tab \tab \tab END
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }}

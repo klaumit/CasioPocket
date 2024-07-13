@@ -1,0 +1,407 @@
+{\rtf1\ansi \deff29\deflang1033{\fonttbl{\f3\fmodern\fcharset0\fprq1 Courier;}{\f5\fswiss\fcharset0\fprq2 Arial;}{\f11\fmodern\fcharset0\fprq1 Courier New;}{\f29\froman\fcharset128\fprq1 \'82l\'82r \'96\'be\'92\'a9;}}
+{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;
+\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}{\stylesheet{\qj\nowidctlpar \f29\fs21\kerning2 \snext0 Normal;}{\*\cs10 \additive Default Paragraph Font;}{
+\s15\qj\nowidctlpar\tqc\tx4252\tqr\tx8504 \f29\fs21\kerning2 \sbasedon0\snext15 footer;}{\*\cs16 \additive\sbasedon10 page number;}{\s17\qj\nowidctlpar\tqc\tx4320\tqr\tx8640 \f29\fs21\kerning2 \sbasedon0\snext17 header;}}{\info{\title 983}
+{\author \'8fH\'93c\'8f\'b9\'94\'fc}{\operator tshimizu}{\creatim\yr1998\mo7\dy30\hr11\min7}{\revtim\yr1998\mo8\dy14\hr12\min59}{\version3}{\edmins28}{\nofpages13}{\nofwords2717}{\nofchars15488}{\*\company  }{\vern57431}}
+\paperw11906\paperh16838\margl1701\margr1701\margt1985\margb1701 \deftab851\widowctrl\ftnbj\aenddoc\pgnstart131\hyphcaps0\formshade \fet0\sectd \pgnrestart\pgnstarts131\linex0\headery851\footery992\colsx425\endnhere {\header \pard\plain 
+\s17\qj\nowidctlpar\tqc\tx4320\tqr\tx8640\pvpara\phmrg\posxr\posy0 \f29\fs21\kerning2 {\field{\*\fldinst {\cs16 PAGE  }}{\fldrslt {\cs16\lang1024 143}}}{\cs16 
+\par }\pard \s17\qj\ri360\nowidctlpar\tqc\tx4320\tqr\tx8640 {\f5\fs20 Chapter 8    Kmmake manual}
+\par }{\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang{\pntxta )}}{\*\pnseclvl5
+\pndec\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl6\pnlcltr\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang
+{\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}\pard\plain \qj\nowidctlpar \f29\fs21\kerning2 {\b\f5\fs28 Chapter 8\tab kmmake manual
+\par }{\f5\fs24 
+\par }{\f5\fs22 The }{\f11\fs22 make}{\f5\fs22  is a program maintenance tool which has been developed for UNIX by AT&T bell laboratory.  The }{\f11\fs22 kmmake}{\f5\fs22 
+ included in this package is an improved version of the make, to which several functions are added for easy use.
+\par This chapter describes the operating procedures for the }{\f11\fs22 kmmake}{\f5\fs22 .
+\par }{\f5\fs24 
+\par 
+\par }{\b\f5\fs24 8.1\tab Overview
+\par }{\f5\fs22 The }{\f11\fs22 make}{\f5\fs22 
+ is a command for efficient compilation of the program.  A sole C program is compiled by just starting up the compiler.  However, compilation of a program containing multiple source files may become complicated if a part of the files is modified.
+\par 
+\par Assuming that 30 parts of the program containing 100 source files are corrected and compiled.  Normally, it cannot be remembered which parts of the files are corrected.  Thus, a part of 
+the program is not compiled correctly and old object codes are often run.
+\par 
+\par On the other hand, if a batch file is always made to compile all source files, this may cause a long compilation time and does not have the meaning to divide the program into source files.
+\par 
+\par The }{\f11\fs22 make}{\f5\fs22 
+ is a tool to solve such problem.  According to the procedures specified by the programmer, the make checks which part of the program is corrected, calculates optimal compiling procedure, and runs it.  Additionally, even though the program
+ is composed of only one file, just typing \ldblquote }{\f11\fs22 make}{\f5\fs22 \rdblquote  will compile the program.  Therefore, the }{\f11\fs22 makefile}{\f5\fs22  is always added to the program.
+\par 
+\par The }{\f11\fs22 kmmake}{\f5\fs22  is a part of the LSI C package.  However, if you use the OS containing the standard make command, such as UNIX, use of this command is recommended.
+\par 
+\par Additionally, since the }{\f11\fs22 kmmake}{\f5\fs22  is a subset of the make command on UNIX, it is possible to write the }{\f11\fs22 makefile }{\f5\fs22 which is commonly used on both the LSI C and UNIX.
+\par \page }{\b\f5\fs24 8.2\tab How to use the }{\b\f11\fs24 kmmake}{\b\f5\fs24 
+\par }{\f5\fs22 To use the }{\f11\fs22 kmmake}{\f5\fs22 , it is absolutely necessary to prepare the file \ldblquote }{\f11\fs22 makefile}{\f5\fs22 \rdblquote  containing instructions for the }{\f11\fs22 kmmake}{\f5\fs22 .
+\par Fig. 8.1 shows an example of the }{\f11\fs22 makefile}{\f5\fs22 .  The file name is \ldblquote }{\f11\fs22 makefile}{\f5\fs22 \rdblquote .
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 #\tab Makefile for make program
+\par OBJS = make.obj  object.obj  parse.obj  misc.obj
+\par PROGRAM = make.exe
+\par LDFLAGS =
+\par 
+\par all: $(PROGRAM)
+\par 
+\par $(PROGRAM) : $(OBJS)
+\par \tab $(CC) $(LDFLAGS) $(OBJS) -o $(PROGRAM)
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li2553\nowidctlpar {\f5\fs22 Fig. 8.1:\tab makefile
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }{\b\f5\fs22 8.2.1\tab Comment
+\par }{\f5\fs22 A line starting with # is a comment.  It is possible to write any character string in the comment.  The first line in Fig. 8.1 shows a comment.
+\par 
+\par }{\b\f5\fs22 8.2.2\tab Macro definition
+\par }{\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 name = character string
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The above shows a macro definition format.  In the macro definition, a character string placed on the right of \ldblquote =\rdblquote  is set to a name (macro name) placed on the left of \ldblquote =\rdblquote 
+.  This makes it possible that $(macro name) refers to the macro definition later.  Therefore, the macro is convenient to write the same contents several times.
+\par 
+\par Additionally, when macros referred to frequently are gathered at the beginning of the }{\f11\fs22 makefile}{\f5\fs22  even though a macro is referred to only once, this allows easy correction.
+\par 
+\par Fig. 8.1 shows macro examples, OBJS, PROGRAM, LDFLAGS, and CC.  Among them, CC is not defined actually, but is defined in other places.  This is explained in later parts.
+\par \page }{\b\f5\fs22 8.2.3\tab \tab Dependent description line
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 target file: source file 1, source file 2, \'85
+\par }\pard \qj\nowidctlpar\tx567 {\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 A line written in the above format is called a dependent description line and shows the file dependent relationship.  That is, a target file on the left of \ldblquote }{\f11\fs22 :}{\f5\fs22 \rdblquote 
+ depends on (is made from) source files on the right of \ldblquote }{\f11\fs22 :}{\f5\fs22 \rdblquote .
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+In the dependent description line, the compilation procedure (any executable process from the command line may be put) may follow the target file.  This is called a command line.  The command line starts with tab.  A space is not allowed at this position.
+  A tab (0x09) must be put.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 all: $(PROGRAM)
+\par 
+\par $(PROGRAM): $(OBJS)
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The above lines in Fig. 8.1 show examples of the dependent description lines.  No command lines exist in the first dependent description line, but the commend line below follows the dependent description line for }{
+\f11\fs22 make.exe}{\f5\fs22 , that is $(PROGRAM) on the second line.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f3\fs22 \tab $(CC) $(LDFLAGS) $(OBJS) -o $(PROGRAM)
+\par }\pard \qj\nowidctlpar\tx567 {\fs22 
+\par }{\b\f5\fs22 8.2.4\tab \tab Inference rules
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The following is obtained when the macros shown in Fig. 8.1 are developed.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 all: make.exe
+\par 
+\par make.exe: make.obj object.obj parse.obj misc.obj 
+\par }\pard \qj\li1702\nowidctlpar\tx567 {\f3\fs22 lcc86 make.obj object.obj parse.obj misc.obj -o make.exe
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 In this case, how are the files, such as }{\f11\fs22 make.obj}{\f5\fs22  created?  These may be created by compiling the C source file named }{\f11\fs22 make.c}{\f5\fs22 .  However, this is not written.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 Actually, the }{\f11\fs22 kmmake}{\f5\fs22  contains the function that automatically creates the dependent description line in the following format.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 make.obj: make.c
+\par \tab lcc86 -c make.c
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 \page Therefore, this is not written explicitly.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 If commands necessary to create a specific file are not written in the }{\f11\fs22 makefile}{\f5\fs22 , the }{\f11\fs22 kmmake}{\f5\fs22 
+ creates the dependent relationship automatically according to the inference rules.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 This step is explained using }{\f11\fs22 make.obj}{\f5\fs22 .  It is first checked that files, such as }{\f11\fs22 make.c}{\f5\fs22 , }{\f11\fs22 make.r86}{\f5\fs22 , and }{\f11\fs22 make.asm}{\f5\fs22 
+ exist in the same directory.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 For example, when }{\f11\fs22 make.c}{\f5\fs22  is found, it is then checked that the rule to create}{\f11\fs22  *.obj}{\f5\fs22  file from }{\f11\fs22 *.c}{\f5\fs22 
+ exists in the inference rules.  If this rule exists, the compilation procedure is generated from the command line according to this rule.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 It is also possible that the user redefines the inference rules.  This procedure is explained later.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\b\f5\fs22 8.2.5\tab \tab Starting up
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 A series of make functions shown in Fig. 8.1 is described in previous sections.  This section describes what will happen when starting up the }{\f11\fs22 kmmake}{\f5\fs22 .
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 When the }{\f11\fs22 kmmake}{\f5\fs22  is executed if the }{\f11\fs22 makefile}{\f5\fs22  in Fig. 8.1 exists in the current directory, the following steps are performed internally.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 1.\tab Using the inference rules, missing dependent relationships and command lines are generated.  In this example, the dependent relationships and command lines to generate }{\f11\fs22 make.obj}{\f5\fs22 , }
+{\f11\fs22 object.obj}{\f5\fs22 , }{\f11\fs22 parse.obj}{\f5\fs22 , and }{\f11\fs22 misc.obj}{\f5\fs22  from relevant C sources are made.
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 2.\tab It is checked whether or not the first target \ldblquote }{\f11\fs22 all}{\f5\fs22 \rdblquote  is updated.  To do so, it is checked whether or not the source file }{\f11\fs22 make.exe}{\f5\fs22 
+ that appears on the right of the \ldblquote }{\f11\fs22 all}{\f5\fs22 \rdblquote  dependent description line is updated.
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 3.\tab To check whether or not }{\f11\fs22 make.exe}{\f5\fs22  is updated, it is checked whether or not }{\f11\fs22 make.obj}{\f5\fs22 , }{\f11\fs22 object.obj}{\f5\fs22 , }{\f11\fs22 parse.obj}{\f5\fs22 
+, and }{\f11\fs22 misc.obj}{\f5\fs22  on the left are updated.
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 4.\tab To check whether or not }{\f11\fs22 make.obj}{\f5\fs22  is updated, the change times of }{\f11\fs22 make.c}{\f5\fs22  and }{\f11\fs22 make.obj}{\f5\fs22  are compared.  If }{\f11\fs22 make.obj}{
+\f5\fs22  is older or does not exist, the specified command lines are executed.  In this example, }{\f11\fs22 lcc86 -c make.c}{\f5\fs22  is executed.
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 5.\tab In the same manner as described above, it is checked whether or not }{\f11\fs22 object.obj}{\f5\fs22 , }{\f11\fs22 parse.obj}{\f5\fs22 , or }{\f11\fs22 misc.obj}{\f5\fs22 
+ is updated.  If any file is old, the commands are executed.
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 6.\tab The execution is returned to the dependent description line of }{\f11\fs22 make.exe}{\f5\fs22 .  If }{\f11\fs22 make.exe}{\f5\fs22  does not exist or it is older than any of }{\f11\fs22 make.obj}{
+\f5\fs22 , }{\f11\fs22 object.obj}{\f5\fs22 , }{\f11\fs22 parse.obj}{\f5\fs22 , and }{\f11\fs22 misc.obj}{\f5\fs22 , the specified commands (}{\f11\fs22 lcc86 make.obj}{\f5\fs22 \'85) are executed.
+\par }\pard \qj\fi-567\li851\nowidctlpar {\f5\fs22 \page 7.\tab The execution is returned to the dependent description line of all.  Since the file all and command line do not exist, nothing is executed and the program is exited.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 As described above, the }{\f11\fs22 kmmake}{\f5\fs22  always tries to make the first target in the }{\f11\fs22 makefile}{\f5\fs22 
+.  After the process of the first target is completed, the subsequent targets are not executed.  Therefore, if you wish to make multiple execution files using the }{\f11\fs22 makefile}{\f5\fs22 
+, you must make the target all: at the beginning, and then enumerate execution files following this target as shown below.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 all: foo.exe  bar.exe  quux.exe
+\par foo.exe: \'85
+\par bar.exe: \'85
+\par quux.exe: \'85
+\par }\pard \qj\nowidctlpar\tx567 {\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 If }{\f3\fs22 all:}{\f5\fs22  line does not exist in this }{\f11\fs22 makefile}{\f5\fs22 , the }{\f11\fs22 kmmake}{\f5\fs22  compiles only }{\f11\fs22 foo.exe}{\f5\fs22 . and does not compile }{\f11\fs22 bar.exe}{
+\f5\fs22  and }{\f11\fs22 quux.exe}{\f5\fs22 .
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs24 
+\par }\pard \qj\nowidctlpar\tx567 {\b\f5\fs24 8.3\tab References
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 This section describes the details of the }{\f11\fs22 kmmake}{\f5\fs22  not described in the previous section.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\b\f5\fs22 8.3.1\tab \tab }{\b\f11\fs22 makefile}{\b\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The }{\f11\fs22 makefile}{\f5\fs22  repeats any of the following 0 time or more.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f11\fs22 <comment>
+\par <macro definition>
+\par <include statement>
+\par <ifdef - endif>
+\par <dependent description>
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par 8.3.1.1\tab Comment
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 A comment starts with # and ends with LF.  The }{\f11\fs22 kmmake}{\f5\fs22  disregards comments.  Any character string can be written in the comment.  Japanese characters (
+shift JIS, EUC, or ISO-2022-JP) can also be used.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 \page 8.3.1.2\tab Macro definition
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 <macro definition> has any of the following formats.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 <name> = <value>
+\par <name> += <value>
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 Any character string not including LF is written in the macro value.  In the original make (UNIX), # shows the start of the comment.  Therefore, # is not used as a macro value, but the }{\f11\fs22 kmmake}{\f5\fs22 
+ can uses # as a macro value.  For compensation, a comment cannot be placed next to the end of the macro definition line.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 <name> = <value>
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par In the macro definition having the above format, value itself is set in the macro.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 <name> += <value>
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 In the macro definition having the above format, a character string is set in which the value on the right follows the current value of the macro.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }{\f3\fs22 foo = $(foo) bar  }{\f5\fs22  is not substituted for }{\f3\fs22  foo += bar}{\f5\fs22 .
+\par 
+\par The latter format is needed.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The macro can be used later in a format of }{\f11\fs22 $(name)}{\f5\fs22 .  If the macro name is only one character, ( ) can be omitted.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 It is also allowed to use undefined macro.  At this time, it is developed t
+o a null character string.  Additionally, a value in the environmental variable is used as macro.  However, if a macro definition exists in the }{\f11\fs22 makefile}{\f5\fs22  or at start up, this takes precedence.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par 8.3.1.3\tab Include statement
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 <include> takes the contents in other file into the }{\f11\fs22 makefile}{\f5\fs22  and has the following format.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 include <file name>
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 Where, <file name> must be a character string excluding spaces and considered as a name of file to be included.  In this character string, a macro can also be used.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The file specified by this statement is read when the include statement is encountered and processed as if the contents of the file are inserted into that location.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 \page 8.3.1.4\tab ifdef - endif statement}{\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The <}{\f11\fs22 ifdef - endif}{\f5\fs22  statement> switches the process in the }{\f11\fs22 makefile}{\f5\fs22  based on the conditions and has the following format.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 ifdef <macro name>
+\par <then-text>
+\par else
+\par <else-text>
+\par endif
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 If the macro name next to}{\f11\fs22  ifdef}{\f5\fs22  is defined, <}{\f11\fs22 then - text}{\f5\fs22 > is executed, otherwise <}{\f11\fs22 else-text}{\f5\fs22 > is executed.  It is possible to omit else and <}{
+\f11\fs22 else-text}{\f5\fs22 >.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 Desired statements can be put in <}{\f11\fs22 then-text}{\f5\fs22 > and <}{\f11\fs22 else-text}{\f5\fs22 >.
+\par The following example shows how to use }{\f11\fs22 ifdef}{\f5\fs22 .
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 ifdef UNIX
+\par O = .o
+\par X = 
+\par else
+\par ifdef DOS
+\par O = .obj
+\par X = .exe
+\par else
+\par O = .sof
+\par X = .com
+\par endif
+\par endif
+\par 
+\par foo$X:\tab foo$O
+\par }\pard \qj\li851\nowidctlpar\tx567 {\f3\fs22 \tab $(CC) foo$O -o foo$X
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par 8.3.1.5\tab Dependent description
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 <}{\f11\fs22 dependent description}{\f5\fs22 > has the following format.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 <target list> : <source list>
+\par [<command line>]
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 \page In the above example, <}{\f11\fs22 target list}{\f5\fs22 > and <}{\f11\fs22 source list}{\f5\fs22 > contain more than one <}{\f11\fs22 name}{\f5\fs22 
+> which is divided by spaces.  Names are normally file names, but others can also be used.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 <}{\f11\fs22 command line}{\f5\fs22 > contains commands to be executed next to tab at starting of the line.  The desired number of command lines, which is }{\f11\fs22 0 }{\f5\fs22 
+line or more, can be written.  However, all command lines must start with tab.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 If <}{\f11\fs22 target list}{\f5\fs22 > contains multiple targets (<}{\f11\fs22 name}{\f5\fs22 >), this is interpreted to that source lists on the right of \ldblquote }{\f11\fs22 :}{\f5\fs22 \rdblquote 
+ are arranged for each target.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par For example,
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 foo.obj  bar.obj  baz.obj : quux.h  bluh.h
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par the above is interpreted to the following.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 foo.obj : quux.h  bluh.h
+\par bar.obj : quux.h  bluh.h
+\par baz.obj : quux.h  bluh.h
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 Additionally, multiple dependent descriptions can be put for the same target.  At this time, source lists for that target are gathered automatically.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par For example,
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 foo.obj : quux.h
+\par foo.obj : bluh.h
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par the above is the same as the following.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 foo.obj : quux.h  bluh.h
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 However, it is not allowed to write more than two dependent descriptions containing the command lines for the same target.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par 8.3.1.6\tab Command line
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 Putting the following characters in front of the command line makes it possible to specify several operations when the command is executed.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\trowd \trgaph99\trleft-99 \cellx720\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 @
+\par \cell }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 This does not display the command echo during execution of the command.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft-99 \cellx720\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -\tab \cell }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 This disregards the command end code.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\tx567 {\fs22 \page }{\f5\fs22 
+One command line is transferred to the shell (command interpreter), and then executed.  Therefore, if the command is executed after changing the current directory in OS other than MS-DOS, the following is not applicable.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 cd subdir
+\par cc -c prog.c
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par The above must be written as follows.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 cd subdir; cc -c prog.c
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The }{\f11\fs22 kmmake}{\f5\fs22  itself processes the }{\f11\fs22 cd}{\f5\fs22  command and \ldblquote }{\f11\fs22 ;}{\f5\fs22 \rdblquote 
+ since the command interpreter in MS-DOS and Windows (COMMAND.COM or CMD.EXE) does not support \ldblquote }{\f11\fs22 ;}{\f5\fs22 \rdblquote .  Therefore, the above description can be used in these OS.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 For Windows NT, the same effect can be obtained when divided by \ldblquote }{\f11\fs22 &}{\f5\fs22 \rdblquote  instead of \ldblquote }{\f11\fs22 ;}{\f5\fs22 \rdblquote .
+\par 
+\par }\pard \qj\nowidctlpar\tx567 {\b\f5\fs22 8.3.2\tab \tab Inference rules
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 As described previously, the }{\f11\fs22 kmmake}{\f5\fs22  makes the dependent information, which is short, according to the inference rules.  The built-in inference rules are described in the }{\f11\fs22 makedef }{
+\f5\fs22 file (storage location may vary depending on OS).  It is also possible that the user can define desired inference rules.  This section describes how to define the inference rules.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par All inference rules have the following format.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 .<suffix1>.<suffix2>:
+\par }\pard \qj\li851\nowidctlpar\tx567 {\f3\fs22 \tab <command>
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 In the above inference rule, <}{\f11\fs22 command}{\f5\fs22 > is used to make files with an extension of }{\f11\fs22 .<suffix2>}{\f5\fs22  from those with an extension of}{\f11\fs22  .<suffix1}{\f5\fs22 >.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par For example, 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 .c.obj:
+\par }\pard \qj\li851\nowidctlpar\tx567 {\f3\fs22 \tab $(CC) $(CFLAGS) -c $<
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par the above has the meaning shown below.
+\par 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 To make }{\f11\fs22 *.obj }{\f5\fs22 files (with associated names) from }{\f11\fs22 *.c}{\f5\fs22  files, }{\f11\fs22 $(CC) $(CFLAGS) -c *.c}{\f5\fs22  is executed.
+\par }\pard \qj\nowidctlpar\tx567 {\f11\fs22 $<}{\f5\fs22  is a special macro which is developed into the source.
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 \page 8.3.2.1\tab .SUFFIXES}{\fs22 
+\par }{\f5\fs22 If you put only the above inference rules in the }{\f11\fs22 makefile}{\f5\fs22 , the inference rules do not function correctly.  To make the inference rules effective, it is absolutely necessary to define the target named }{\f11\fs22 .SUFFIXES
+}{\f5\fs22 .
+\par In }{\f11\fs22 . SUFFIXES}{\f5\fs22 , the list of extensions of the source files to be searched for must be defined as source.
+\par 
+\par For example, the following is written.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 .SUFFIXES: .y .c .obj
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par }{\f11\fs22 .SUFFIXES}{\f5\fs22  is already set in the standard setting file }{\f11\fs22 makedef}{\f5\fs22 .  The extension list put in the }{\f11\fs22 makefile}{\f5\fs22  is added to the end of the }{\f11\fs22 makedef}{\f5\fs22 .
+\par 
+\par If this is not preferable (standard search order is to be replaced), null definition shown below is given and new definition is continued to clear the existing values and replace them with new ones.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 .SUFFIXES:
+\par .SUFFIXES: .asm  .c  .obj
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par 8.3.2.2\tab Special macros
+\par Several special macros can be used for commands in the inference rules.
+\par 
+\par }\trowd \trgaph99\trleft284 \cellx1411\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $@
+\par \cell This develops the macro to the target name.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284 \cellx1411\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $*
+\par \cell This develops the macro to the target name, from which the extension is deleted.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $<
+\par \cell This develops the macro to the source (first source if multiple sources exist).
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284 \cellx1411\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $?
+\par \cell This develops the macro to the list, which is newer than the target in the source.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\tx567 {\fs22 
+\par 
+\par }{\f5\fs22 The following special macros are local expansion functions provided only on the }{\f11\fs22 kmmake}{\f5\fs22 .  However, it is recommended not to use such macros when taking the compatibility of the }{\f11\fs22 makefile}{\f5\fs22 
+ into consideration.}{\fs22 
+\par 
+\par }\trowd \trgaph99\trleft142 \cellx1288\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $>\cell This develops the macro to that the extension is deleted from $<.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft142 \cellx1288
+\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $#
+\par $\'88}{\fs22 \cell }{\f5\fs22 
+\par This develops the macro to all source lists.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft142 \cellx1288\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $&\tab \cell This develops the macro to all sources from which the extension is deleted.\cell }\pard \widctlpar\intbl {
+\fs22 \row }\pard \qj\nowidctlpar {\fs22 \page 
+\par }\trowd \trgaph99\trleft142 \cellx1288\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $:c\cell This develops nothing and uses next character \ldblquote c\rdblquote 
+ as a delimiter.  This delimiter character is put between names defined by $?, $#, or $&.  The default delimiter is a space.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft142 \cellx1288\cellx8603 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 $ [\'85]
+\par $ \{\'85}{\fs22 \}\cell }{\f5\fs22 A character string enclosed by [ ] (\{ \}) is output to the file named make.i (if macro exists, it is developed) in order to replace the 
+file name.  This is convenient when using commands with the MS-DOS/Windows response file.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\tx567 {\fs22 
+\par 
+\par {\pntext\pard\plain\f5\kerning2 8.3.3.3 \tab}}\pard \qj\fi-360\li360\nowidctlpar\tx567{\*\pn \pnlvlbody\pndec\pnb0\pni0\pnf5\pnfs24\pnstart3\pnindent360\pnhang{\pntxtb 8.3.3.}{\pntxta  }}{\f5\fs22 Changing the source directory with }{\f11\fs22 VPATH}{
+\f5\fs22 .
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 In some cases, it is desired to place the targets and sources in different directories.  At this time, the special macro }{\f11\fs22 VPATH}{\f5\fs22  is used to identify the directory where the sources exist.
+\par 
+\par In the }{\f11\fs22 VPATH}{\f5\fs22 , directory path names containing the sources are divided by \ldblquote }{\f11\fs22 :}{\f5\fs22 \rdblquote  as shown below.
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 VPATH = .:../lib:/proj/foo/common
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par When the inference rules function, it is checked whether or not the sources corresponding to the same directory as that containing the target exist (this is not always the current directory).
+\par If the sources are not found, the inference rules start to sequentially check whether or not the sources exist in the directories from the left of the macro }{\f11\fs22 VPATH}{\f5\fs22 , if it is defined.
+\par 
+\par The default delimiter in the macro }{\f11\fs22 VPATH}{\f5\fs22  is \ldblquote }{\f11\fs22 :}{\f5\fs22 \rdblquote .  If a value is set in the }{\f11\fs22 VPATHDELIM}{\f5\fs22 
+ macro, the start character of this macro is recognized as delimiter.  If you use MS-DOS/Windows in which the path name contains \ldblquote }{\f11\fs22 :}{\f5\fs22 \rdblquote , it is convenient to replace this character with \ldblquote }{\f11\fs22 ;}{
+\f5\fs22 \rdblquote .
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f3\fs22 VPATHDELIM = ;
+\par VPATH = .;N:\\LINSRC;..\\COMMON
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par {\pntext\pard\plain\f5\kerning2 8.3.3.3 \tab}}\pard \qj\fi-360\li360\nowidctlpar\tx567{\*\pn \pnlvlbody\pndec\pnb0\pni0\pnf5\pnfs24\pnstart3\pnindent360\pnhang{\pntxtb 8.3.3.}{\pntxta  }}{\f5\fs22 Starting up the }{\f11\fs22 kmmake}{\f5\fs22 
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 It is possible to give the following arguments when starting up the }{\f11\fs22 kmmake}{\f5\fs22 .
+\par 
+\par }\pard \qj\li567\nowidctlpar\tx567 {\f11\fs22 Kmmake}{\f3\fs22  [option] [macro definition] [target]
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 
+\par Multiple options, macro definitions, and targets can be written.  However, the option must be written prior to the macro definition and target.
+\par 
+\par {\pntext\pard\plain\f5\kerning2 8.3.3.1 \tab}}\pard \qj\fi-360\li360\nowidctlpar\tx567{\*\pn \pnlvlbody\pndec\pnb0\pni0\pnf5\pnfs24\pnstart1\pnindent360\pnhang{\pntxtb 8.3.3.}{\pntxta  }}{\f11\fs22 kmmake}{\f5\fs22  options
+\par }\pard \qj\nowidctlpar\tx567 {\f5\fs22 The following options are provided.
+\par \page 
+\par }\trowd \trgaph99\trleft-99 \cellx1620\cellx3060\cellx8601 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -d\cell (Debug)\cell This displays the debug information.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft-99 \cellx1620\cellx3060\cellx8601 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -f filename\cell (File)\cell This reads the instructions to the }{\f11\fs22 kmmake}{\f5\fs22 
+ from the file with filename instead of the }{\f11\fs22 makefile}{\f5\fs22 .
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -i\cell (Ignore)\cell This ignores the end code of the command.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -k\cell (Kontinue)\cell 
+This executes as many commands as possible even though making of targets fails.  (Only targets, which do not depend on failed targets, are executed.)
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -n\cell (Notexec)\cell This only displays commands to be executed, and does not execute them.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -r\cell (not Read)\cell This does not read the initial setting file }{\f11\fs22 makedef}{\f5\fs22 .
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -s\cell (Silent)\cell This executes the command without display.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft-99 \cellx1620\cellx3060\cellx8601 \pard \qj\nowidctlpar\intbl\tx567 {\f5\fs22 -t\cell (Touch)\cell This updates only the time stamp of the target without execution of commands.\cell 
+}\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\tx567 {\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 8.3.3.2\tab Macro definition at start up
+\par The macro definition has the following format.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 macro name = value
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par The meaning of the above macro definition is the same as that in the }{\f11\fs22 makefile}{\f5\fs22 .  Additionally, all macros defined by arguments at start up are disregarded even though they are defined in the }{\f11\fs22 makefile}{\f5\fs22 .
+\par That is, values specified by arguments always take precedence over others.
+\par 
+\par If the macro value contains special characters of the shell (command interpreter), such as <, >, and |, it is necessary to escape them using appropriate procedures.  These procedures may vary depending on the type of OS.  You may refer to the manual for t
+he shell (command interpreter) of OS for further details.
+\par The following is accepted in UNIX.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 kmmake}{\f3\fs22  CFLAGS = \lquote -O\rquote 
+\par }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 8.3.3.3\tab Target
+\par Arguments, which are not option nor macro definition, are considered as they are specified for the target.  Unless otherwise specified particularly, the }{\f11\fs22 kmmake}{\f5\fs22  attempts to make the first target in the }{\f11\fs22 makefile}{\f5\fs22 
+.  If the target is specified by the command argument, the }{\f11\fs22 kmmake}{\f5\fs22  makes it.
+\par \page For example, if the file }{\f11\fs22 foo.c}{\f5\fs22  exists in the current directory (}{\f11\fs22 makedef}{\f5\fs22  is set appropriately),
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f3\fs22 lcc86 foo.c -o foo.exe}{\f5\fs22  
+\par }\pard \qj\nowidctlpar {\f5\fs22 is executed by 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 kmmake}{\f3\fs22  foo.exe}{\f5\fs22 .
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 At this time, it is accepted even though the }{\f11\fs22 makefile}{\f5\fs22  does not exist.  (Of course, if the program contains multiple sources, the }{\f11\fs22 makefile}{\f5\fs22  is absolutely necessary.)
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 Multiple targets can be specified.  In this case, targets are executed (made) from those specified earlier in sequential order.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par 
+\par }}

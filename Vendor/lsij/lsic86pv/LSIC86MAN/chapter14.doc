@@ -1,0 +1,635 @@
+{\rtf1\ansi \deff31\deflang1033{\fonttbl{\f0\froman\fcharset0\fprq2 Tms Rmn;}{\f1\froman\fcharset2\fprq2 Symbol;}{\f2\fswiss\fcharset0\fprq2 Helv;}{\f3\fmodern\fcharset0\fprq1 Courier;}
+{\f4\froman\fcharset0\fprq2 Times New Roman;}{\f5\fswiss\fcharset0\fprq2 Arial;}{\f6\froman\fcharset0\fprq2 MS Serif;}{\f7\fswiss\fcharset0\fprq2 MS Sans Serif;}{\f8\froman\fcharset0\fprq2 Times{\*\falt Times New Roman};}
+{\f9\fswiss\fcharset0\fprq2 Helvetica;}{\f10\fswiss\fcharset0\fprq2 System;}{\f11\fmodern\fcharset0\fprq1 Courier New;}{\f12\froman\fcharset0\fprq2 New York;}{\f13\fswiss\fcharset0\fprq2 Geneva;}{\f14\fmodern\fcharset0\fprq1 Fixedsys;}
+{\f15\fmodern\fcharset255\fprq1 Terminal;}{\f16\fswiss\fcharset0\fprq2 Small Fonts;}{\f17\fmodern\fcharset255\fprq2 Modern;}{\f18\fswiss\fcharset0\fprq2 MS Dialog;}{\f19\fswiss\fcharset0\fprq2 MS Dialog Light;}{\f20\fswiss\fcharset0\fprq2 MS SystemEx;}
+{\f21\fnil\fcharset2\fprq2 Marlett;}{\f22\fnil\fcharset2\fprq2 Wingdings;}{\f23\froman\fcharset2\fprq2 MT Extra;}{\f24\fswiss\fcharset0\fprq2 Arial Narrow;}{\f25\froman\fcharset0\fprq2 Book Antiqua;}{\f26\froman\fcharset0\fprq2 Bookman Old Style;}
+{\f27\froman\fcharset0\fprq2 Century Schoolbook;}{\f28\fmodern\fcharset2\fprq1 MS LineDraw;}{\f29\froman\fcharset128\fprq1 \'96\'be\'92\'a9;}{\f30\fmodern\fcharset128\fprq1 \'ba\'de\'bc\'af\'b8;}{\f31\froman\fcharset128\fprq1 \'82l\'82r \'96\'be\'92\'a9;}
+{\f32\fmodern\fcharset128\fprq1 \'82l\'82r \'83S\'83V\'83b\'83N;}{\f33\froman\fcharset0\fprq2 Century;}{\f34\fmodern\fcharset128\fprq2 \'82l\'82r \'82o\'83S\'83V\'83b\'83N;}{\f35\fmodern\fcharset128\fprq1 @\'82l\'82r \'83S\'83V\'83b\'83N;}
+{\f36\fmodern\fcharset128\fprq2 @\'82l\'82r \'82o\'83S\'83V\'83b\'83N;}{\f37\froman\fcharset128\fprq2 \'82l\'82r \'82o\'96\'be\'92\'a9;}{\f38\froman\fcharset128\fprq1 @\'82l\'82r \'96\'be\'92\'a9;}
+{\f39\froman\fcharset128\fprq2 @\'82l\'82r \'82o\'96\'be\'92\'a9;}{\f40\fswiss\fcharset0\fprq2 Arial Black;}{\f41\froman\fcharset0\fprq2 Map Symbols;}{\f42\froman\fcharset0\fprq2 Garamond;}{\f43\fswiss\fcharset0\fprq2 Impact;}
+{\f44\fdecor\fcharset128\fprq1 \'82c\'82ePOP\'91\'cc;}{\f45\fdecor\fcharset128\fprq2 \'82c\'82e\'82oPOP\'91\'cc;}{\f46\fdecor\fcharset128\fprq1 @\'82c\'82ePOP\'91\'cc;}{\f47\fdecor\fcharset128\fprq2 @\'82c\'82e\'82oPOP\'91\'cc;}
+{\f48\froman\fcharset128\fprq2 HG\'90\'b3\'9e\'b2\'8f\'91\'91\'cc-PRO;}{\f49\froman\fcharset128\fprq2 @HG\'90\'b3\'9e\'b2\'8f\'91\'91\'cc-PRO;}{\f50\fmodern\fcharset128\fprq2 HG\'8a\'db\'ba\'de\'bc\'af\'b8M-PRO;}
+{\f51\fmodern\fcharset128\fprq2 @HG\'8a\'db\'ba\'de\'bc\'af\'b8M-PRO;}{\f52\froman\fcharset128\fprq1 @\'96\'be\'92\'a9;}{\f53\fmodern\fcharset128\fprq1 @\'ba\'de\'bc\'af\'b8;}{\f54\froman\fcharset0\fprq1 EPSON Roman;}
+{\f55\fswiss\fcharset0\fprq1 EPSON Sans serif;}{\f56\fswiss\fcharset238\fprq2 Arial Narrow CE;}{\f57\fswiss\fcharset204\fprq2 Arial Narrow Cyr;}{\f58\fswiss\fcharset161\fprq2 Arial Narrow Greek;}{\f59\fswiss\fcharset162\fprq2 Arial Narrow Tur;}
+{\f60\fswiss\fcharset186\fprq2 Arial Narrow Baltic;}{\f61\fswiss\fcharset238\fprq2 Arial Black CE;}{\f62\fswiss\fcharset204\fprq2 Arial Black Cyr;}{\f63\fswiss\fcharset161\fprq2 Arial Black Greek;}{\f64\fswiss\fcharset162\fprq2 Arial Black Tur;}
+{\f65\fswiss\fcharset186\fprq2 Arial Black Baltic;}{\f66\froman\fcharset238\fprq2 Bookman Old Style CE;}{\f67\froman\fcharset204\fprq2 Bookman Old Style Cyr;}{\f68\froman\fcharset161\fprq2 Bookman Old Style Greek;}
+{\f69\froman\fcharset162\fprq2 Bookman Old Style Tur;}{\f70\froman\fcharset186\fprq2 Bookman Old Style Baltic;}{\f71\froman\fcharset238\fprq2 Garamond CE;}{\f72\froman\fcharset204\fprq2 Garamond Cyr;}{\f73\froman\fcharset161\fprq2 Garamond Greek;}
+{\f74\froman\fcharset162\fprq2 Garamond Tur;}{\f75\froman\fcharset186\fprq2 Garamond Baltic;}{\f76\fswiss\fcharset238\fprq2 Impact CE;}{\f77\fswiss\fcharset204\fprq2 Impact Cyr;}{\f78\fswiss\fcharset161\fprq2 Impact Greek;}
+{\f79\fswiss\fcharset162\fprq2 Impact Tur;}{\f80\fswiss\fcharset186\fprq2 Impact Baltic;}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;
+\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}{\stylesheet{\qj\nowidctlpar 
+\f31\fs21\kerning2 \snext0 Normal;}{\*\cs10 \additive Default Paragraph Font;}{\s15\qj\nowidctlpar\tqc\tx4320\tqr\tx8640 \f31\fs21\kerning2 \sbasedon0\snext15 header;}{\s16\qj\nowidctlpar\tqc\tx4320\tqr\tx8640 \f31\fs21\kerning2 \sbasedon0\snext16 
+footer;}{\*\cs17 \additive\sbasedon10 page number;}}{\info{\title 1019}{\author \'8fH\'93c\'8f\'b9\'94\'fc}{\operator tshimizu}{\creatim\yr1998\mo8\dy24\hr13\min36}{\revtim\yr1998\mo8\dy26\hr16\min25}{\version2}{\edmins1}{\nofpages7}{\nofwords4909}
+{\nofchars27984}{\*\company  }{\vern57431}}\paperw11906\paperh16838\margl1701\margr1701\margt1985\margb1701 \deftab851\widowctrl\ftnbj\aenddoc\pgnstart205\hyphcaps0\formshade \fet0\sectd 
+\pgnrestart\pgnstarts205\linex0\headery851\footery992\colsx425\endnhere {\header \pard\plain \s15\qj\nowidctlpar\tqc\tx4320\tqr\tx8640\pvpara\phmrg\posxr\posy0 \f31\fs21\kerning2 {\field{\*\fldinst {\cs17 PAGE  }}{\fldrslt {\cs17\lang1024 211}}}{\cs17 
+
+\par }\pard \s15\qj\ri360\nowidctlpar\tqc\tx4320\tqr\tx8640 {\f5\fs20 Chapter 14   Command references}
+\par }{\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang{\pntxta )}}{\*\pnseclvl5
+\pndec\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl6\pnlcltr\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang
+{\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}\pard\plain \qj\nowidctlpar \f31\fs21\kerning2 {\f5\fs28 Chapter 14\tab Command references
+\par }{\f5\fs22 
+\par This chapter describes references necessary for each command.  Command references are listed in the alphabetical order.
+\par This section describes how to read the command references.  The references include the following items.
+\par 
+\par }\pard \qj\fi-2552\li3119\nowidctlpar {\f5\fs22 [Name]\tab This shows a command name.  Following a hyphen (-), a brief explanation of the command is put.
+\par 
+\par [Syntax]\tab A syntax to cal up the command is described.  Options enclosed by [  ] can be omitted.
+\par }\pard \qj\li3119\nowidctlpar {\f5\fs22 Additionally, | shows that either one is selected.
+\par }\pard \qj\fi-2552\li3119\nowidctlpar {\f5\fs22 
+\par [Comment]\tab This describes how the command functions.
+\par 
+\par [Option]\tab \tab Options applicable to the command are listed.
+\par 
+\par [Example]\tab Examples of the actual command usage are described.
+\par 
+\par [File]\tab Files are shown that the command creates or refers to.
+\par 
+\par [Environmental variable]\tab Environmental variables to be used by the command are shown.
+\par 
+\par [End code]\tab If the command returns values to the environment, these values and their meanings are described.
+\par 
+\par [Reference]\tab Items closely related to the command are shown.
+\par 
+\par [Diagnosis message]\tab Error and warning messages, which are detected by the command, are listed.
+\par 
+\par [Bug]\tab Cautions for use of the command are described.}{\fs22 
+\par }\pard \qj\nowidctlpar {\fs22 \page }{\f5\fs22 CPP (1)
+\par [Name]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 cpp - preprocessor
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Syntax]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22\expnd-2\expndtw-14 cpp [-B] [-c] [-D}{\i\f11\fs22\expnd-2\expndtw-14 NAME}{\f11\fs22\expnd-2\expndtw-14 ][=}{\i\f11\fs22\expnd-2\expndtw-14 value}{\f11\fs22\expnd-2\expndtw-14 ]] [-I}{\i\f11\fs22\expnd-2\expndtw-14 
+directory}{\f11\fs22\expnd-2\expndtw-14 ] [-j[X]] [-o}{\i\f11\fs22\expnd-2\expndtw-14 file}{\f11\fs22\expnd-2\expndtw-14 ] [-s] [-w] [-y[}{\i\f11\fs22\expnd-2\expndtw-14 N}{\f11\fs22\expnd-2\expndtw-14 ]] [}{\i\f11\fs22\expnd-2\expndtw-14 inputfile\'85}{
+\f11\fs22\expnd-2\expndtw-14 ]
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Comment]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The }{\f11\fs22 ccp}{\f5\fs22  is a C preprocessor and the first path of the compiler.  The }{\f11\fs22 ccp}{\f5\fs22  processes preprocessor commands, such as }{\f11\fs22 #define, #include}{\f5\fs22 , and }{
+\f11\fs22 #if}{\f5\fs22 , and writes the result to the standard output.  The output destination can be changed by }{\f11\fs22 -o}{\f5\fs22  option.
+\par If }{\i\f11\fs22 inputfile}{\f5\fs22  is given, the }{\f11\fs22 ccp}{\f5\fs22  processes it as an input.  It is also possible to specify multiple input files.  If no }{\i\f11\fs22 inputfile}{\f5\fs22  is specified, the standard input is used.
+\par 
+\par }\pard \qj\nowidctlpar {\f5\fs22 [Option]
+\par }\trowd \trgaph99\trleft709\trkeep \cellx2835\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 -B\cell }{\f5\fs22 This option makes use of a C++ comment starting with // enabled.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709\trkeep \cellx2835\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 -c\cell }{\f5\fs22 This option enables nesting of comments.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -D}{\i\f11\fs22 NAME}{\f11\fs22 [=}{\i\f11\fs22 value}{\f11\fs22 ]
+\par \cell }{\f5\fs22 This option defines a macro called }{\f11\fs22 NAME}{\f5\fs22 .  If \ldblquote }{\i\f11\fs22 =value}{\f5\fs22 \rdblquote  is omitted, =1 is used.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -I}{\i\f11\fs22 directory}{\f11\fs22 \cell }{\f5\fs22 This option searches the directory \ldblquote }{\i\f11\fs22 directory}{\f5\fs22 \rdblquote 
+ for files to be included.  It is also possible to specify more than one this option.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -j[X]\cell }{\f5\fs22 This option is used to select which language is applied to error message display.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar\intbl {\f11\fs22 \cell }{\f5\fs22 For MS-DOS and Windows\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709 \cellx2835\cellx4395\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -j0\cell }{\f5\fs22 
+Error messages are displayed in English.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -j, -j1\cell }{\f5\fs22 Error messages are displayed in Japanese.  \ldblquote Shift-JIS\rdblquote 
+ is used for Japanese character codes.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709\trkeep \cellx2835\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell }{\f5\fs22 For UNIX\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709 \cellx2835\cellx4395
+\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -j0\cell }{\f5\fs22 Error messages are displayed in English.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -j, -j1,-je\cell }{\f5\fs22 
+Error messages are displayed in Japanese.  \ldblquote EUC\rdblquote  is used for Japanese character codes.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709 \cellx2835\cellx4395\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -js
+\cell }{\f5\fs22 Error messages are displayed in Japanese.  \ldblquote Shift-JIS\rdblquote  is used for Japanese character codes.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar \page 
+\par \trowd \trgaph99\trleft709\trkeep \cellx8601 \pard \qj\nowidctlpar\intbl {\f5\fs22 In either OS, if this option is omitted, this option becomes as }{\f11\fs22 -j0}{\f5\fs22  is specified.
+\par }{\f11\fs22 \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709\trkeep \cellx2835\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 -o}{\i\f11\fs22 file}{\f11\fs22 \cell }{\f5\fs22 This option writes the output to \ldblquote }{\f11\fs22 
+file}{\f5\fs22 \rdblquote .
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -s\cell }{\f5\fs22 This option does not output line number information starting with # to the output.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -w\cell }{\f5\fs22 This option makes warning message display disabled.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -y[N]\cell }{\f5\fs22 This option specifies handling of the extended character code set.  Since the }{\f11\fs22 ccp}{\f5\fs22 
+ normally handles data as shift JIS code strings, it cannot handle a character string in a system other than JIS shift code system (for example a heart mark in IBM-PC) in correct manner if it appears.  To solve this problem, the following option must be s
+pecified.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709 \cellx2835\cellx4123\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -y\cell }{\f5\fs22 All character codes are handled as 1-byte characters.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -y0\cell }{\f5\fs22 All character codes are handled as Japanese character codes (shift JIS code).\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 
+\cell -y1\cell }{\f5\fs22 All character codes are handled as Chinese and Taiwanese codes.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -y2\cell }{\f5\fs22 All character codes are handled as Korean codes.\cell 
+}\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709\trkeep \cellx2835\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell }{\f5\fs22 If no option is specified, the command functions as }{\f11\fs22 -y0}{\f5\fs22  is specified.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 [Example]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 cpp  -I/usr/include  -DANSI  -otest.out  test.c
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 In the above example, }{\f11\fs22 test.c}{\f5\fs22  is processed and the result is output to test.out.  Files to be included are found in the directory \ldblquote }{\f11\fs22 /usr/include}{\f5\fs22 \rdblquote 
+.  Additionally, the macro ANSI is defined to 1.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [End code]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 If the }{\f11\fs22 ccp}{\f5\fs22  is completed successfully, 0 is returned.  If an error is detected, 1 is returned.  If a warning occurs, 2 is returned.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }{\fs22 \page }{\f5\fs22 KMMAKE (1)
+\par 
+\par [Name]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 kmmake - program maintenance
+\par 
+\par }\pard \qj\nowidctlpar {\f5\fs22 [Syntax]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs20\expnd-4\expndtw-20 kmmake [-f file] [-i] [-k] [-n] [-r] [-t] [NAME = value\'85] [target\'85]
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Comment]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The }{\f11\fs22 kmmake}{\f5\fs22  executes commands specified in the }{\f11\fs22 makefile}{\f5\fs22  to update one or more target.  If }{\f11\fs22 -f}{\f5\fs22  option is not specified, commands are read from file 
+\ldblquote }{\f11\fs22 makefile}{\f5\fs22 \rdblquote  in the current directory.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Option]
+\par }\trowd \trgaph99\trleft709 \cellx2077\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -d\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option displays the debug information.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709 
+\cellx2077\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -f file\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option specifies the name of a file, from which }{\f11\fs22 kmmake}{\f5\fs22 
+ commands are read.  If this option is not specified, the file \ldblquote }{\f11\fs22 makefile}{\f5\fs22 \rdblquote  in the current directory is read.  If \ldblquote -\ldblquote  is specified in \ldblquote file\rdblquote 
+, commands are input from the standard input.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -i\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option disregards the return code from the executed command.  The }{
+\f11\fs22 kmmake}{\f5\fs22  functions in the same manner as that \ldblquote .IGNORE\rdblquote  is specified.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -k\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option creates as many targets as possible without exiting of the command if an error is detected while the command is being executed.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -n\cell }\pard 
+\qj\sa120\nowidctlpar\intbl {\f5\fs22 This option does not execute the command, but displays commands, which may be executed.  Use of this option makes it possible to check which commands are executed before starting execution of the commands.\cell 
+}\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -r\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option makes the rules for omission of the }{\f11\fs22 kmmake}{\f5\fs22  invalid.  That is, the }{\f11\fs22 makedef}{
+\f5\fs22  is not read.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -s\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 The }{\f11\fs22 kmmake}{\f5\fs22 
+ normally displays commands currently being executed.  However, if this option is specified, commands are not displayed.  The }{\f11\fs22 kmmake}{\f5\fs22  functions in the same manner as that \ldblquote .SILENT\rdblquote  is specified.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft709 \cellx2077\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -t\cell }{\f5\fs22 This option updates only time stamps for the target files without execution of commands.\cell }\pard \widctlpar\intbl {
+\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 [Example]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 kmmake -f makeit all
+\par 
+\par }{\f5\fs22 The above example reads the dependent relationship from the file \ldblquote makeit\rdblquote  in the current directory and creates target \ldblquote all\rdblquote .
+\par }\pard \nowidctlpar\tx1539\tx8702 {\f5\fs22 \page 
+\par }\pard \li426\nowidctlpar\tx1539\tx8702 {\f11\fs22 kmmake -n}{\fs22 
+\par }\pard \li1539\nowidctlpar\tx1539\tx8702 {\f5\fs22 The above example analyzes the dependent relationship, but executes no commands, and displays commands scheduled to be executed.
+\par }\pard \nowidctlpar\tx1539\tx8702 {\fs22 
+\par }\pard \li426\nowidctlpar\tx8702 {\f11\fs22 kmmake -f b:filemake CFLAG = -DDEBUG
+\par }\pard \li1539\nowidctlpar\tx1539\tx8702 {\f5\fs22 The above example reads the dependent relationship from the file \ldblquote }{\f11\fs22 b:filemake}{\f5\fs22 \rdblquote  instead of }{\f11\fs22 makefile}{\f5\fs22 .  Additionally, the macro named }{
+\f11\fs22 CFLAG}{\f5\fs22  is defined in \ldblquote }{\f11\fs22 -DDEBUG}{\f5\fs22 \rdblquote .}{\fs22 
+\par }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 [File]
+\par 
+\par }\trowd \trgaph99\trleft426 \cellx1872\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 makedef\cell }{\f5\fs22 This file describes the default rules.
+\par \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1872\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 makefile\cell }{\f5\fs22 This file describes the }{\f11\fs22 kmmake}{\f5\fs22  commands.  If -f option is not specified, }{
+\f11\fs22 makefile}{\f5\fs22  in the current directory is used instead.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par \page }{\f5\fs22 LCC86 (1)
+\par 
+\par [Name]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 lcc86 - compiler driver
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Syntax]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs20\expnd-4\expndtw-20 
+lcc86 [@file] [-a [file]] [-B] [-c] [-cn] [-cs | -cu] [-cv] [-DNAME [=value]] [-E] [-g] [-h] [-Idir] [-j[X]] [-kX] [-llibrary] [-Ldir] [-m] [-mX] [-mslink | -nomslink] [-nN] [-noconf] [-O[0]] [-ofile] [-P] [-p] [-S[c]] [-Tdir] [-v[X]] [-w[X]] [-Xdir] [-y[
+X]] [-z] sourcefile\'85
+\par }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 [Comment]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The }{\f11\fs22 lcc86}{\f5\fs22  calls up the C compiler, assembler, and linker to convert the C source programs into those in the executable format.  
+\par 
+\par For source files, C language files with an extension of \ldblquote }{\f11\fs22 .c}{\f5\fs22 \rdblquote , assembly language files with an extension of \ldblquote }{\f11\fs22 .a86 (r86)}{\f5\fs22 \rdblquote , \ldblquote }{\f11\fs22 .p86 (r86)}{\f5\fs22 
+\rdblquote , or \ldblquote }{\f11\fs22 .asm (MASM)}{\f5\fs22 \rdblquote , and object files with an extension of \ldblquote }{\f11\fs22 .obj}{\f5\fs22 \rdblquote  can be specified.  More than one file can be written and they are linked together.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The }{\f11\fs22 lcc86}{\f5\fs22  first compiles or assembles these files to make object files.  If the extension of an assembly language file is \ldblquote }{\f11\fs22 .a86}{\f5\fs22 \rdblquote  or \ldblquote }{
+\f11\fs22 .p86}{\f5\fs22 \rdblquote , it is assembled by the }{\f11\fs22 r86}{\f5\fs22  after the }{\f11\fs22 ccp}{\f5\fs22  is executed.  If the extension is \ldblquote }{\f11\fs22 .asm}{\f5\fs22 \rdblquote 
+, the assembly language file is assembled by the MASM.
+\par 
+\par If no error is found, all objects are linked to create one executable file (with an extension of \ldblquote }{\f11\fs22 .exe}{\f5\fs22 \rdblquote ).  The same name as that of the first source file is put on this \ldblquote }{\f11\fs22 .exe}{\f5\fs22 
+\rdblquote  file.  (The name of a file to be created can be changed using }{\f11\fs22 -o}{\f5\fs22  option.)
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 If an error is found, the command is executed until objects are created, but linking is not made.  Since the error message is output to the standard output, it is possible to output it to a file using redirect 
+\ldblquote >\rdblquote  of the standard output.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 For options that need to specify a directory name, either putting or not putting \ldblquote /\rdblquote  (or \ldblquote }{\fs22 \\}{\f5\fs22 \rdblquote 
+) at the end may be accepted. Please also note that a letter in the capital is regarded as  a different letter when it is used in the small letter.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 
+The lcc86 analyzes character strings given in command lines in sequential order.  If a character string is an option, relevant process is executed.  If it is not an option, it is thought as a source file name, and then compilation is executed using option
+s specified at that time.  For example,
+\par 
+\par }\pard \qj\li1702\nowidctlpar {\f11\fs22 lcc86  -c  a.c  -S  b.c  -p
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 \page }{\f5\fs22 if the above command is given, the command is executed until assembling to create an object file named \ldblquote }{\f11\fs22 a.obj}{\f5\fs22 \rdblquote  since -c is specified for }{\f11\fs22 a.c}{
+\f5\fs22 .  On the contrary, since -S is valid when compiling }{\f11\fs22 b.c}{\f5\fs22 , the file \ldblquote }{\f11\fs22 b.c}{\f5\fs22 \rdblquote  is compiled to assembly language file \ldblquote }{\f11\fs22 b.a86}{\f5\fs22 \rdblquote .
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 When the }{\f11\fs22 lcc86}{\f5\fs22  recognizes \ldblquote }{\f11\fs22 -p}{\f5\fs22 \rdblquote 
+ specified at the end, codes for the profiler are not generated since both are already compiled.  As described above, the order in which options and source files are specified must always checked carefully.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par 
+\par [Option]
+\par }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 @file\cell }{\f5\fs22 This option reads command line parameters from the file \ldblquote file\rdblquote 
+.  Options and source file names divided by a space or LF code are written in \ldblquote file\rdblquote .  These options can be placed halfway or twice or more as shown in the following example.
+\par }{\fs22 \tab }{\f11\fs22 lcc86  -o foo.exe  @files  @libs -m}{\f5\fs22 
+\par }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 However, nesting is not allowed.  That is, @ option cannot be used in \ldblquote }{\i\f11\fs22 file}{\f5\fs22 \rdblquote .\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985
+\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -a[}{\i\f11\fs22 file}{\f11\fs22 ]\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option specifies \ldblquote }{\i\f11\fs22 file}{\f5\fs22 \rdblquote 
+ as the initialization routine.  This file option must exist in a directory specified by -L option.  Additionally, }{\f11\fs22 -a}{\f5\fs22  and file must be written continually without spaces.  If \ldblquote }{\i\f11\fs22 file}{\f5\fs22 \rdblquote 
+ is blank (only -a is specified), it is considered that there is no initialization routine.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -B\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option makes use of a C++ comment starting with // enabled.  However, note that use of // comment lowers the portability.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -c\cell }\pard \qj\sa120\nowidctlpar\intbl {
+\f5\fs22 This option does not execute the link after creating object files.  If there is only one file to be compiled, it is possible to specify an object file name using }{\i\f11\fs22 -o}{\f5\fs22  option.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar\intbl {\f11\fs22 -cn\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option makes nesting of comments enabled.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -cs, -cu\cell }\pard 
+\qj\sa120\nowidctlpar\intbl {\f11\fs22 -cs}{\f5\fs22  option specifies that the char type is signed.  }{\f11\fs22 -cu}{\f5\fs22  option specifies that the char type is unsigned.  If this option is omitted, the char type is unsigned.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -cv\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option creates variables allocated to the class DATA in declaration order.  If this option is omitted, variables are sorted and created in alphabetical sort.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 
+\pard \qj\nowidctlpar\intbl {\f11\fs22 -DNAME [=value]\cell }{\f5\fs22 This option defines a macro named NAME.  This option functions in the same manner as that the following line is placed at the beginning of the C language source file.
+\par }\pard \qj\sb120\sa120\nowidctlpar\intbl {\fs22 \tab }{\f11\fs22 #define NAME value}{\f5\fs22 
+\par }\pard \qj\nowidctlpar\intbl {\f5\fs22 However, \ldblquote }{\f11\fs22 =value}{\f5\fs22 \rdblquote  is omitted, it functions in the same manner as described below.
+\par }\pard \qj\sb120\sa120\nowidctlpar\intbl {\fs22 \tab }{\f5\fs22 #define NAME 1\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar \page 
+\par \trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -E\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option executes only the preprocessor }{\f11\fs22 ccp}{\f5\fs22 
+.  The result is output to the standard output or a file specified by -o option.  The output includes the preprocessor line number information.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard 
+\qj\nowidctlpar\intbl {\f11\fs22 -g\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option embeds the debug information (line number information) in the object.  This is used by Microsoft\rquote s SYMDEB.\cell }\pard \widctlpar\intbl {\fs22 \row 
+}\pard \qj\nowidctlpar\intbl {\f11\fs22 -h\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option generates codes to inspect the stack overflow
+.  When this option is used, the execution speed of the created program becomes slow.  If the stack overflow is detected in the created program, a return code of 9 is returned and the execution is stopped.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar\intbl {\f11\fs22 -I}{\i\f11\fs22 dir}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option adds \ldblquote }{\f11\fs22 dir}{\f5\fs22 \rdblquote  to the list of directories where files specified by }{\f11\fs22 #include}{
+\f5\fs22  statement are searched for.  Multiple }{\f11\fs22 -I}{\f5\fs22  options can be specified.  At this time, all directories specified are searched.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx1985\cellx8601 
+\pard \qj\nowidctlpar\intbl {\f11\fs22 -j[X]\cell }{\f5\fs22 This option is used to select which language is applied to error message display.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell }{\f5\fs22 
+For MS-DOS and Windows\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx4083\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -j0\cell }{\f5\fs22 Error messages are displayed in English.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -j, -j1\cell }{\f5\fs22 Error messages are displayed in Japanese.  \ldblquote Shift-JIS\rdblquote  is used for Japanese character codes.\cell }\pard \widctlpar\intbl {\fs22 \row 
+}\trowd \trgaph99\trleft426\trkeep \cellx1985\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell }{\f5\fs22 For UNIX\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx4083\cellx8601 \pard \qj\nowidctlpar\intbl {
+\f11\fs22 \cell -j0\cell }{\f5\fs22 Error messages are displayed in English.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -j, -j1,-je\cell }{\f5\fs22 Error messages are displayed in Japanese.  \ldblquote EUC
+\rdblquote  is used for Japanese character codes.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -js\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 Error messages are displayed in Japanese.  \ldblquote Shift-JIS
+\rdblquote  is used for Japanese character codes.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx8601 \pard \qj\nowidctlpar\intbl {\f5\fs22 In either OS, if this option is omitted, this option becomes as }{\f11\fs22 -j0}
+{\f5\fs22  is specified.}{\f11\fs22 \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -kX\cell }{\f5\fs22 
+This option transfers option X to the linker.  For example, to set a stack size, the following command is specified using this option.
+\par }\pard \qj\sb120\sa120\nowidctlpar\intbl {\fs22 \tab }{\f11\fs22 lcc86  foo.c -k\rdblquote -s 5000\rdblquote }{\fs22 
+\par }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 In the above example, foo.c is compiled and the stack size is set to 0x5000 bytes (-s 5000 is an option of lld).  In this example, -s 5000 is enclosed by}{\f11\fs22  \ldblquote  \ldblquote }{\f5\fs22 
+, but use of }{\f11\fs22 \lquote  \lquote }{\f5\fs22  is recommended in UNIX.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar \page 
+\par \trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -l}{\i\f11\fs22 library}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option scans the library \ldblquote }{\i\f11\fs22 library}{\f5\fs22 
+\rdblquote  during linking.  The file \ldblquote }{\i\f11\fs22 library}{\f5\fs22 \rdblquote  is considered as that it is in a directory specified by }{\f11\fs22 -L}{\f5\fs22  option.  Additionally, when an extension of \ldblquote }{\f11\fs22 .obj}{
+\f5\fs22 \rdblquote 
+ is identified, it is possible to connect object files in the library directory.  If the linker lld encounters this option, it immediately searches for unsolved symbol.  Therefore, the order of writing options has the meaning.  Note that desired results 
+are not obtained even though libraries are specified preceding the object files.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -L}{\i\f11\fs22 dir}{\f11\fs22 \cell }\pard 
+\qj\sa120\nowidctlpar\intbl {\f5\fs22 This option adds \ldblquote }{\f11\fs22 dir}{\f5\fs22 \rdblquote  to the list of directories where a li
+brary is searched for.  At this time, there must be S, P, D, and L sub-directories corresponding to each memory size.  Actual libraries must be put in these sub-directories.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 
+-m\cell }{\f5\fs22 This option creates a linkage map file.  No line number information is output to the map file.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -mX\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option specifies a memory model.  Any of s, p, d, and l is specified for X.  If this option is not specified, S model is selected (-ms).\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx8603 \pard 
+\qj\nowidctlpar\intbl {\f11\fs22 -mslink, -nomslink\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f11\fs22 -mslink}{\f5\fs22 
+ option declares that MS-LINK is used as a linker.  }{\f11\fs22 -nonmslink}{\f5\fs22  option declares that the standard }{\f11\fs22 lld}{\f5\fs22  is used as a linker.  This option must be specified preceding }{\f11\fs22 -k}{\f5\fs22 
+ option.  If this option is not specified, the }{\f11\fs22 lld}{\f5\fs22  is used as a linker.  This option is invalid in the UNIX version.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -nN\cell }\pard 
+\qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option sets the upper limit for the number of continuously detected errors to N (N is in decimal).  If the number of detected errors exceeds the set level, compilation of that file is stopped.  The default setting of N is 20.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -noconf\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option makes the configuration file invalid
+.  This option must be written at the beginning of the command line.  If this option is written at other position, an error may result.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {
+\f11\fs22 -O[0]\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 When }{\f11\fs22 -O}{\f5\fs22  is specified, the compiler performs the optimization.  When }{\f11\fs22 -O0}{\f5\fs22 
+ is specified, the compiler does not perform the optimization.  If this option is not specified, the optimization is not made (}{\f11\fs22 -O0}{\f5\fs22 ).  In the current version, only optimization of jump commands by the assembler r86 is controlled by }
+{\f11\fs22 -O0}{\f5\fs22  option.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar \page 
+\par \trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -o }{\i\f11\fs22 file}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option specifies the output file name to \ldblquote }{\i\f5\fs22 file}{
+\f5\fs22 \rdblquote .  Normally, this file name is a name of the executable file.  However, if -c option is specified, the object file name is set to the executable file name.  If }{\i\f5\fs22 -s}{\f5\fs22 
+ option is specified, the assembly file name is set to the executable file name.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -P\cell }\pard \qj\sa120\nowidctlpar\intbl {
+\f5\fs22 This option executes only the preprocessor }{\f11\fs22 ccp}{\f5\fs22 .  The result is output to a file with an extension of \ldblquote }{\f11\fs22 .i}{\f5\fs22 \rdblquote .  The output does not include the preprocessor line number information.
+\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -p\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 Th
+is option generates codes for the profiler.  The profiler is a utility that checks the program execution status and reports how many times each program part is executed.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 
+-S[C]\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 -S option creates an assembly language file (}{\f11\fs22 .a86}{\f5\fs22 
+) for each C language file.  Assembling and linking are not made.  -SC option embeds C source codes in the created assembly language file in the comment format.  Created files are not assembled by the MS-DOS standard assembler \ldblquote MASM\rdblquote 
+.  At this time, the r86 supplied with this package must be used.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -T}{\i\f11\fs22 dir}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option creates a compiler work file in the directory \ldblquote }{\i\f11\fs22 dir}{\f5\fs22 \rdblquote 
+.  If a high-speed access device, such as RAM disk is provided, specifying this directory may greatly improve the compilation speed.  If this option is not specified, the current directory is used.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar\intbl {\f11\fs22 -v[X]\cell }{\f5\fs22 This option specifies how the display functions during compilation. \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx1985\cellx3261\cellx8603 \pard 
+\qj\nowidctlpar\intbl {\f11\fs22 \cell -v0\cell }{\f5\fs22 Nothing is displayed.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -v, -v1\cell }{\f5\fs22 Commands executed internally are displayed.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -v2\cell }{\f5\fs22 In addition to -v1, names of functions currently being processed are displayed during code generation.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft426\trkeep \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 If this option is not specified, the command functions in the same manner as that -v0 is specified.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -w[X]\cell }{\f5\fs22 This option specifies the handling method, if a warning is detected.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx1985
+\cellx3261\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -w, -w0\cell }{\f5\fs22 No warning message is displayed and compilation is continued.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -w1\cell }{
+\f5\fs22 Warning message is displayed and compilation is continued.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -w2\cell }{\f5\fs22 Warning message is displayed and compilation is stopped.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx1985\cellx3261\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -wi\cell }{\f5\fs22 Warning message is controlled, which reported if undeclared function is used.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar \page 
+\par \trowd \trgaph99\trleft426\trkeep \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 If this option is not specified, the command functions in the same manner as that }{\f11\fs22 -w1}{\f5\fs22 
+ is specified.  If an error is detected, the compilation is stopped regardless of designation of this option.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx1985\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -X}{
+\i\f11\fs22 dir}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option searches the directory \ldblquote }{\i\f11\fs22 dir}{\f5\fs22 \rdblquote 
+ for compiler internal commands (cf, cg86, or etc.).  If this option is not specified, a directory specified in the environmental variable \ldblquote PATH\rdblquote  is searched.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep 
+\cellx1985\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 -y[N]\cell }{\f5\fs22 
+This option specifies handling of the extended character code set.  Since the lcc86 normally handles the contents of character strings as shift JIS code strings, it cannot directly handle a character string in a system other than JIS shift code system (fo
+r example a heart mark in IBM-PC) in correct manner if it appears.  To solve this problem, the following option must be specified.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1985\cellx3261\cellx8601 \pard 
+\qj\nowidctlpar\intbl {\f11\fs22 \cell -y\cell }{\f5\fs22 All character codes are handled as 1-byte characters.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -y0\cell }{\f5\fs22 
+All character codes are handled as Japanese character codes (shift JIS code).\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -y1\cell }{\f5\fs22 All character codes are handled as Chinese and Taiwanese codes.\cell 
+}\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 \cell -y2\cell }{\f5\fs22 All character codes are handled as Korean codes.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426\trkeep \cellx1985\cellx8601 \pard 
+\qj\nowidctlpar\intbl {\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 If no option is specified, the command functions in the same manner as that }{\f11\fs22 -y0}{\f5\fs22  is specified.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft426\trkeep \cellx1985\cellx8601 \pard \qj\nowidctlpar\intbl {\f11\fs22 -z\cell }{\f5\fs22 
+This option displays commands to be executed.  The commands are not executed.  This option is used to check whether or not the environmental settings are correct.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par 
+\par }{\f5\fs22 [Example]
+\par 
+\par }\pard \qj\li426\sa120\nowidctlpar {\f11\fs22 lcc86  -DDEBUG  -T/tmp  test.c
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 In this example, macro DEBUG is defined to }{\f11\fs22 1}{\f5\fs22  and }{\f11\fs22 test.c}{\f5\fs22  is compiled.  A temporary file created by the compiler is placed in the directory /temp.
+\par }\pard \qj\li426\sb120\sa120\nowidctlpar {\f11\fs22 lcc86  -ml  -o  foo.exe  main .c  sub.c  -lmathlib
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 In this example, }{\f11\fs22 main.c}{\f5\fs22  and }{\f11\fs22 sub.c}{\f5\fs22  are compiled with a large model.  They are gathered together by the linker and the name of an execution file is \ldblquote }{\f11\fs22 
+foo.exe}{\f5\fs22 \rdblquote .  Additionally, }{\f11\fs22 mathlib.lib}{\f5\fs22  is scanned during linking.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [File]
+\par 
+\par }\pard \qj\li284\nowidctlpar {\f5\fs22 MS-DOS and Windows version
+\par }\pard \qj\li425\sb120\sa120\nowidctlpar {\f11\fs22 _lcc86}{\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 Environmental settings necessary for the compiler are described in _lcc86.  If the lcc86 does not find \ldblquote .lcc86\rdblquote 
+ in the current directory, it searches directories defined in the environmental variable PATH in order.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li284\nowidctlpar {\f5\fs22 UNIX version
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 \page }{\f11\fs22 .lcc86, options.lcc86
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 Environmental settings necessary for the compiler are described in \ldblquote }{\f11\fs22 .lcc86}{\f5\fs22 \rdblquote  and \ldblquote }{\f11\fs22 options.lcc86}{\f5\fs22 \rdblquote 
+.  The lcc86 sequentially searches the current directory and directories specified in environmental variable Home for }{\f11\fs22 .lcc86}{\f5\fs22 .  Finally, the }{\f11\fs22 lcc86}{\f5\fs22  searches }{\f11\fs22 /user/local/lib/lsic/options.lcc86}{
+\f5\fs22 .
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [End code]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 0 is returned if the compilation is completed successfully.  If an error 
+is detected, 1 is returned.  If a warning is detected, subsequent operation depends on -w option.  1 is returned if -w2 is specified, otherwise 0 is returned.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }{\fs22 \page }{\f5\fs22 [Name]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 libr86 - library compiler
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Syntax]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs20\expnd-4\expndtw-20\kerning16 libr86 [-l] [-n] [-o }{\i\f11\fs20\expnd-4\expndtw-20\kerning16 file}{\f11\fs20\expnd-4\expndtw-20\kerning16 ] [-s] [-x }{\i\f11\fs20\expnd-4\expndtw-20\kerning16 lcc}{
+\f11\fs20\expnd-4\expndtw-20\kerning16 ] [}{\i\f11\fs20\expnd-4\expndtw-20\kerning16 lcc86 option}{\f11\fs20\expnd-4\expndtw-20\kerning16  \'85] }{\i\f11\fs20\expnd-4\expndtw-20\kerning16 sourcefile}{\f11\fs20\expnd-4\expndtw-20\kerning16 
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Comment]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The }{\f11\fs22 libr86}{\f5\fs22  is a type of compiler driver that disassembles the gathered library module and combines them with compile and library files.
+\par 
+\par The name of a source code file in the library is specified for \ldblquote }{\f11\fs22 sourcefile}{\f5\fs22 \rdblquote .  Any name can be used, but normally an extension of \ldblquote }{\f11\fs22 .l}{\f5\fs22 \rdblquote  is put.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 
+The libr86 reads the input file and cuts each module.  After that, it compiles and combines the compilation result with the library file.  To perform actual compilation, the lcc86 is called up for execution.  Modules are combined by the librarian oar.  Th
+erefore, it is absolutely necessary to put these commands in the executable directory.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The work file is made in the current directory and the library file is also created in the current directory with a name of \ldblquote }{\f11\fs22 libr.out}{\f5\fs22 \rdblquote  put.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Option]
+\par 
+\par }\trowd \trgaph99\trleft284 \cellx1583\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -l\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option uses Microsoft\rquote s LIB instead of oar as a librarian. \cell }\pard \widctlpar\intbl {\fs22 \row 
+}\trowd \trgaph99\trleft284 \cellx1583\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -n\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option does not execute the compilation and creation of library, and displays only commands.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -o }{\i\f11\fs22 file}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option sets the name of an output library file to \ldblquote }{\i\f11\fs22 file}{\f5\fs22 
+\rdblquote .  If this option is not specified, the output file name is \ldblquote }{\f11\fs22 libr.out}{\f5\fs22 \rdblquote .\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -s\cell }\pard \qj\sa120\nowidctlpar\intbl {
+\f5\fs22 The }{\f11\fs22 libr86}{\f5\fs22  displays }{\f11\fs22 lcc86}{\f5\fs22  and oar commands, which are being executed internally, on the console.  If this option is specified, they are not displayed.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft284 \cellx1583\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -x }{\i\f11\fs22 lcc}{\f11\fs22 \cell }{\f5\fs22 This option uses }{\i\f11\fs22 lcc }{\f5\fs22 
+as a compiler driver.  If this option is not specified, lcc86 is used as a compiler driver.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 All options starting with \ldblquote -\ldblquote  other than those shown above are transferred to the lcc86.
+\par 
+\par [Example]
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 libr86  -ms  libfile.l
+\par 
+\par }{\f5\fs22 The above example makes a small model library from \ldblquote }{\f11\fs22 libfile.l}{\f5\fs22 \rdblquote .  -ms is an option of the lcc86 that specifies a small model.  Library file \ldblquote }{\f11\fs22 libr.out}{\f5\fs22 \rdblquote 
+ is created in the current directory.
+\par }\pard \qj\nowidctlpar {\f5\fs22 \page [File]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 libr.out
+\par }{\f5\fs22 This is a library file created by the libr86 if -o option is not specified.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [End code]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 0 is returned if the process is completed successfully.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Reference]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 lcc86 (1), oar (1)
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }{\fs22 \page }{\f5\fs22 [Name]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 lld - link loader
+\par }\pard \qj\nowidctlpar {\f5\fs16 
+\par }{\f5\fs22 [Syntax]
+\par }\pard \qj\li851\nowidctlpar {\f11\fs20\expnd-4\expndtw-20\kerning16 lld [@}{\i\f11\fs20\expnd-4\expndtw-20\kerning16 file}{\f11\fs20\expnd-4\expndtw-20\kerning16 ] [-F}{\i\f11\fs20\expnd-4\expndtw-20\kerning16 form}{
+\f11\fs20\expnd-4\expndtw-20\kerning16 ] [-I[X]] [-L}{\i\f11\fs20\expnd-4\expndtw-20\kerning16 dir}{\f11\fs20\expnd-4\expndtw-20\kerning16 ] [-l}{\i\f11\fs20\expnd-4\expndtw-20\kerning16 file}{\f11\fs20\expnd-4\expndtw-20\kerning16 ] [-g] [-M] [-o }{
+\i\f11\fs20\expnd-4\expndtw-20\kerning16 file}{\f11\fs20\expnd-4\expndtw-20\kerning16 ] [-s }{\i\f11\fs20\expnd-4\expndtw-20\kerning16 hex}{\f11\fs20\expnd-4\expndtw-20\kerning16 ] [-T[}{\i\f11\fs20\expnd-4\expndtw-20\kerning16 seg}{
+\f11\fs20\expnd-4\expndtw-20\kerning16 ]] }{\i\f11\fs20\expnd-4\expndtw-20\kerning16 hex}{\f11\fs20\expnd-4\expndtw-20\kerning16 ] }{\i\f11\fs20\expnd-4\expndtw-20\kerning16 objfile}{\f11\fs20\expnd-4\expndtw-20\kerning16 \'85
+\par }\pard \qj\nowidctlpar {\fs16 
+\par }{\f5\fs22 [Comment]
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The }{\f11\fs22 lld}{\f5\fs22  connects files in Microsoft Object Module Format to create an EXE format file in the executable, core image, extended Intel HEX, or Motorola S2 format.
+\par }\pard \qj\nowidctlpar {\f5\fs16 
+\par }{\f5\fs22 [Option]
+\par }\trowd \trgaph99\trleft284\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 @}{\i\f11\fs22 file}{
+\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option reads command line parameters from \ldblquote }{\f11\fs22 file}{\f5\fs22 \rdblquote .\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trbrdrt\brdrs\brdrw15 
+\trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -F}{\i\f11\fs22 form}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {
+\f5\fs22 This option sets the output file format to \ldblquote }{\f11\fs22 form}{\f5\fs22 \rdblquote .  \ldblquote }{\f11\fs22 form}{\f5\fs22 \rdblquote  must be any of the following.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx3327\cellx8602 \pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 e\cell 
+}{\f5\fs22 MS-EXE format\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 c\cell }{\f5\fs22 COM format\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 h\cell }{
+\f5\fs22 Extended Intel HEX format\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 s\cell }{\f5\fs22 Motorola S2 format\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt
+\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f5\fs22 
+If above option is not specified, the format is determined based on an extension of the output file.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr
+\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx3327\cellx8602 \pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 .exe\cell e\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 
+.com\cell c\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 .hex\cell }\pard \qj\sa120\nowidctlpar\intbl {\f11\fs22 h\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt
+\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -I[X]}{\f5\fs22 \cell 
+This controls whether or not upper and lower case letters of the name are distinct.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 
+\trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx3327\cellx8602 \pard \qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 -I, -I1\cell }{\f5\fs22 Upper and lower case letters are not distinct.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 -I0\cell }{\f5\fs22 Upper and lower case letters are distinct.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 
+\trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+If the above option is not specified, the command functions in the same manner as that }{\f11\fs22 -I0}{\f5\fs22  is specified.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -L}{\i\f11\fs22 dir}{\f11\fs22 \cell }\pard 
+\qj\sa120\nowidctlpar\intbl {\f5\fs22 This option specifies a directory where library files exist.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -l}{\i\f11\fs22 file}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {
+\f5\fs22 This option scans the library \ldblquote }{\f11\fs22 file}{\f5\fs22 \rdblquote .  \ldblquote .}{\f11\fs22 lib}{\f5\fs22 \rdblquote  can be omitted.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 
+\trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -g\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option creates line number information.  When -g is specified, -M is specified automatically.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar \page 
+\par \trowd \trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -M\cell }\pard 
+\qj\sa120\nowidctlpar\intbl {\f5\fs22 This option creates a map file.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr\brdrs\brdrw15 \trbrdrh
+\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -o }{\i\f11\fs22 file}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option sets the output file name to \ldblquote }{\f11\fs22 file}{
+\f5\fs22 \rdblquote .  If this option is not specified, .exe file with the same base name as that of the object file specified first is created.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -s}{\i\f11\fs22  hex}{
+\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option sets the stack size to \ldblquote }{\f11\fs22 hex}{\f5\fs22 \rdblquote .  A hexadecimal number is specified for \ldblquote }{\f11\fs22 hex}{\f5\fs22 \rdblquote .\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -T }{\i\f11\fs22 hex}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This sets the start address of the first segment to \ldblquote }{\f11\fs22 hex}{\f5\fs22 \rdblquote 
+.  A hexadecimal number is specified for \ldblquote }{\f11\fs22 hex}{\f5\fs22 \rdblquote .\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284\trkeep\trbrdrt\brdrs\brdrw15 \trbrdrl\brdrs\brdrw15 \trbrdrb\brdrs\brdrw15 \trbrdrr
+\brdrs\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \cellx1701\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -T}{\i\f11\fs22 seg}{\f11\fs22  }{\i\f11\fs22 hex}{\f11\fs22 \cell }{\f5\fs22 This option specifies the start address of the segment 
+\ldblquote }{\f11\fs22 seg}{\f5\fs22 \rdblquote  to \ldblquote }{\f11\fs22 hex}{\f5\fs22 \rdblquote .  A hexadecimal number is specified for \ldblquote }{\f11\fs22 hex}{\f5\fs22 \rdblquote .\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar 
+{\fs22 
+\par }{\f5\fs22 [Example]
+\par 
+\par }\pard \qj\li425\sa120\nowidctlpar {\f11\fs22 lld -o  foo.exe  foo.obj  bar.obj
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 This example combines object modules }{\f11\fs22 foo.obj}{\f5\fs22  and }{\f11\fs22 bar.obj}{\f5\fs22  to create }{\f11\fs22 foo.exe}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li425\sa120\nowidctlpar {\f11\fs22 lld  foo.obj  bar.obj
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 This example functions in the same manner as described in the above example.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li425\sa120\nowidctlpar {\f11\fs22 lld -o  foo.exe  bar.obj  zot.obj  -L/use/lib/c  -lclib
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 This example links }{\f11\fs22 bar.obj}{\f5\fs22  and }{\f11\fs22 zot.obj}{\f5\fs22 , and searches the library }{\f11\fs22 /usr/lib/c/clib.lib}{\f5\fs22  to make }{\f11\fs22 foo.exe}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\fs22 
+\par }\pard \qj\li425\sa120\nowidctlpar {\f11\fs22 lld -Fh -o  foo.hex  bar.obj  zot.obj
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 This example connects }{\f11\fs22 bar.obj}{\f5\fs22  and}{\f11\fs22  zot.obj}{\f5\fs22  to make extended Intel HEX file named }{\f11\fs22 foo.hex}{\f5\fs22 .
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [End code]
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 0 is returned if the link is completed successfully.  1 is returned if an error is detected.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Diagnosis message]
+\par 
+\par }\pard \qj\li426\nowidctlpar {\f11\fs22 Address already given: }{\i\f11\fs22 segment}{\f11\fs22 
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 -T option is specified twice or more in the same segment \ldblquote }{\i\f11\fs22 segment}{\f5\fs22 \rdblquote  or -T option is specified even though the address is specified by the SEGMENT command.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Bad module type
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 \ldblquote }{\i\f11\fs22 file}{\f5\fs22 \rdblquote  is not an object module created by the r86.  The }{\f11\fs22 lld}{\f5\fs22  cannot handle this file correctly.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 \page }{\i\f11\fs22 file}{\f11\fs22 : Conflicting class name: segment
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Segments with the same name on multiple modules are declared with different classes.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Conflicting combine type: segment
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Segments with the same name on multiple modules are declared with different combine types.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Conflicting group definition: segment
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Segments with the same name on multiple modules belong to different groups.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Data before 0x100 (May be ORG 100H missing)
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Program or data is found at a position before }{\f11\fs22 0x100}{\f5\fs22  while the }{\f11\fs22 COM}{\f5\fs22  file is being created.  Don\rquote t you forget }{\f11\fs22 ORG 100H}{\f5\fs22 ?
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Device full
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Disk is full while the file is being written.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Invalid object module: reason
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Object module has an unexpected structure.  The following may be the cause.
+\par }\pard \qj\li1134\sb120\nowidctlpar {\f5\fs20\expnd-4\expndtw-20 1. Extension is made which the}{\f11\fs20\expnd-4\expndtw-20  lld}{\f5\fs20\expnd-4\expndtw-20  cannot process.
+\par 2. Object module file is corrupted for some reason.
+\par 3. Language process system or}{\f11\fs20\expnd-4\expndtw-20  lld}{\f5\fs20\expnd-4\expndtw-20 , which creates this object, may have an unknown bug.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : No such file or directory
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 File cannot be found.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Not a library file
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 File other than the library file is specified in -l option.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 Out of memory
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Symbol table overflows.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22  (segment + offset): Overflow (base): name
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Base address of the segment or symbol \ldblquote }{\f11\fs22 name}{\f5\fs22 \rdblquote  cannot be put within 16 bits.
+\par Total program size may exceed 1M bytes.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22  (segment + offset): Overflow (byte): name
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Value of symbol \ldblquote name\rdblquote  cannot be put within 8 bits.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22  (segment + offset): Overflow (word): name
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Value of symbol \ldblquote }{\f11\fs22 name}{\f5\fs22 \rdblquote  cannot be put within 16 bits.  Segment size may exceed 64 Kbytes.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 \page 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Redefined symbol: name
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Symbol \ldblquote }{\f11\fs22 name}{\f5\fs22 \rdblquote  defined in the file has already been defined in another file.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22  (segment + offset): Too far (different segment): name
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 
+Destination symbol of the relative jump/call command does not belong to the same segment/group of that command.  (Note: MS-LINK does not report this error.  Program which runs in MS-LINK may cause an error in the }{\f11\fs22 llb}{\f5\fs22 
+.  At this time, however, the same executable file as that in MS-LINK is created.  If you know the reason, these errors can be disregarded even though we recommend you to correct the source program as much as possible.)
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22  (segment + offset): Too far (relative byte): name
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Destination of the relative jump command is not in a range of -128 - +127.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 Too small memory
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Memory capacity is insufficient.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\i\f11\fs22 file}{\f11\fs22 : Undefined symbol: name
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 Symbol \ldblquote name\rdblquote  to which the file refers is not defined.
+\par }\pard \qj\nowidctlpar {\fs22 \page }{\f5\fs22 OAR (1)
+\par 
+\par [Name]
+\par }\pard \qj\li426\nowidctlpar {\f11\fs22 oar- librarian
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Syntax]
+\par }\pard \qj\li426\nowidctlpar {\f11\fs22 oar [-]d|q|r|t|x[cuv] [g N] library member-file\'85
+\par }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 [Comment]
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 The }{\f11\fs22 oar}{\f5\fs22  is a program that controls the library to which the}{\f11\fs22  lld}{\f5\fs22  refers.  The oar registers, deletes, picks up, and lists object modules.  The library format is comp
+atible with Microsoft\rquote s one.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+An alphabetic character to be used for control is specified for the first parameter while the name of a library to be controlled is specified for the second parameter.  If the extension of the library is not specified, an extension of \ldblquote }{
+\f11\fs22 .lib}{\f5\fs22 \rdblquote  is automatically put.
+\par 
+\par In the \ldblquote }{\f11\fs22 member-file}{\f5\fs22 \rdblquote , object module file names to be registered or deleted, which are separated by spaces, are specified.  If the extension is omitted, an extension of \ldblquote }{\f11\fs22 .obj}{\f5\fs22 
+\rdblquote  is automatically put.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }\pard \qj\li425\sa120\nowidctlpar {\f5\fs22 The following operations are available.
+\par }\trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 d\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This deletes \ldblquote }{\f11\fs22 member-file}{\f5\fs22 \rdblquote  from \ldblquote }{\f11\fs22 library}{
+\f5\fs22 \rdblquote .\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 q\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This registers \ldblquote }{\f11\fs22 member-file}{
+\f5\fs22 \rdblquote  to \ldblquote }{\f11\fs22 library}{\f5\fs22 \rdblquote , but always adds it to the end.  If the member with the same name already exists, \ldblquote }{\f11\fs22 member-file}{\f5\fs22 \rdblquote  is not registered to \ldblquote }{
+\f11\fs22 library}{\f5\fs22 \rdblquote .  Since the processing time of this operation is shorter than that of \ldblquote }{\f11\fs22 r}{\f5\fs22 \rdblquote 
+, this operation is applicable when the members are registered one-by-one.  Additionally, if a file with an extension of \ldblquote }{\f11\fs22 .lib}{\f5\fs22 \rdblquote  is specified as \ldblquote }{\f11\fs22 member-file}{\f5\fs22 \rdblquote 
+, that library is connected.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 r\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This registers \ldblquote }{\f11\fs22 member-file}{\f5\fs22 \rdblquote  to \ldblquote }{
+\f11\fs22 library}{\f5\fs22 \rdblquote .  If the member with the same name already exists in \ldblquote }{\f11\fs22 library}{\f5\fs22 \rdblquote , it is overwritten.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 t\cell 
+}\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This displays the list of \ldblquote }{\f11\fs22 library}{\f5\fs22 \rdblquote  contents on the standard output.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard 
+\qj\nowidctlpar\intbl {\f11\fs22 x\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This picks up \ldblquote }{\f11\fs22 member-file}{\f5\fs22 \rdblquote  from \ldblquote }{\f11\fs22 library}{\f5\fs22 \rdblquote .  If \ldblquote }{\f11\fs22 member-file}{
+\f5\fs22 \rdblquote  is not specified, all members are picked up.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par }\pard \qj\sa120\nowidctlpar {\f5\fs22 [Option]
+\par }\trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 @file\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option reads a command from \ldblquote }{\f11\fs22 file}{\f5\fs22 \rdblquote  and executes it.\cell 
+}\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 c\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option controls whether or not the message \ldblquote }{\f11\fs22 
+library: created}{\f5\fs22 \rdblquote 
+ is displayed if a specified library does not exist during execution of r or q command.  This option has no meaning if the library already exists.  Additionally, if this option is specified for d, t, and x commands, it has no meaning.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar \page 
+\par \trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 g }{\i\f11\fs22 N}{\f11\fs22 \cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 
+This option specifies a page size of N in decimal.  This option is effective only when creating a new library file.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 v\cell 
+}\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 If this option is specified for d, r, q, and x commands, file names currently being executed are displayed.  If this command is specified for t command, detailed information on each object module is displayed.
+\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft426 \cellx1703\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 u\cell }{\f5\fs22 When this option is specified for r command, only \ldblquote }{\f11\fs22 member-files}{\f5\fs22 \rdblquote 
+ having update time not later than that of \ldblquote }{\f11\fs22 library}{\f5\fs22 \rdblquote  are registered.  This option does not give effects on commands other than }{\f11\fs22 r}{\f5\fs22  command.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 [Example]
+\par }\pard \qj\li426\sb120\nowidctlpar {\f11\fs22 oar tv /usr/lib/c/s/doslib.lib
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example displays members in}{\f11\fs22  /user/lib/c/s/doslib.lib}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar q  mathlib.lib  sin.obj  cos.obj
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example adds sin.obj and cos.obj to mathlib.lib.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar q all.lib  doslib.lib  mathlib.lib  knjlib.lib 
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example combines }{\f11\fs22 doslib.lib}{\f5\fs22 , }{\f11\fs22 mathlib.lib}{\f5\fs22 , and }{\f11\fs22 knjlib.lib}{\f5\fs22  to create }{\f11\fs22 all.lib}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar r mathlib.lib  sin.obj  cos.obj
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example replaces }{\f11\fs22 sin.obj}{\f5\fs22  and }{\f11\fs22 cos.obj}{\f5\fs22  in }{\f11\fs22 mathlib.lib}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar ru mathlib.lib  *.obj
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example registers }{\f11\fs22 *.obj}{\f5\fs22  files in the current directory, which are more newly created than }{\f11\fs22 mathlib.lib}{\f5\fs22 , to }{\f11\fs22 mathlib.lib}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar xv romlib.lib
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example picks up all the contents of }{\f11\fs22 romlib.lib}{\f5\fs22  to the current directory.  These file names are displayed during execution of the command.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar d romlib.lib  printf
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example deletes }{\f11\fs22 printf}{\f5\fs22  from }{\f11\fs22 romlib.lib}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar rcvg 64  newlib.lib  *.obj
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example creates new library file }{\f11\fs22 newlib.lib}{\f5\fs22  with a page size of 64 and registers all .}{\f11\fs22 obj}{\f5\fs22  files in the current directory to it.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 \page }{\f11\fs22 oar qg 64  newlib.lib  oldlib.lib
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example creates a new library file in which the page size of }{\f11\fs22 oldlib.lib}{\f5\fs22  is changed to 64.  The new library file name is }{\f11\fs22 newlib.lib}{\f5\fs22 .
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 
+\par }{\f11\fs22 oar r slib.lib  @list
+\par }\pard \qj\li851\sb120\nowidctlpar {\f5\fs22 The above example registers members listed in the file \ldblquote list\rdblquote  to}{\f11\fs22  slib.lib}{\f5\fs22 .  As shown in the above example, it is accepted that @file is written in the parameter.
+
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par }{\fs22 \page }{\f5\fs22 R86 (1)
+\par 
+\par [Name]
+\par }\pard \qj\li426\nowidctlpar {\f11\fs22 r86 - 8086/80186/80286 assembler
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Syntax]
+\par }\pard \qj\li426\nowidctlpar {\f11\fs22 r86 [-m name] [-o outputfile] [-p listfile] [-q] inputfile
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Comment]
+\par }\pard \qj\li425\sa120\nowidctlpar {\f5\fs22 The r86 is an assembler for 8086/80186/80286.
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 Since the r86 aims at assembling of codes generated by the LSI C-86 compiler, it is not so complicate as Microsoft\rquote s MASM and is very simple.  Addi
+tionally, the r86 also has an additional function that automatically converts conditional jump commands, which do not reach, into a long jump command not available in MASM.
+\par An input file is specified in }{\f11\fs22 inputfile}{\f5\fs22 .  If the extension of the input file is omitted, it is assumed as \ldblquote }{\f11\fs22 .a86}{\f5\fs22 \rdblquote .  The r86 reads the input file and creates }{\f11\fs22 .obj}{\f5\fs22 
+ files with the same name in the same directory.  This object file has Microsoft Object Module Format.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Option]
+\par }\trowd \trgaph99\trleft284 \cellx1755\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -m name\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option sets the name of a object module to \ldblquote }{\f11\fs22 name}{\f5\fs22 \rdblquote .   
+If this option is omitted, the module name is \ldblquote }{\f11\fs22 inputfile}{\f5\fs22 \rdblquote .\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284 \cellx1755\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -o file\cell }\pard 
+\qj\sa120\nowidctlpar\intbl {\f5\fs22 This option creates an object in the file \ldblquote }{\f11\fs22 file}{\f5\fs22 \rdblquote .  If this option is omitted, the object file name is \ldblquote }{\f11\fs22 inputfile.obj}{\f5\fs22 \rdblquote .\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar\intbl {\f11\fs22 -p file\cell }\pard \qj\sa120\nowidctlpar\intbl {\f5\fs22 This option makes the listing in file \ldblquote }{\f11\fs22 file}{\f5\fs22 \rdblquote 
+.  If this option is omitted, the listing is not made.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft284 \cellx1755\cellx8603 \pard \qj\nowidctlpar\intbl {\f11\fs22 -q\cell }{\f5\fs22 
+This option changes all jump commands to long commands to make the assembling time shorter.  If this option is omitted, jump commands are assembled into as short commands as possible.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+
+\par }{\f5\fs22 [Example]
+\par }\pard \qj\li425\sa120\nowidctlpar {\f11\fs22 r86 -p  test.lst  test
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The above example assembles }{\f11\fs22 test.r86}{\f5\fs22  to create object file }{\f11\fs22 test.obj}{\f5\fs22 .  Additionally, the listing is written in }{\f11\fs22 test.lst}{\f5\fs22 
+ at the same time.  The module name is test (not }{\f11\fs22 test.a86}{\f5\fs22 ) and jump commands are assembled into as short commands as possible.
+\par }\pard \qj\li425\sa120\nowidctlpar {\f5\fs22 \page }{\f11\fs22 r86 -m  foo -o  bar.obj  -q  zod.a86
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 The above command assembles }{\f11\fs22 zod.a86}{\f5\fs22 .  The object file name is }{\f11\fs22 bar.obj}{\f5\fs22 .  This example does not optimize jump commands.  The module name is }{\f11\fs22 foo}{\f5\fs22 .
+
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [End code]
+\par }\pard \qj\li426\nowidctlpar {\f5\fs22 0 is returned if the assembling is completed.  1 is returned if an error is detected.
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par [Diagnosis message]
+\par 
+\par }\pard \qj\li426\sa60\nowidctlpar {\f11\fs22 0 or more than 2 char
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 The length of a character constant used in the formula is 0, or 3 or more.  A character constant having 3 characters or more is allowed only in the DB command.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 bad number
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 The numeric convention is incorrect.  For example, a number other than 0 and 1 is used in the binary notation.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 bad operand type
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 Operand type is unmatched.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 can\rquote t op
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 op cannot be used here.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 double defined XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 XXX is defined twice or more.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 illegal END
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 END command is found at unexpected position.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 illegal align or combine
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 Align type or combine type is incorrect.  These types may not match with previously declared ones.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 illegal class name XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 The class name XXX is incorrect.  This class may not match with previous declaration.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 illegal extrn XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 The external symbol declaration may not match with the previous declaration.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 illegal group XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 The group declaration may not match with the previous declaration.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f5\fs22 \page }{\f11\fs22 illegal operand XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 Operand, use of which is not allowed, is used.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 illegal public XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 The public declaration may not match with the previous declaration.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 illegal type
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 The type is incorrect.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 line detected after END
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 It is not allowed to write lines after END.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 missing quote
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 There are no \lquote  and \ldblquote  that ends character constants.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 missing segment information
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 There is no segment information.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 missing type information 
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 There is no type information.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 operand type doesn\rquote t match
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 Operand type is not incorrect.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 operand unmatch
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 Operand is incorrect.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 overflow ESC value
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 Immediate value of the ESC command is too large.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 syntax error
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 A syntax error occurs.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 too long string
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 Character string is too long.  The length of a character string must be 127 characters or less.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 undefined symbol XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 XXX is not defined.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 unknown opecode XXX
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 XXX is not a correct command.  There are no commands at locations where commands normally exist.  Check also that a colon (:) is missing after the label.
+\par }\pard \qj\li425\sb120\sa60\nowidctlpar {\f11\fs22 Warning: byte overflow
+\par }\pard \qj\li851\sa60\nowidctlpar {\f5\fs22 A value of one byte is in a range of -256 - +255.
+\par }\pard \qj\nowidctlpar {\f5\fs22 \page [Bug]
+\par Even though a large number is specified for the operand of the RS command, the r86 uses only the value of lower 16 bits.  Therefore, the maximum size assigned by the RS command is 65535 bytes.
+\par 
+\par 
+\par }}

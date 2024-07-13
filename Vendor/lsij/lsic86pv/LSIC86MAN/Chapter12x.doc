@@ -1,0 +1,156 @@
+{\rtf1\ansi \deff29\deflang1033{\fonttbl{\f5\fswiss\fcharset0\fprq2 Arial;}{\f11\fmodern\fcharset0\fprq1 Courier New;}{\f29\froman\fcharset128\fprq1 \'82l\'82r \'96\'be\'92\'a9;}}{\colortbl;\red0\green0\blue0;
+\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;
+\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}{\stylesheet{\qj\nowidctlpar \f29\fs21\kerning2 \snext0 Normal;}{\*\cs10 \additive Default Paragraph Font;}{\s15\qj\nowidctlpar\tqc\tx4320\tqr\tx8640 
+\f29\fs21\kerning2 \sbasedon0\snext15 header;}{\s16\qj\nowidctlpar\tqc\tx4320\tqr\tx8640 \f29\fs21\kerning2 \sbasedon0\snext16 footer;}{\*\cs17 \additive\sbasedon10 page number;}}{\info{\title 1004}{\author \'8fH\'93c\'8f\'b9\'94\'fc}{\operator tshimizu}
+{\creatim\yr1998\mo8\dy14\hr10\min7}{\revtim\yr1998\mo8\dy14\hr12\min3}{\version2}{\edmins0}{\nofpages5}{\nofwords1106}{\nofchars6307}{\*\company  }{\vern57431}}\paperw11906\paperh16838\margl1701\margr1701\margt1985\margb1701 
+\deftab851\widowctrl\ftnbj\aenddoc\pgnstart179\hyphcaps0\formshade \fet0\sectd \pgnrestart\pgnstarts179\linex0\headery851\footery992\colsx425\endnhere {\header \pard\plain \s15\qj\nowidctlpar\tqc\tx4320\tqr\tx8640\pvpara\phmrg\posxr\posy0 
+\f29\fs21\kerning2 {\field{\*\fldinst {\cs17 PAGE  }}{\fldrslt {\cs17\lang1024 181}}}{\cs17 
+\par }\pard \s15\qj\ri360\nowidctlpar\tqc\tx4320\tqr\tx8640 {\f5\fs20 Chapter 12  Linker lld}
+\par }{\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl2\pnucltr\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang{\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang{\pntxta )}}{\*\pnseclvl5
+\pndec\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl6\pnlcltr\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang
+{\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang{\pntxtb (}{\pntxta )}}\pard\plain \qj\nowidctlpar \f29\fs21\kerning2 {\f5\fs28 Chapter 12\tab Linker lld
+\par }{\f5\fs22 
+\par This chapter describes the linker lld.
+\par 
+\par }{\b\f5\fs24 12.1\tab Overview
+\par }{\f5\fs22 The lld is a linker that is compatible with Microsoft\rquote s LINK.  The lld reads object files and library files, and combines them to create }{\f11\fs22 *.exe}{\f5\fs22  and }{\f11\fs22 *.hex}{\f5\fs22  files.
+\par Note that the lld does not support the debug information records for CodeView.
+\par 
+\par }{\b\f5\fs24 12.2\tab Operating the lld
+\par }{\f5\fs22 The lld is called up in the following format.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 lld [}{\i\f11\fs22 options}{\f11\fs22 ] }{\i\f11\fs22 objectfiles}{\f11\fs22 \'85
+\par }\pard \qj\nowidctlpar {\fs22 
+\par }{\f5\fs22 In above }{\i\f11\fs22 objectfiles}{\f5\fs22 , names of object files and library files to be input are specified.
+\par The following options are also provided.
+\par 
+\par }\trowd \trgaph99\trleft851 \cellx2076\cellx8603 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 @}{\i\f11\fs22 file}{\f11\fs22 \cell }{\f5\fs22 Command line parameters are read from file.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft851 \cellx2076\cellx8603 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -F}{\i\f11\fs22 form}{\f11\fs22 \cell }{\f5\fs22 This sets the output file format to \ldblquote form\rdblquote .  This form must be any of the following.\cell 
+}\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft851\trkeep \cellx2382\cellx3464\cellx8602 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 e\cell }{\f5\fs22 MS-EXE format\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\sl-300\slmult0\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 c\cell }{\f5\fs22 COM format\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 h\cell }{\f5\fs22 Extended Intel HEX format\cell 
+}\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft851\trkeep \cellx2382\cellx3464\cellx8602 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\fs22 \cell }{\f11\fs22 s\cell }{\f5\fs22 Motorola S2 format\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar {\fs22 
+\par }\pard \qj\li851\nowidctlpar {\f5\fs22 If no above options are given, the output file format is determined based on its extension.
+\par }\pard \qj\nowidctlpar {\f5\fs22 \page 
+\par }\trowd \trgaph99\trleft851\trkeep \cellx2382\cellx3544\cellx8602 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell .exe\cell e\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft851\trkeep \cellx2382\cellx3544\cellx8602 \pard 
+\qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell .com\cell c\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell .hex\cell h\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft851\trkeep \cellx2382\cellx8603 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -I [X]\cell }{\f5\fs22 This controls whether or not the upper and lower cases are distinct.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd 
+\trgaph99\trleft851\trkeep \cellx2382\cellx3888\cellx8603 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell -I, -I1\cell }{\f5\fs22 Upper and lower cases are not distinct.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0
+\nowidctlpar\intbl {\f11\fs22 \cell -I0\cell }{\f5\fs22 Upper and lower cases are distinct\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft851\trkeep \cellx2382\cellx8603 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell }{
+\f5\fs22 If above options are not given, the default setting \ldblquote }{\f11\fs22 -I0}{\f5\fs22 \rdblquote  is applied.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -Ldir\cell }{\f5\fs22 
+This specifies a directory where library files are searched for.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -lfile\cell }{\f5\fs22 This scans the library \ldblquote file\rdblquote .  Extension, 
+\ldblquote .lib\rdblquote , can be omitted.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -g\cell }{\f5\fs22 This generates line number information.  -M is also given automatically.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -M\cell }{\f5\fs22 This generates a map file.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -o file\cell }{\f5\fs22 
+This sets the output file name to \ldblquote }{\f11\fs22 file}{\f5\fs22 \rdblquote .  If this option is omitted, a }{\f11\fs22 .EXE}{\f5\fs22  file with the same base name as that of the file which appears first in the objectfiles.\cell }\pard 
+\widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -s hex\cell }{\f5\fs22 This sets the size of the stack to \ldblquote }{\f11\fs22 hex}{\f5\fs22 \rdblquote 
+.  hex is expressed in hexadecimal notation and has a 16-bit value.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 -T hex\cell }{\f5\fs22 This sets the start address of the first segment to \ldblquote }{
+\f11\fs22 hex}{\f5\fs22 \rdblquote .  hex is expressed in hexadecimal notation and has a 20-bit value.\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft851\trkeep \cellx2382\cellx8603 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 
+-Tseg hex\cell }{\f5\fs22 This sets the start address of the segment \ldblquote }{\f11\fs22 seg}{\f5\fs22 \rdblquote  to hex.  hex is expressed in hexadecimal notation and has a 20-bit value.\cell }\pard \widctlpar\intbl {\fs22 \row }\pard 
+\qj\nowidctlpar {\fs22 
+\par 
+\par }{\b\f5\fs24 12.3\tab Segment placement
+\par }{\f5\fs22 The}{\f11\fs22  lld}{\f5\fs22  reads object files in order specified by the command line to combine them.  At this time, each segment is placed according to the following rules.
+\par 
+\par {\pntext\pard\plain\f5\fs22\kerning2 1.\tab}}\pard \fi-360\li360\nowidctlpar{\*\pn \pnlvlbody\pndec\pnstart1\pnindent360\pnhang{\pntxta .}}{\f5\fs22 Each segment is arranged in order of that segment pseudo command appears on the source program.\line 
+
+\par {\pntext\pard\plain\f5\fs22\kerning2 2.\tab}Segments with the same name and a connection type of }{\f11\fs22 PUBLIC}{\f5\fs22 , }{\f11\fs22 MEMORY}{\f5\fs22 , }{\f11\fs22 STACK}{\f5\fs22  or }{\f11\fs22 COMMON}{\f5\fs22  are gathered.\line 
+Segments with a connection type of }{\f11\fs22 PUBLIC}{\f5\fs22  or }{\f11\fs22 MEMORY}{\f5\fs22  are simply overlapped in input order.  The total size is a sum of each segment size input.
+\par }\pard \li340\nowidctlpar {\f5\fs22 \page Segments with a connection type of }{\f11\fs22 COMMON}{\f5\fs22 
+ are overlapped.  The total size becomes the same as a maximum size among input segments.  After that, the segments are overlapped so that the beginning of each segment is aligned.
+\par Segments with a connection type of }{\f11\fs22 STACK}{\f5\fs22  are also overlapped.  However, they are overlapped so that the end of each segment is aligned, different from }{\f11\fs22 COMMON}{\f5\fs22 
+.  The total size is a sum of each segment size input.\line 
+\par {\pntext\pard\plain\f5\fs22\kerning2 3.\tab}}\pard \nowidctlpar{\*\pn \pnlvlbody\pndec\pnstart3\pnindent360 {\pntxta .}}{\f5\fs22 Segments belonging to the same class are placed continuously.\line 
+\par {\pntext\pard\plain\f5\fs22\kerning2 4.\tab}}\pard \fi-360\li360\nowidctlpar{\*\pn \pnlvlbody\pndec\pnstart3\pnindent360 {\pntxta .}}{\f5\fs22 An address is allocated to each segment in order.  If }{\f11\fs22 -T}{\f5\fs22 
+ option is not specified, the start address becomes 0 and an address satisfying the alignment attribute is allocated sequentially.  If a segment for which an address is specified by }{\f11\fs22 -T}{\f5\fs22  option is encountered, addresses a
+re allocated from that address in order.
+\par {\pntext\tab}}\pard \qj\fi-360\li360\nowidctlpar{\*\pn \pnlvlcont\pndec\pnstart3\pnindent360 {\pntxta .}}{\f5\fs22 
+\par }\pard \qj\nowidctlpar {\f5\fs22 For example, assuming that the following segments are aligned in a program.
+\par 
+\par }{\f11\fs22 \tab TEXT\tab \tab CSEG\tab \lquote CODE\rquote 
+\par \tab DATA\tab \tab DSEG\tab \lquote DATA\rquote 
+\par \tab XSTACK\tab DSEG\tab \lquote STACK\rquote 
+\par \tab BSS\tab \tab DSEG\tab \lquote DATA\rquote 
+\par }{\fs22 
+\par }{\f5\fs22 
+The linker places segments in order of that they appear in object files.  At this time, segments with the same class name are gathered.  Therefore, programs are arranged as shown in Fig. 12.1.  With default settings, the lld links the segments as the addr
+ess of the first segment is 0.
+\par 
+\par }\trowd \trgaph99\trleft2694\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \clbrdrt\brdrdb\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx4185\clbrdrt\brdrdb\brdrw15 \clbrdrl\brdrs\brdrw15 
+\cellx5812 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 TEXT\cell \lquote CODE\rquote \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft2694\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv
+\brdrs\brdrw15 \clbrdrt\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx4185\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \cellx5812 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 DATA\cell \lquote DATA\rquote \cell }\pard 
+\widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft2694\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \trbrdrh\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \clbrdrt\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx4185\clbrdrl\brdrs\brdrw15 
+\clbrdrb\brdrs\brdrw15 \cellx5812 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 BSS\cell \lquote DATA\rquote \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft2694\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \trbrdrh
+\brdrs\brdrw15 \trbrdrv\brdrs\brdrw15 \clbrdrt\brdrs\brdrw15 \clbrdrb\brdrdb\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx4185\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrdb\brdrw15 \cellx5812 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 
+XSTACK\cell \lquote STACK\rquote \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par }\pard \qc\nowidctlpar {\f5\fs22 Fig. 12.1  Segment arrangements
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par Use of }{\f11\fs22 -T}{\f5\fs22  option provided by the }{\f11\fs22 lld}{\f5\fs22  makes it possible to specify an absolute address of the segment.  There are two ways how to use }{\f11\fs22 -T}{\f5\fs22  option.
+\par When using }{\f11\fs22 -T}{\f5\fs22 
+ option without specifying of a segment name, the segment that appears first is relocated at a specified address.  Since subsequent addresses are then placed sequentially from that address, the segment placement becomes the same as that without use of }{
+\f11\fs22 -T}{\f5\fs22 .  Only the first segment becomes different.
+\par At this time, note that 5-digit hexadecimal number must be used to specify an address.  For example, when }{\f11\fs22 -T 20000}{\f5\fs22  is specified, the first segment is placed at }{\f11\fs22 2000:0000}{\f5\fs22 .
+\par \page When a segment name is specified as }{\f11\fs22 -TDATA 12340}{\f5\fs22 , the start address of that segment (}{\f11\fs22 DATA}{\f5\fs22  in this example) becomes }{\f11\fs22 1234:0000}{\f5\fs22 
+.  Subsequent segments are placed after that segment in the same manner as described above.
+\par 
+\par Only the segment name can be specified using the}{\f11\fs22  -T}{\f5\fs22  option.  Group and class names cannot be specified.
+\par 
+\par 
+\par }{\b\f5\fs24 12.4\tab Ghost segment
+\par }{\f5\fs22 When a program is stored into ROM, it may be required to store data to a place at an address different from actual one.  The lld provides the ghost segment function to achieve this requirement.
+\par The ghost segment is a segment that begins with a name of }{\f11\fs22 _GHOST_}{\f5\fs22 .  If the}{\f11\fs22  lld}{\f5\fs22  finds a segment with a name of }{\f11\fs22 _GHOST_name}{\f5\fs22  in the object module, it stores the entity of the segment with 
+\ldblquote }{\f11\fs22 name}{\f5\fs22 \rdblquote  at that address.
+\par 
+\par For example, let\rquote s see the following program.
+\par 
+\par }\pard \qj\li851\nowidctlpar {\f11\fs22 TEXT\tab CSEG
+\par \tab mov \tab ax, DATA
+\par \tab mov\tab ds, ax
+\par \tab mov\tab ax, [my_data]
+\par 
+\par _GHOST_DATA\tab CSEG\tab PARA
+\par 
+\par DATA\tab DSEG
+\par dummy:\tab dw\tab 1234h
+\par my_data::\tab dw\tab 1
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par The file name, \ldblquote test.a86\rdblquote , is put on the above program.  When this program is assembled and linked using 
+\par 
+\par }{\f11\fs22 lcc86 -a -g -k\rdblquote -Fh -o test.hex -T 10000 -TDATA 20000\rdblquote  test.a86
+\par }{\f5\fs22 
+\par a }{\f11\fs22 HEX}{\f5\fs22  file having the contents shown in Fig. 12.2 is created.  (In the UNIX environment, it is recommended to enclose using \lquote  instead of \ldblquote .)
+\par As shown in the Fig., the contents of the DATA segment are moved to }{\f11\fs22 _GHOST_DAT}{\f5\fs22 , and then output.  The }{\f11\fs22 DATA}{\f5\fs22  segment itself is not output.
+\par However, labels in the }{\f11\fs22 DATA}{\f5\fs22  segment are correctly referred to from the start offset of the }{\f11\fs22 DATA}{\f5\fs22  segment.
+\par 
+\par If the contents of this ghost segment are moved to actual addresses using the initial routine during execution, it becomes possible that the initialization data is placed in the ROM and RAM addresses can be referred to from the program.
+\par For details about storing of programs into ROM, see Chapter 13, \ldblquote ROM programming\rdblquote .
+\par 
+\par \page 
+\par }\trowd \trgaph99\trleft567\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \clbrdrt\brdrdb\brdrw15 \cellx1985\clbrdrt\brdrdb\brdrw15 \cellx6096\clbrdrt\brdrdb\brdrw15 \cellx8080 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell :020000021000EC
+\cell \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft567\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \cellx1985\cellx6096\cellx8080 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell :08000000B800208ED8A1020017\cell \cell 
+}\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell :020000021001EB\cell \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell :0400000034120100B5\cell \cell 
+}\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 \cell :00000001FF\cell \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0\nowidctlpar\intbl {\fs22 \cell \cell \cell }\pard \widctlpar\intbl {
+\fs22 \row }\trowd \trgaph99\trleft567\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \clbrdrt\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx1985\clbrdrt\brdrs\brdrw15 \clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx6096\clbrdrt
+\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx8080 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f5\fs22 Address\cell Command\cell Segment\cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft567\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 
+\cellx1985\clbrdrl\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx6096\cellx8080 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 10000\cell mov  ax, 2000h\tab ;DATA\cell TEXT\cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\sl-300\slmult0
+\nowidctlpar\intbl {\f11\fs22 10003\cell mov  ds, ax\cell \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft567\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \clbrdrb\brdrs\brdrw15 \cellx1985\clbrdrl\brdrs\brdrw15 \clbrdrb\brdrs\brdrw15 
+\clbrdrr\brdrs\brdrw15 \cellx6096\clbrdrb\brdrs\brdrw15 \cellx8080 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 10004\cell mov  ax, [0002h]\tab ; my_data\cell \cell }\pard \widctlpar\intbl {\fs22 \row }\trowd \trgaph99\trleft567\trbrdrt
+\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \cellx1985\clbrdrl\brdrs\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx6096\cellx8080 \pard \qj\sl-300\slmult0\nowidctlpar\intbl {\f11\fs22 10010\cell dw  1234h\cell _GHOST_DATA\cell }\pard \widctlpar\intbl {\fs22 \row 
+}\trowd \trgaph99\trleft567\trbrdrt\brdrdb\brdrw15 \trbrdrb\brdrdb\brdrw15 \clbrdrb\brdrdb\brdrw15 \cellx1985\clbrdrl\brdrs\brdrw15 \clbrdrb\brdrdb\brdrw15 \clbrdrr\brdrs\brdrw15 \cellx6096\clbrdrb\brdrdb\brdrw15 \cellx8080 \pard \qj\sl-300\slmult0
+\nowidctlpar\intbl {\f11\fs22 10012\cell dw  1\cell \cell }\pard \widctlpar\intbl {\fs22 \row }\pard \qj\nowidctlpar {\fs22 
+\par }\pard \qc\nowidctlpar {\f5\fs22 Fig. 12.2:  Created HEX file
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par 
+\par }{\b\f5\fs24 12.5\tab Library searching sequence
+\par }{\f5\fs22 The }{\f11\fs22 lld}{\f5\fs22  adopts a library search method different from Microsoft\rquote s LINK.  Even though modules in each library file refer to each others, the LINK solves it.  The}{\f11\fs22  lld}{\f5\fs22 
+ searches each library file only once.  Therefore, if modules in each library file refer to each others, the symbol becomes undefined in the}{\f11\fs22  llb}{\f5\fs22 .
+\par 
+\par The}{\f11\fs22  lld}{\f5\fs22  processes given options in order.  If the }{\f11\fs22 lld }{\f5\fs22 finds }{\f11\fs22 -l}{\f5\fs22 
+ option, it searches the library for unsolved symbol.  It seems inconvenient, but use of this feature makes it possible to do the following.
+\par 
+\par }\pard \qj\li284\nowidctlpar {\f11\fs22 lld -o  foo.com  foor.obj  -llibc  foonr.obj  -llibc
+\par }\pard \qj\nowidctlpar {\f5\fs22 
+\par Assuming that }{\f11\fs22 foo.com}{\f5\fs22  is TSR (resident program) and that }{\f11\fs22 foor.obj}{\f5\fs22  contains resident codes of }{\f11\fs22 foo.com}{\f5\fs22  and}{\f11\fs22  foonr.obj}{\f5\fs22  contains non-resident codes.
+\par }{\f11\fs22 libc.lib}{\f5\fs22  is a library.  When the above command is executed, the first }{\f11\fs22 -llibc}{\f5\fs22  combines only library routines which are referred from the resident part.  Then, the last }{\f11\fs22 -llibc}{\f5\fs22 
+ searches for non-connected library routines of those referred from the non-resident part.
+\par That is, it is possible to split the resident part and non-resident part, and to use library routines.
+\par }}
