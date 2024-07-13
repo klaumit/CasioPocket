@@ -1,0 +1,145 @@
+481:Mail
+482:Settings
+483:To?
+484:Cc?
+485:Bcc?
+486:Reply-To?
+487:Subject?
+488:Message?
+489:Name?
+490:Number?
+491:Login ID?
+492:Login Password?
+493:DNS(1)?
+494:DNS(2)?
+495:SMTP Server?
+496:POP Server?
+497:Mail Account?
+498:Mail Password?
+499:Mail Address?
+500:IP Address
+501:Address Bit Mask
+502:IP Header Compression
+503:SMTP Port
+504:POP Port
+505:Re:
+506:Fw:
+507:-Attachments-
+508:-Continued-
+509:Modem
+510:Login Password
+511:One message
+512:Send all
+513:Receive
+514:Inbox
+515:Outbox
+516:Send & Receive
+517:Rec
+518:Reply
+519:Reply all
+520:Forward
+521:Att
+522:A
+523:
+524:Adr
+525:Attachment
+526:QM
+527:Access Point
+528:Access Point setup
+529:Access Point edit
+530:Mail settings
+531:Delete Access Point
+532:Close
+533:Send mail then pick@up new mail.
+534:Delete mail from@host upon receipt.
+535:
+536:Del
+537:
+538:Disconnect after@10 minutes.
+539:Confirm POP before@sending mail.
+540:On
+541:Off
+542:Contains illegal@characters.
+543:No mail address.
+544:OK to delete one@message?
+545:OK to delete all@sent messages?
+546:OK to delete all@Outbox messages?
+547:OK to delete all@read messages?
+548:OK to delete all@Inbox messages?
+549:OK to delete all@messages?
+550:OK to delete all@messages in the@current mailbox?
+551:Attached data@saved in@Quick Memo.
+552:Data attached to@message.
+553:OK to delete the@access point?
+554:Too many total@characters for@Name and@Mail Address.
+555:Checking Modem
+556:Initializing Modem
+557:Connecting
+558:Logging in
+559:Logging out
+560:Sending mail
+561:Mail send@complete!
+562:Receiving mail
+563:You've got mail!@
+564:%8d msgs
+565:No new mail.
+566:Re-connect
+567:Send all queued@messages.@
+568:New messages@include one with@more than 24KB.
+569:Cannot detect tone.
+570:Modem not@connected!
+571:Disconnecting!
+572:Disconnected!
+573:Cannot connect!
+574:Line is busy.
+575:No response@from the host!
+576:No access point@settings!
+577:Log in error!@Check the settings!
+578:Mail session@failed!
+579:Memory is full!@Mail could not be@received.
+580:Too many total@characters for To,@Cc, Bcc, Reply-To,@and Subject.
+581:Disconnected!@10 minutes passed!
+582:Could not pick up@all the mail from@the host.
+583:The message@exceeds the input@limit.  Part of it@will be deleted.
+584:Undefined 1
+585:Undefined 2
+586:Undefined 3
+587:Send mail
+588:Receive mail
+589:Send Error!
+590:New message
+591:Send
+592:All read messages
+593:All Inbox messages
+594:All sent messages
+595:All Outbox messages
+596:All access point messages
+597:Address copy
+598:Skip large mail messages.
+599:Delete picked up mail only.
+600:Delete all mail.
+601:Provider?
+602:Settings 1
+603:Settings 2
+604:Other settings
+605:Phone
+606:Skips messages that@are larger than a@specified size.
+607:KB
+608:Other
+609:Message was skipped.
+610:String?
+611:Nokia
+612:Ericsson
+613:Siemens
+614:There is one@message that could@not be picked up.
+615:Dialing
+616:Wrong password!
+617:OK to delete@attachment?
+618:OK to delete@all data assigned to@the access point?
+619:Modem initialization@failed.
+620:%8d msg
+621:Send messages	/* Only PV-750Ver1.20 & PV-750Plus */
+622:Receive messages	/* Only PV-750Ver1.20 & PV-750Plus */
+623:Contacts(Phone)	/* Only PV-750Ver1.20 & PV-750Plus */
+624:Contacts(SIM)	/* Only PV-750Ver1.20 & PV-750Plus */
+625:Contacts(1~3)	/* Only PV-750Ver1.20 & PV-750Plus */

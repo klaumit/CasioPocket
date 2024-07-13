@@ -1,0 +1,2840 @@
+		H8 Interface (IrDA support) / Internal Process Specification
+
+							Ver. 1.31
+							Date of Creation : May 15, 2000
+
+		Copyright (C) 2000 CASIO COMPUTER CO.,LTD. All rights reserved.
+====================================================================================================
+<Contents>
+
+  [ 1 ]  Image of H8 Interface  ----------------------------------------------------------  page  1
+
+
+  [ 2 ]  Specifications of Modem Front End (MFE)  ----------------------------------------  page  2
+
+
+     2-1. MFE control status  ------------------------------------------------------------  page  3
+
+
+     2-2. ATI0 command  ------------------------------------------------------------------  page  4
+
+
+     2-3. MIME/decode/encode process  ----------------------------------------------------  page  4
+
+
+     2-4. Handling break signal   --------------------------------------------------------  page  4
+
+
+  [ 3 ]  Session Concept  ----------------------------------------------------------------  page  5
+
+
+  [ 4 ]  Valid Command during Each Session  ----------------------------------------------  page  7
+
+
+  [ 5 ]  Electronic Note and MFE Operations after Turning Initial Power   ----------------  page 11
+
+
+  [ 6 ]  Expansion Interpretation of ER Signal  ------------------------------------------  page 12
+
+
+  [ 7 ]  PPP Connecting Method  ----------------------------------------------------------  page 15
+
+
+  [ 8 ]  Operation Conditions of Modem Driver   ------------------------------------------  page 16
+
+
+  [ 9 ]  How to Understand Error Result Code and Error ID   ------------------------------  page 17
+
+
+ [ 10 ]  Description of Binary (Attachment) File  ----------------------------------------  page 19
+
+
+ VTE (Virtual modem system Transmit protocol Extension) Command List
+
+
+							--- 00 ---
+
+[1] Image of H8 Interface
+
+  Internet protocol such as TCP/IP/POP/SMTP
+  It is developed as a modem including spool buffer for e-mail.
+
+  The interface with DTE complies with RS232C and functions based on AT command and AT expansion command (VTE command).
+
+  Access to Internet mail and protocol is established using VTE command.
+
+
+  The following is the software block structure for H8 and electronic note.
+
+                                                                                             GSM mobile phone
+Electronic note                                    H8                                        (Hardware modem)
+<--------------> |<-----------------------------------------------------------------------> |<-------------->
+                 |                                                                          |
+                 |                                                                          |
+ +-------------+ | +-------------------+    +-------------------+             +-----------+ |
+ |Electronic   | | |RS232C             |<-> |Modem front end    |<----------> |E-mail     | |
+ |mail         | | |(Serial communica- |    |(MFE)              |             |  protocol | |
+ |application  | | |tions BIOS)        |    |                   |             |SMTP/POP   | |
+ |             | | |                   |    |*AT command analy- |             |           | |
+ |             | | |*TL16C550C control |    | sis               |             +-----------+ |
+ |             | | |*Receive interrupt |    |*Result code anal- |   +-------+ |TCP/IP     | |
+ |             | | | control           |    | ysis              |-> |Mail   | |           | |
+ |             | | |*Timer interrupt   |    |*Data stream anal- |   |spool  | +-----------+ |
+ |             | | | control           |    | ysis              |<- |buffer | |PPP        | |
+ |             | | |*Ring buffer cont- |    |*Echo back process |   +-------+ |           | |
+ |             | | | rol               |    |*RS232C control    |             +-----------+ |
+ |             | | |*Flow control      |    |*Modem status con- |                 | |       |
+ |             | | |                   |    | trol              |             +-----------+ |
+ |             | | |                   |    |*Protocol operati- |             |IrDA       | | +-----------+
+ |             | | |                   |    | on                |<----------> |  driver   | | |IrDA<->GSM |
+ |             | | |                   |    |*MIME              |             |           | | +-----------+
+ |             | | |                   |    |*Encode/decode     |             +-----------+ |
+ |             | | |                   |    |                   |             |serial     | |
+ |             | | |                   |    |*Test program      |             |  driver   | |
+ |             | | |                   |    |                   |             |           | |
+ +-------------+ | +-------------------+    +-------------------+             +-----------+ |
+                 |                                                                          |
+                 |                                                                          |
+RS232C 38400bps,8bit,non parity,stop 1bit                     IrDA max57.6Kbps, 8bit, RS/CS flow control
+(Flow control is fixed to RS/CS; 38400bps                     
+ at operation start)                                          
+    AT command                                                
+    VTE command (expansion AT command for                     
+       Internet protocol access)                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 01 ---
+
+
+[2] Specifications of Modem Front End (MFE)
+
+[Command/result code flow]
+
+  MFE controls session level and line connection status, and processes AT/VTE commands and data according to each lev-
+  el.
+
+  It also processes MIME/encode/decode in mail data.
+
+  For example, in the AT session offline command mode, the operations flow as follows:
+
+  The AT command from DTE is identified, judged if it is the command (VTE command) to be processed using the MFE, and
+  other commands are transmitted to the modem side.
+
+
+                                         Modem Front End (MFE)
+   +-----------+                     +-----------------------------+                   +---------------+
+   |           | AT,VTE command/data |   +---------------+         | AT command/data   |               |
+   |Electronic | ------------------> |-> |Command filter |-------> | --------------->  |Modem          |
+   |note       |                     |   +---------------+         |                   |  (DCE)        |
+   |  (DTE)    |                     |          |                  |                   |               |
+   |           |                     |   +---------------------+   |                   |IrDA driver    |
+   |           |                     |<- |VTE command process  |   |                   |serial driver  |
+   |           |   Result/data/echo  |   +---------------------+   | Result/data/echo  |               |
+   |           | <-----------------  |<--------------------------- | <---------------  |               |
+   |           |                     |                             |                   |               |
+   +-----------+                     +-----------------------------+                   +---------------+
+
+
+With regard to the command to be processed using MFE, the echo back process for the electronic note side is not execut-
+ed with the MFE.
+Also, the echo back process for the command to be transmitted to the modem side, is not executed, and the MFE transmits
+the modem echo back to the electronic note.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 02 ---
+
+
+ 2-1. MFE control status
+
+  * Session level
+
+    The valid command is determined at each session.
+
+    A. AT session
+       1. Offline command mode (while CD signal is OFF)
+       2. Online mode (while CD signal is ON)
+       3. Online command mode (from the time when CD signal ON and ER signal is turned from ON to OFF)
+
+    B. VTE session 
+
+    C. PPP session 
+
+    D. POP session 
+
+    E. SMTP session 
+
+  * RS232C control line
+
+    CD --- It basically has no time lag, is transparent for the modem status, and can be viewed on the electronic note
+    side.
+    MFE sets the CD to ON (CD=ON) when the line is connected in the online command mode.
+    MFE sets the CD to OFF (CD=OFF) when the line is disconnected, IrDA connection is disconnected, or IrDA process is
+    completed to move to the hibernate mode.
+
+    DR --- It is the control line to show if H8 is ready, to the electronic note side.
+    MFE sets the DR to ON (DR=ON) after the initial command is ready to be accepted when the initial power is turned on
+    or H8 is reset.
+    MFE sets the DR to OFF (DR=OFF) when the IrDA connection is disconnected or the IrDA process is completed to move
+    to the hibernate mode.
+    DR=OFF is maintained until the initial power is re-turned on or H8 is reset.
+
+    ER --- It basically displays the status of electronic note provided that expansion operation/interpretation is exe-
+    cuted.
+    Refer to the following material.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 03 ---
+
+
+ 2-2. Modem command providing direct process for electronic note using MFE
+
+  The following three commands of the general modem commands directly respond to the electronic note using the MFE.
+
+  * AT+VMI0
+
+    It returns the modem identification characters as result code.
+    MFE returns the characters equivalent to H8.
+    The characters are as follows:
+
+        CASIO Z488
+
+  * AT+VM&C0
+
+    It is the command to turn the CD signal ON forcibly.
+    After the process is completed, "CMDOK" is sent to the electronic note side.
+    It is used to turn the CD signal ON during communication.
+
+  * AT+VM&C1
+
+    It is the command to match the CD signal to the telephone line status.
+    After the process is completed, "CMDOK" is sent to the electronic note side.
+    It is used to turn the CD signal OFF during communication.
+
+
+ 2-3. MIME/decode/encode process
+
+  MIME/decode/encode process is executed for mail header and contents using MFE.
+
+  The MIME conversion responds to charset="ISO-8859-1".
+  (It doesn't correspond to "ISO-2022-JP".)
+
+  [At sending]
+  Specify "charset" from the application in sending. When the specification is not made, set the default to charset=
+  "ISO-8859-1".
+
+  [At receiving]
+  It usually responds to the code specified by the counterpart. When the specification is not made, set the default to
+  charset="us-ascii".
+
+  The specification for sending/receiving binary data (to be attached to e-mail) exists as an application for the elec-
+  tronic note side and includes the items of binary data process.
+  Attaching binary data is enabled if the encoding/decoding process of binary data is executed on electronic note side
+  since the multipart/mixed function is provided.
+
+  The valid encoding systems are base64 and quoted-printable.
+
+  The encoding/decoding process is available if the mail contents/type is text/plain or message/rfc822.
+
+
+ 2-4. Handling break signal
+
+  Break signal is not sent from electronic note side this time.
+  Also, the break signal sent from the modem is not sent to the electronic note.
+  Accordingly, the break signal is counted as the framing error.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 04 ---
+
+
+[3] Session Concept
+
+  Session level is mainly divided into AT and VTE session.
+  Refer to the separate document for the valid commands in each session.
+
+  The following shows the status immediately after turning the initial power.
+  Note as the special status before entering session.
+
+
+  * Status immediately after turning the initial power
+
+    This level remains until AT+VICON is completed to process after H8 power is turned.
+    At this time, the modem is not connected, therefore, the signal status on the modem side is not transmitted to the
+    electronic note and remains the same status as that when IrDA is disconnected at the AT session.
+
+    The session level moves to the AT session using AT+VICON (connection with IrDA device) command.
+    It cannot return to this level after the AT+VICON execution.
+
+
+  * AT session
+
+    This session level enables to send/receive to/from the modem using the AT command.
+    This level remains after AT+VICON is completed to process with H8 ON unless VTE session start request is issued.
+
+    Use the following commands to move to/return from the VTE session.
+
+    AT session -> VTE session --- AT+VMVTESTART (VTE session start request)
+    VTE session -> AT session --- AT+VMVTEEND (VTE session end request)
+
+
+  * VTE session (including each session of PPP, POP, SMTP)
+
+    It is the level to access to the Internet mail using the VTE command.
+    The session level becomes this level when the VTE session start request is issued from the electronic note.
+
+    It is required to move from the VTE session in the following way when sending/receiving mails.
+
+    VTE session -> PPP session -> POP session 
+                               -> SMTP session 
+
+    It is necessary to use the following commands and move to each session one level by one.
+    (To return from the POP session to the AT session, move from POP->PPP->VTE->AT.)
+
+    VTE session  -> PPP session --- AT+VPCON (PPP connect request)
+    PPP session  -> POP session --- AT+VOCON (connect to POP server)
+    PPP session  -> SMTP session -- AT+VSCON (connect to SMTP server)
+
+    POP session  -> PPP session --- AT+VODCON(disconnect from POP server)
+    SMTP session -> PPP session --- AT+VSDCON (disconnect with SMTP server)
+    PPP session  -> VTE session --- AT+VPDCON(PPP disconnect request)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 05 ---
+
+
+  The session level may become in the following status when a connection error occurs.
+
+    1. Telephone line disconnected
+    2. IrDA disconnected 
+       (IrDA module is in the stand-by state (P82(IRSD)=H) at this time.)   * P82 is the PORT terminal of H8.
+    3. TCP/IP disconnected
+    4. PPP disconnected
+
+
+  To understand each status, the application on the electronic note side needs to care about the following status.
+
+
+    1. Telephone line disconnected --- RS232C control line: CD=OFF [disconnected], DR=*** [maintaining]
+       (The result code from the modem, NO CARRIER is not used here.)
+       (This is because the communication from the modem to the electronic note is unavailable during the VTE session.)
+
+    2. IrDA disconnected --- RS232C control line: CD=OFF [disconnected], DR=OFF [disconnected]
+                             The result code of each VTE command
+                             (CONFAULTI02  IrDA disconnected)
+
+    3. TCP/IP disconnected --- Result code of each VTE command
+                               (CONFAULTI02  TCP disconnected)
+
+    4. PPP disconnected --- Result code of each VTE command
+                            (CONFAULTI03  PPP disconnected)
+
+
+  In the above status, the session level on the H8 side does not change.
+  End the current session on the electronic note and return to the necessary level to execute the reconnecting process.
+  (Comply with the application specification for the operation flow and retry process after disconnected.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 06 ---
+
+
+[4] Valid Command during Each Session
+
+<> Status immediately after turning initial power
+
+  Use the MFE to process the following commands:
+
+  * AT+VMI0
+  * AT+VICON  --- Connect with IrDA device. -> to AT session
+  * AT+VMATST --- Start modem test program.
+  * AT+VMPRM  --- Set DTE communication parameter.
+  * AT+VMHBNT --- Move to hibernate mode.
+
+  At this time, the modem is not connected, therefore, sending/receiving data to/from the modem is disabled during the
+  AT or VTE session like the case that DR is OFF.
+  Sending/receiving to/from the modem is disabled when DR is OFF (IrDA is disconnected; hard modem is NOT READY), which
+  will not be described in the later section, "valid command during AT or VTE session".
+
+  To move to the AT session from here, execute AT+VICON command (to connect to IrDA device). At this time, move to the
+  AT session whether the AT+VICON command execution is succeeded or not.
+  After moving to AT session, keep connecting to IrDA and execute IrDA shutdown process in the hibernate mode.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 07 ---
+
+
+<> AT session
+
+   * Offline command mode (while CD signal is OFF)
+
+    Use the MFE to process the following commands:
+    (The followings are valid even when DR is OFF.)
+
+    * AT+VMVTESTART -- Request VTE session start
+    * AT+VMI0
+    * AT+VICON  --- Connect to IrDA device.
+    * AT+VMATST --- Start modem test program.
+    * AT+VMPRM  --- Set DTE communication parameter.
+    * AT+VMHBNT --- Move to hibernate mode.
+    * AT+VM&C0
+
+    The following data is transmitted from the MFE. 
+
+    * The AT commands from the electronic note other than the above and the data other than commands
+      (When sending the VTE commands except the listed commands, it is possible to judge errors using the result code
+      on the modem side, causing no problem.)
+      At this time, <CR><LF> locating at the end of characters is considered as end judge condition.
+      Also, the character code of 00h-1Fh is considered as end judge condition.
+      (It uses CTRL-Z/ESC as the terminator in GSM SMS.)
+
+    * All data from the modem (including echo back data and result code)
+      At this time, it delivers 1 byte to the side of the electronic organizer without the terminator of <CR><LF>.
+
+    The following shows the status of RS232C signals.
+
+      DCE-ER  DCE-DR  DCE-CD       DTE-ER  DTE-DR  DTE-CD
+        x      <-    <-(OFF)        ->      x     0FF
+
+    (DCE- refers to the signal on the electronic note side and DTE to the signal on the modem side.)
+    (x is optional; <- reflects DTE status; and -> reflects DCE status.)
+
+
+   * Online mode (CD signal ON)
+
+    All data is transmitted from the MFE.
+    The following shows the status of RS232C signals.
+
+      DCE-ER  DCE-DR  DCE-CD       DTE-ER  DTE-DR  DTE-CD
+        ON      <-    <-(ON)       (ON)->    x      ON
+
+
+   * Online command mode (from the time when CD signal is ON and ER signal is turned from ON to OFF)
+
+    Use the MFE to process the following commands:
+
+    * AT+VMVTESTART -- Request VTE session start
+    * AT+VMI0
+    * AT+VMATST ------ Start modem test program.
+    * AT+VMPRM ------- Set DTE communication parameter.
+    * AT+VMHBNT ------ Move to hibernate mode.
+    * AT+VM&C1
+
+    Transmit all data from the electronic note other than the above to the modem side.
+    At this time, <CR><LF> locating at the end of characters is considered as end judge condition.
+
+    The data received from the modem during this session is processed with RTS/CTS flow control for H8 modem driver and
+    all transmitted to the electronic note side.
+    In case that the command executes to move the session, the data received from the above modem is processed with the
+    protocol in the new session.
+    The CD signal moves to CD=ON after the ATD command is issued and when the line connection is established.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 08 ---
+
+
+<> VTE session
+
+  Use the MFE to process the following commands:
+
+  * AT+VMVTEEND --- Request VTE session end.
+                    -> AT session OFF; Move to online mode (depending on CD status)
+  * AT+VPCON ------ Request PPP connection. -> Move to PPP session.
+
+  The 8 items shown later are valid in the PPP, POP and SMTP session, and called "VTE common command".
+
+  * AT+VMI0
+  * AT+VMATST ---- Start modem test program. 
+  * AT+VMPRM ----- Set DTE communication parameter.
+  * AT+VMHBNT ---- Move to hibernate mode.
+  * AT+VMRMREL --- Release receiving mail spool memory. 
+  * AT+VMTMREL --- Release sending mail spool memory. 
+  * AT+VMRDML ---- Send received mail to electronic note.
+  * AT+VMWRML ---- Receive sending mail from electronic note.
+
+  Transmit all of the data from the electronic note other than the above to the modem side.
+
+  The data received from the modem during this session is also processed with the RTS/CTS flow control for H8 modem dr-
+  iver and transmitted to the electronic note side.
+  In case that the session moves to PPP using PPP connection, the data is processed with the protocol in the new sessi-
+  on.
+  In case of AT+VMVTEEND command, the data that is not processed with H8 and received from the modem may be sent to the
+   electronic note side following the result.
+  (In this case, make sure to send the data after sending out the result.)
+
+  Care should be also taken for the followings:
+
+  * For the data from the electronic note, the MFE does not execute the echo back process to the electronic note.
+  * Use the MFE basically to store and process the data from the modem such as packet.
+  * Transmit the data that cannot be interpreted with H8 to the main CPU. (excluding error packet, etc.)
+
+
+<> PPP session
+
+  Use the MFE to process the following commands:
+
+  * AT+VPDCON --- Request PPP disconnection. -> Move to VTE session.
+  * AT+VOCON ---- Connect to POP server. -> Move to POP session.
+  * AT+VSCON ---- Connect to SMTP server. -> Move to SMTP session.
+  * VTE common command (Refer to VTE session.)
+
+  The data received from the modem during this session is also processed with the flow control for H8 modem driver and
+  transmitted to the electronic note side.
+  In case that the session moves to POP or SMTP, the data is processed with the protocol in the new session.
+
+  Care should be also taken for the followings:
+
+  * For the data from the electronic note, the MFE does not execute the echo back process to the electronic note.
+  * Use the MFE basically to store and process the data from the modem such as packet.
+  * Transmit the data that cannot be interpreted with H8 to the main CPU. (excluding error packet, etc.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 09 ---
+
+
+<> POP session
+
+  Use the MFE to process the following commands:
+
+  * AT+VODCON --- Disconnect from POP server. -> Move to PPP session.
+  * AT+VOGML ---- Receive mail from POP server.
+  * AT+VOGLST --- Obtain mail list from POP server.
+  * AT+VOGUID --- Obtain UIDL list from POP server.
+  * AT+VODML ---- Delete mail from POP server.
+  * VTE common command (Refer to VTE session.)
+
+  The data received from the modem during this session is also processed with the flow control for H8 modem driver and
+  the protocol in the new session.
+
+  Care should be also taken for the followings:
+
+  * For the data from the electronic note, the MFE does not execute the echo back process to the electronic note.
+  * Use the MFE basically to store and process the data from the modem such as packet.
+  * Transmit the data that cannot be interpreted with H8 to the main CPU. (excluding error packet, etc.)
+
+
+<> SMTP session
+
+  Use the MFE to process the following commands:
+
+  * AT+VSDCON --- Disconnect from SMTP server. -> Move to PPP session.
+  * AT+VSPML ---- Send mail.
+  * VTE common command (Refer to VTE session.)
+
+  The data received from the modem during this session is also processed with the flow control for H8 modem driver and
+  the protocol in the new session.
+
+  Care should be taken for the followings:
+
+  * For the data from the electronic note, the MFE does not execute the echo back process to the electronic note.
+  * Use the MFE basically to store and process the data from the modem such as packet.
+  * Transmit the data that cannot be interpreted with H8 to the main CPU. (excluding error packet, etc.)
+
+   * In the command processes during the POP or SMTP session, the following NOOP command is regularly issued to prevent
+     the connection timeout with the POP or SMTP server (administered by server side).
+
+     • NOOP is issued every 30 seconds if no command is sent from the electronic note.
+     • NOOP is issued every 30 seconds during the command process (sending/receiving mail to/from the electronic note)
+       if the following two commands are sent from the electronic note: AT+VMWRML and AT+VMRDML
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 10 ---
+
+
+[5] Electronic Note and MFE Operations Immediately after Turning Initial Power
+
+  Perform each operation according to the following procedure.
+
+
+  <> Electronic note side
+
+                Open modem port                   38400bps (synchronized with H8 default.)
+                                                  RS/CS flow control
+                                                  8 bits
+                                                  NON parity
+                                                  Stop 1 bit
+                       |
+           Wait until DR is turned ON.            Display "MODEM NOT CONNECTED" if timeout is achieved with DR OFF.
+                       |
+      Issue AT+VMI0 and identify modem type.      "CASIO Z488" is issued from H8.
+                       |
+          Issue communication parameter           Change baud rate optionally if necessary.
+                 change command.                  Change it for electronic note also within one second.
+                       |
+             Issue AT+VICON command.
+                       |
+      Issue command according to the desired
+             process as AT session.
+
+
+  <> MFE (H8) side
+
+               Start H8 OS, MFE.
+                       |
+            Open electronic note port.            38400kbps
+                                                  RS/CS flow control
+                                                  8 bits
+                                                  NON parity
+                                                  Stop 1 bit
+                       |
+       Turn DR signal for electronic note
+            ON and CD signal OFF.
+                       |
+           Initialize modem driver.               Do not transmit signal status on modem side to electronic note.
+                       |
+      Wait for command from electronic note.      At this time, the modem is not connected, therefore, the session lev-
+                                                  el is same as that when IrDA is disconnected during AT session, and
+                                                  the following command from electronic note can be processed.
+                                                    * AT+VMI0
+                                                    * AT+VICON (Connect to IrDA device.)
+                                                    * AT+VMATST (Start modem test program.)
+                                                    * AT+VMPRM (Set DTE communication parameter.)
+                                                    * AT+VMHBNT (Move to hibernate mode.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 11 ---
+
+
+[6] Expansion Interpretation of ER Signal
+
+  There are three types of expansion interpretation patterns.
+
+    A. Issue command when CD is turned ON during AT session (in online mode).
+    B. Disconnect line when CD is turned ON during AT session (in online mode).
+    C. Direct transfer cancel of data being transferred based on AT+VMRDML, AT+VMWRML, AT+VOGLST, or AT+VOGUID during
+       VTE session.
+
+  The specification common in the above three patterns is as follows:
+
+   * Re-measure for 1 second from the time when ER is turned OFF while recognizing the command in the online for 1 sec-
+     ond.
+   * Transmit CD status from the MFE real time.
+   * In the patterns other than the above three, the electronic note ER is transmitted to the modem side real time.
+   * Each corrugation is a communication level between the electronic organizer and MODEM (232C considerably).
+     In the terminal level between the main CPU and H8, it is necessary to turn over.
+
+  Note that this may be finally adjusted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 12 ---
+
+
+[A. Command issue when CD is ON during AT session (in online mode)]
+
+
+                         |<-           1sec         ->|
+    Time axis   -------- +----------------------------+ ----------------------
+
+    MODEM     H --------------------------------------------------------------
+      <CD>
+              L
+
+    MODEM     H --------------------------------------------------------------
+      <ER>
+              L
+
+    ELECTRO-  H ---------+         +------------------------------------------
+    NIC NOTE             |         |
+      <ER>    L          +---------+
+
+
+    1.Electronic note    |->Turn OFF ER and issue command.
+    2.MFE                   |->Start 1-sec measurement and check command syntax.
+                               (Take the same step as B if no command is entered for 1 second from here.)
+                               (Stop 1-sec measurement immediately if any command is entered.)
+    3.MFE                     |->Issue CMDOK or CMDFAULT command and start 1-sec measurement.
+                                 (Start 1-sec measurement from 0 regardless of the measurement in 2.)
+                                 (In case of CMDFAULT command, finish the online command process to return to the onli-
+                                  ne mode.)
+    4.Electronic note             |->Return ER to ON.
+    5.MFE                         |->Wait until parameter is entered.
+                                     (Wait for parameter whether ER on the electronic note is ON or OFF.)
+                                     (It cancels the parameter entry and starts 1-sec measurement to return to online
+                                      mode when ER on the electronic note is turned from ON to OFF.)
+    6.Electronic note                |->Send entered parameter.
+    7.MFE                               |->Issue CONFAULTM05, M06, or PARAMOK command and start 1-sec measurement.
+                                           (Start 1-sec measurement from 0 regardless of the measurement in 3.)
+                                           (In case of CONFAULTM05 or M06, return to 1.)
+                                           (In case of PARAMOK, proceed to 8.)
+    8.MFE                                  |->Execute actual process of command.
+    9.MFE                                     |->Issue actual process result.
+   10.MFE                     |<-           1sec         ->|->Transmit ER after 1 second from the time when 3. is comp-
+                                                              leted.
+                                  |<-           1sec         ->|->Or, detect ER is turned from ON to OFF in 5. and tra-
+                                                                  nsmit ER after 1 second.
+                                        |<-           1sec         ->|->Or, transmit ER after 1 second from the time
+                                                                        when 7. is completed.
+
+
+  For the above flow, note the followings:
+
+  * Use the trigger for online command mode only when the ER on the electronic note is turned from ON to OFF.
+  * Online mode is not influenced by electronic note ER status, ON or OFF.
+  * Transmit the ER status on the electronic note side to the modem side after 1-sec measure is completed in one
+    second.
+    This transmission can be executed along with other processes. (For example, it can be executed when returning to
+    online mode in 3.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 13 ---
+
+
+[B. Line disconnection when CD is ON during AT session (in online mode)]
+
+
+                         |<-           1sec         ->|
+    Time axis   -------- +----------------------------+ ----------------------
+
+    MODEM     H -------------------------------------------------+
+      <CD>                                                       |
+              L                                                  +------------
+
+    MODEM     H -----------------------------------------+           +--------
+      <ER>                                               |           |
+              L                                          +-----------+
+
+    ELECTRO-  H ---------+                                           +--------
+    NIC NOTE             |                                           |
+      <ER>    L          +-------------------------------------------+
+
+
+    1.Electronic note    |->Turn OFF ER. (Wait until CD is turned OFF.)
+    2.MFE                   |->Start 1-sec measurement and wait for command entry.(Take the same step as A if any comm-
+                               and is entered.)
+    3.MFE                   |<-           1sec         ->|->Transmit ER after 1 second from the time when 2. is comple-
+                                                            ted.)
+    4.Electronic note                                            |->Detect modem CD is OFF.
+    5.Electronic note                                               |->Return ER to ON.(Modem ER is also turned ON.)
+
+
+
+
+[C. Transfer cancel direction of data being transferred based on AT+VMRDML, AT+VMWRML, AT+VOGLST, or AT+VOGUID
+    during VTE session.]
+
+
+                         |<-           1sec         ->|
+    Time axis   -------- +----------------------------+ ----------------------
+
+    MODEM     H --------------------------------------------------------------
+      <CD>
+              L
+
+    MODEM     H --------------------------------------------------------------
+      <ER>
+              L
+
+    ELECTRO-  H ---------+         +------------------------------------------
+    NIC NOTE             |         |
+      <ER>    L          +---------+
+
+
+    1.Electronic note    |->Turn OFF ER. 
+    2.MFE                   |->Start 1-sec measurement and process transfer cancel.
+    3.MFE                      |->Issue STOPPED command and start 1-sec measurement.
+    4.Electronic note             |->Return ER to ON.
+    7.MFE                      |<-           1sec         ->|->Transmit ER after 1 second from the time when 3. is com-
+                                                               pleted.
+
+    (Take the same step as B if ER is not returned to ON in 4. within 1 second from the time when 2. is completed.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 14 ---
+
+
+[7] PPP Connection
+
+  PPP connection is divided into two steps: physical connection (dial-up) and connection to PPP server.
+  PPP connection is established by physically connecting from the application in the electronic note, then connecting
+  to the PPP server using VTE command.
+
+
+  <> Physical connection (dial-up)
+
+  The physical connection is established by calling up from the application in the electronic note.
+
+        Call up with using the dial command.
+             |
+        Wait for connect result code from modem.
+        (In case of busy state, etc., follow each application specification.)
+             |
+        Complete physical connection.
+
+
+<> Connection to PPP server
+
+  Use VTE command to connect to PPP server and take the following steps.
+
+
+        Use communication BIOS of electronic note to turn OFF ER.	 *It may omit.
+             |
+        Issue AT+VMVTESTART command. (Request VTE session start.)
+             |
+        Wait for CMDOK result code from modem.
+             |
+        Use communication BIOS of electronic note to turn ON ER.	 *It may omit.
+             |
+        Send AT+VMVTESTART entry parameter. (Request VTE session start.)
+             |
+        Wait for STARTED result code from modem.
+             |
+        Issue AT+VPCON command. (Request PPP connection.)
+             |
+        Wait for NETUP result code from modem.
+             |
+        Complete PPP connection.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 15 ---
+
+
+[8] Operation Conditions of Modem Driver
+
+  The followings are the operation conditions of modem driver.
+
+    1. Data length is fixed to 8 bits.
+
+    2. Communication baud rate:
+
+      IrDA: Max. 57.6Kbps
+
+    3. The electronic note and modem driver sides have their individual flow control system that is fixed to the flow
+       control (RS/CS) system.
+
+      Xon/Xoff system is not used.
+
+    4. In the IrDA connection, H8 is used only as the primary side.
+
+      In the IrCOMM connection, 9-wire DTE is used to operate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 16 ---
+
+
+[9] How to Understand Error Code and Error ID
+
+  Command error process is mainly divided into three types.
+
+    A. When returning CMDFAULT as a result of VTE command
+
+    B. When returning CONFAULT + error ID as a result of VTE command
+
+    C. When transmitting command to modem
+
+  The followings describe the timing and meaning of each error process.
+
+    A. CMDFAULT is the error issued before executing VTE command in the following cases:
+      1. Syntax error of the command itself or command parameter occurs.
+      2. In case of command related to moving session, incorrect moving procedure is taken.
+      3. Invalid command in each session is entered.
+
+    B. CONFAULT + error ID is the error issued when VTE command is being actually processed in the following cases.
+       (It may include the error issued when the entered parameter is received before actual process starts, depending
+        on VTE command.)
+
+      1. General MFE error
+                          M01	Insufficient memory
+                          M02	Data remains in receiving mail spool
+                          M03	Data remains in sending mail spool 
+                          M04	Invalid specified mail ID
+                          M05	Input parameter receive error
+                          M06	Input parameter syntax error 
+                          M07	MIME failed
+        [Remarks]
+          * Error ID, M06 is outputted when a mail using AT+VMWRML command includes more than 1024 characters continuo-
+            usly (in case of subject, more than 256 including the subject characters), in the message contents or sub-
+            ject and is specified as the input parameter.
+            Therefore, limit the number of the letters in the application and don't deliver the character string which
+            exceeded a specification range.
+
+          * Error ID, M07 is outputted only when a format error occurs during the MIME process and not outputted when
+            the MIME process is judged as disabled. This case is considered as normal termination, therefore, the data
+            is outputted without executing the MIME process.
+            For example, M07 is not issued in the following cases.
+              Content-type: content-transfer-encoding: No header exists.
+              Content-type out of the specified range of MIME process
+                (other than multipart/mixed and message/rfc822)
+              Content-Transfer-Encoding out of the specified range of MIME process:
+                (other than base64 and quoted-printable)
+              Encoding (ex. content-transfer-encoding is base64 or quoted-printable) other than text/plain
+                (ex. multipart/mixed) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 17 ---
+
+
+
+      2. IrDA error
+                          I01	IrDA connection failed
+                          I02	IrDA connection disconnected
+
+      3. TCP/IP error
+                          T01	TCP timeout
+                          T02	TCP connection disconnected
+
+      4. PPP error
+                          P01	Connection to PPP server failed
+                          P03	PPP connection disconnected
+
+      5. DNS error
+                          D01	Connection to DNS server failed
+                          D03	IP data for host does not exist.
+                          D04	Internal error of DNS server
+                          D05	DNS timeout
+
+      6. POP error
+                          O01	Connection to POP server failed
+                          O02	POP authentication error
+                          O04	Mail receive error of displayed ID
+                          O05	POP command execution error
+
+      7. SMTP error
+                          S01	Connection to SMTP server failed
+                          S02	Incorrect mail address (RFC821 response: 251,550,551,553)
+                          S03	Mail send error of displayed ID (RFC821 response: 450,451,452,552,554)
+                          S04	SMTP command execution error (RFC821 response: 450,451,452,552,554)
+        [Remarks]
+          * Error ID, S05 is issued when execution error for the command unrelated to sending mail occurs, and S04 only
+            when mail fails to send.
+          * Error ID, S03 is issued when domain address (my domain) for AT+VSCON does not include "@" in input paramet-
+            er or does include any comment (the part with quotation mark (' ')) after "@".
+            In the latter case, RFC821 returns 501, or error ID may be exceptionally outputted.
+          * The followings of RFC821 responses are processed in the MFE, and no error is outputted.
+                221,214,220,221,250,354 --- Affirmative response
+                252 ----------------------- Not outputted without using VRFY command
+                421 ----------------------- Outputs T02 (TCP connection disconnected) after TCP connection is disconne-
+                                            cted.
+                500,501,502,503,504,550 --- Command syntax error
+
+    C. In this case, the command syntax check is performed with the modem, therefore, the MFE transmits the result code
+       to the electronic note side without any correction.
+       However, when IrDA connection is disconnected:
+          CONFAULTI02 (shown in the above B.)   Return IrDA connection disconnected.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 18 ---
+
+
+[10] Description of Binary (Attachment) File
+
+  () Sending/receiving data with attached file
+
+  $ Receiving (Sending to electronic note)
+
+  APL      AT+VOGLST
+  Result   GOTLIST
+           Mail ID + " " + number of blocks * number of lines (in all mail)
+  APL      AT+VMRDML + mail ID + TA
+  Result   CMDOK
+           [Output parameter] mail text + " "
+           ( --boundary characters + header ) * actual amount of body part
+  APL      AT+VMRDINF + mail ID + specify sending data + xxxxID
+  Result   SIZEGOT + size
+  APL      AT+VMRDBD + xxxxID + T
+  Result   CMDOK
+           [Output parameter]
+
+
+  $ Sending (Receiving from electronic note)
+
+  APL      AT+VMWRML + mail ID + T
+  Result   CMDOK
+           [Input parameter] mail text + " "
+           ( --boundary characters + header ) * actual amount of body part
+  Result   PARAMOK
+  APL      AT+VMWRBD + xxxxID + T
+  Result   CMDOK
+           [Input parameter] Actual amount of body part
+  Result   PARAMOK
+
+    The file name of the attachment file is "xxxxID" ( binary data ID ) + ".bin".
+    The optional file name can not be added.
+       ex.) The file name is "0001.bin" in case of "xxxxID = 0001".
+
+    The attachment file which it is possible to attach to 1 mail is only one.
+
+
+() Encoding system response
+
+  * Execute base64 and Quoted Printable in MIME process.
+  * Enable uuencode other than MIME process to decode.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 19 ---
+
+====================================================================================================
+		VTE (Virtual modem system Transmit protocol Extension) Command List
+====================================================================================================
+
+<<VTE Command Format>>
+
+    AT    +    V           O   -- to POP
+     |    |    |           S   -- to SMTP
+     |    |    |           P   -- to PPP
+     |    | VTE command    M   -- to MFE
+     | Expansion mark      I   -- to IrDA
+  AT command
+                           |
+                        Command issue target
+
+
+   * Note that any command with space in the quotation mark such as " + " is not included as command.
+   * Command and result code format is as follows:
+     (1 frame = 1 byte)
+
+     [AT (VTE) command format]
+       +---+ +---+ +---+ +---+ +---+
+       | A | | T | | - | | - | |CR |      CR is attached in the end of AT command.
+       +---+ +---+ +---+ +---+ +---+
+     [Result code format]
+       +---+ +---+ +---+ +---+ +---+ +---+
+       |CR | |LF | | - | | - | |CR | |LF | Result code is put between CR and LF.
+       +---+ +---+ +---+ +---+ +---+ +---+
+       CR = 0x0D
+       LF = 0x0A
+
+   * Respond to both capital and lowercase in command and parameter format.
+   * The basic command process flows though checking the command format, parameter, and session procedure, then return-
+     ing one of the following two responses to the electronic note.
+
+        CMDOK       Command accepted
+        CMDFAULT    No command accepted; Syntax error
+
+     Then, the commands enter each actual process and the different result is returned.
+     (Input parameter may be required before each actual process depending on command type.)
+
+     Exceptionally, the actual process of command does not require time, instead, CMDOK may be the result code of the
+     actual process for the command if input/output parameter is not specified. (Its process flow will be described la-
+     ter.)
+
+
+     The basic command process flow is as follows:
+
+
+       <Electronic Note>                                   <H8>
+
+                                                      Wait command (*1)
+                                                             |
+       Issue command             ------->            Receive and analyze
+             |                                               |
+       Receive result           <-------            Send CMDOK or CMDFAULT.
+             |                                               |
+   CMDFAULT      CMDOK                               CMDOK     CMDFAULT
+       |           |                                   |           |
+Reissue or end.    |                                   |         to (*1)
+                   |                                   |
+             |                                               |
+     Wait result code                             Command actual process
+             |                                               |
+    Receive and analyze         <-------             Send result code
+             |                                               |
+      Reissue or end                                       End
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 01 ---
+
+
+   * Input/output parameter
+
+     Send/receive plain text to/from the electronic note.
+     Comply with the format described in RFC822 for parameter name and body.
+     The followings are the main cautions:
+
+      1. Each parameter item and line are broken with CRLF.
+      2. Parameter name does not include any space, is regardless of capital and lowercase, and ends with ":".
+      3. Any white space (tab or space) is ignored when the structural parameter body is analyzed.
+      4. Refer to RFC822 for the specifications of command, mail address format, return and return undo processes.
+      5. Each mail header item may be returned. Care should be taken when judging the item.
+         H8 does not execute the return/return undo process of mail header item and text. Execute it on the electronic
+         note if necessary.
+      6. Input/output parameter end is displayed only on the line with ".".
+
+
+   * In case that input parameter is received from the electronic note, the process procedure is as follows:
+
+
+       <Electronic Note>                                   <H8>
+
+                                                      Wait command (*1)
+                                                             |
+       Issue command           ------->              Receive and analyze
+             |                                               |
+       Receive result         <-------             Send CMDOK or CMDFAULT.
+             |                                               |
+   CMDFAULT      CMDOK                               CMDOK     CMDFAULT
+       |           |                                   |           |
+Reissue or end.    |                                   |         to (*1)
+                   |                                   |
+             |                                               |
+             |                                       Wait parameter (*2)
+             |                                               |
+    Send input parameter       ------->          Receive and analyze (Note 1)
+             |                                               |
+       Receive result         <-------        Send PARAMOK, CONFAULTM05 or M06
+             |                                               |
+  PARAMOK     M05       M06                       PARAMOK     M05       M06
+     |         |         |                           |         |         |
+Receive result      |         <-------  Execute actual process      |
+     |              |                         and issue result      |
+     |              |                                |              |
+   End              |                             to (*1)           |
+             |                                               |
+Resend or end with ER->OFF                                to (*2)
+
+
+  Note 1) It is required to monitor ER->OFF during AT+VMWRML execution (receive sending mail from electronic note) and
+          input parameter receiving. (Send STOPPED when ER->OFF is detected.)
+          AT+VMWRML (Receive sending mail from electronic note)
+          AT+VOCON (Connect to POP server)
+          AT+VSCON (Connect to SMTP server)
+          AT+VPCON (Request PPP connection)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 02 ---
+
+
+   * In case that output parameter is received from H8, the process procedure is as follows:
+
+
+       <Electronic Note>                                   <H8>
+
+                                                      Wait command (*1)
+                                                             |
+       Issue command             ------->            Receive and analyze
+             |                                               |
+       Receive result           <-------            Send CMDOK or CMDFAULT.
+             |                                               |
+   CMDFAULT      CMDOK                               CMDOK     CMDFAULT
+       |           |                                   |           |
+Reissue or end.    |                                   |         to (*1)
+                   |                                   |
+             |                                               |
+   Wait output parameter                          Command actual process
+             |                                               |
+    Receive and analyze         <-------        Send output parameter (Note 2)
+             |                                               |
+      Reissue or end                                       End
+
+
+  Note 1) AT+VMRDML (Send received mail to electronic note.)
+          AT+VOGLST (Obtain mail list from POP server.)
+          It is required to monitor ER->OFF during AT+VOGUID execution (obtain UIDL list from POP server) or during
+          output parameter sending. (Send STOPPED when ER->OFF is detected.)
+
+
+   * Commands unrequired time for the actual process and including no input/output parameter
+     The followings show such commands:
+
+      AT+VMVTEEND (Request VTE session end.)
+      AT+VMRMREL (Release receiving mail spool memory.)
+      AT+VMTMREL (Release sending mail spool memory.)
+
+     The process procedure of those commands is as follows:
+
+
+       <Electronic Note>                                   <H8>
+
+                                                      Wait command (*1)
+                                                             |
+       Issue command             ------->        Receive, analyze and execute
+             |                                               |
+   Receive result and analyze   <-------       Send CMDOK, CMDFAULT or CONFAULT
+             |                                               |
+      Reissue or end                                       End   to (*1)
+
+
+   * For the following two commands, the special process procedure is required.
+
+      AT+VMPRM (Set DTE communication parameter.)
+      AT+VMHBNT (Move to hibernate mode.)
+
+     For each command process procedure, refer to the following individual command specifications.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 03 ---
+
+
+<< POP >>
+
+<> Connecting to POP server
+[Command]		AT+VOCON
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			PARAMOK	Completed to receive input parameter
+			STOPPED	Stopped receiving input parameter (due to timeout)
+			CONNECTED	Succeeded connection
+			CONFAULT + error ID
+			  M05		Input parameter receive error
+			  M06		Input parameter syntax error
+			  I02		IrDA connection disconnected 
+			  T01		TCP timeout
+			  T02		TCP connection disconnected
+			  P03		PPP connection disconnected 
+			  D01		DNS server connection failed
+			  D03		No IP data to host exist
+			  D04		DNS server internal error
+			  D05		DNS timeout
+			  O01		POP server connection failed 
+			  O02		POP authentication error
+[Command Parameter]	-----
+[Input Parameter]	POP-domain: + characters	POP server domain name
+			POP-port: + characters		POP server port number
+			POP-user: + characters		POP user name
+			POP-pass: + characters		POP user password
+[Output Parameter]	-----
+[Remarks]
+  * Input parameter is received from the electronic note after sending CMDOK.
+  * The domain name using IP address is fixed to decimal 12 digits that are divided every 3 digits with ".".
+    But, it is possible to omit "0" at the head of each value.
+       ex.) 128.001.024.052 -> 128.1.24.52
+  * Port number is decimal 5 digits. But, it is possible to omit "0" at the head.
+        ex.) 00110 -> 110
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+
+<> Disconnecting from POP server
+[Command]		AT+VODCON 
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			DISCONNECTED	Succeeded to disconnect
+			CONFAULT + error ID
+			  I02		IrDA connection disconnected
+			  T02		TCP connection disconnected 
+			  P03		PPP connection disconnected 
+			  O05		POP command execution error
+[Command Parameter]	-----
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 04 ---
+
+
+<> Receiving mail from POP server
+[Command]		AT+VOGML + mail ID
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			DATAGOT + No. of received blocks + "/" + total No. of blocks
+					Confirmed mail receiving
+					Total No. of blocks (unit: 2048bytes)
+					No. of received blocks (unit: 2048bytes)
+			GOTMAIL + mail ID
+					Succeeded to receive mail with displayed ID 
+					(MIME succeeded)
+			CONFAULT + error ID
+			  M01		Insufficient memory
+			  M04		Invalid specified mail ID
+			  I02		IrDA connection disconnected
+			  T02		TCP connection disconnected 
+			  P03		PPP connection disconnected 
+			  O04		Mail receive error of displayed ID
+[Command Parameter]	Mail ID
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999 and applies the ID obtained from AT+VOGLST.
+  * No. of blocks is fixed to decimal 3-digit number. (More than 3-digits is displayed as "***".)
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+  * Result code, DATAGOT
+    DATAGOT is the command to send the receiving status of mail coming from the POP server to the electronic note. It
+    is returned every time 1 block size (2048bytes) of data is received.
+    For example:
+      1. In case of the mail containing less than 2K bytes, only GOTMAIL + mail ID is returned. (No DATAGOT)
+      2. DATAGOT is returned every 2K bytes, therefore, it is not necessary to send in case of less than 2K bytes.
+         Accordingly, in case of 5K-byte mail, two DATAGOTs and GOTMAIL + mail ID are returned.
+         The formats for the first two DATAGOTs are as follows:
+         First: DATAGOT001/003 -> Second: DATAGOT002/003
+    In case of 6K-byte mail, the above two DATAGOTs, the third DATAGOT (DATAGOT003/003), and GOTMAIL + mail ID are ret-
+    urned.
+
+<> Obtaining mail list from POP server
+[Command]		AT+VOGLST + mail ID
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			STOPPED		Stopped sending output parameter (due to ER->OFF on electronic note side)
+			GOTLIST		Succeeded to obtain mail list
+			CONFAULT + error ID
+			  I02		IrDA connection disconnected
+			  T02		TCP connection disconnected 
+			  P03		PPP connection disconnected 
+			  O05		POP command execution error
+			  M04		Invalid specified mail ID
+[Command Parameter]	Mail ID
+[Input Parameter]	-----
+[Output Parameter]	Mail ID + " " + No. of blocks * No. of lines in all mails
+			Mail list
+[Remarks]
+  * Output parameter is sent to the electronic note side after sending GOTLIST.
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999.
+  * The list characters in all mails are obtained when command parameter (mail ID) does not exist, and those in the
+    specified mails when it does exist.
+  * 1 block size is 2048bytes.
+  * No. of blocks is fixed to decimal 3-digit number. (More than 3-digits is displayed as "***".)
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 05 ---
+
+
+<> Obtaining UIDL list from POP server
+[Command]		AT+VOGUID + mail ID
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			STOPPED		Stopped sending output parameter (due to ER->OFF on electronic note side)
+			GOTUIDL		Succeeded to obtain list
+			CONFAULT + error ID
+			  I02		IrDA connection disconnected
+			  T02		TCP connection disconnected 
+			  P03		PPP connection disconnected 
+			  O05		POP command execution error
+			  M04		Invalid specified mail ID
+[Command Parameter]	Mail ID
+[Input Parameter]	-----
+[Output Parameter]	Mail ID + " " + UIDL characters * No. of lines in all mails
+			UIDL list
+[Remarks] 
+  * Output parameter is sent to the electronic note side after sending GOTUIDL.
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999, and applies the ID obtained from AT+VOGLST.
+  * The UID characters in all mails are obtained when command parameter (mail ID) does not exist, and those in the spe-
+    cified mails when it does exist.
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+
+<> Deleting mail from POP server
+[Command]		AT+VODML + mail ID
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			DELETED		Succeeded to delete command
+			CONFAULT + error ID
+			  M04		Invalid specified mail ID
+			  I02		IrDA connection disconnected
+			  T02		TCP connection disconnected 
+			  P03		PPP connection disconnected 
+			  O05		POP command execution error
+[Command Parameter]	Mail ID
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks] 
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999, and applies the ID obtained from AT+VOGLST.
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 06 ---
+
+
+<< SMTP >>
+
+<> Connecting to SMTP server
+[Command]		AT+VSCON
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			PARAMOK		Completed to receive input parameter
+			STOPPED		Stopped receiving input parameter (due to timeout)
+			CONNECTED	Succeeded connection
+			CONFAULT + error ID
+			  M05		Input parameter receive error
+			  M06		Input parameter syntax error
+			  I02		IrDA connection disconnected 
+			  T01		TCP timeout
+			  P03		PPP connection disconnected 
+			  D01		DNS server connection failed
+			  D03		No IP data to host exist
+			  D04		DNS server internal error
+			  D05		DNS timeout
+			  S01		SMTP server connection failed 
+			  O02		POP authentication error
+[Command Parameter]	-----
+[Input Parameter]	SMTP-domain: + characters	SMTP server domain name
+			SMTP -port: + characters	SMTP server port number
+			My-domain: + characters		SMTP user name
+			POP-pass: + characters		MY domain name 
+[Output Parameter]	-----
+[Remarks]
+  * Input parameter is received from the electronic note after sending CMDOK.
+  * The domain name using IP address is fixed to decimal 12 digits that are divided every 3 digits with "."..
+    But, it is possible to omit "0" at the head of each value.
+       ex.) 128.001.024.052 -> 128.1.24.52
+  * Port number is decimal 5 digits. But, it is possible to omit "0" at the head.
+       ex.) 00110 -> 110
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+  * Input the mail address of sender in my domain name. The characters displayed after "@" are sent to SMTP HELO comma-
+    nd as parameter.
+
+<> Disconnecting to SMTP server
+[Command]		AT+VSDCON 
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			DISCONNECTED	Succeeded disconnection
+			CONFAULT + error ID
+			  I02		IrDA connection disconnected
+			  T02		TCP connection disconnected 
+			  P03		PPP connection disconnected 
+			  S04		SMTP command execution error
+					(RFC821 response related: 450,451,452,552,554)
+[Command Parameter]	-----
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 07 ---
+
+
+<> Sending mail
+[Command]		AT+VSPML + mail ID
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			SENT + ID	Completed to send mail with displayed ID
+			DATASENT + No. of sent blocks + "/" + total No. of blocks
+					Confirmed mail sending
+					  Total No. of blocks (unit: 2048bytes)
+					  No. of sent blocks (unit: 2048bytes)
+			CONFAULT + error ID
+			  M04		Invalid specified mail ID
+			  I02		IrDA connection disconnected
+			  T02		TCP connection disconnected 
+			  P03		PPP connection disconnected 
+			  S02		Incorrect mail address
+					(RFC821 response related: 251,550,551,553)
+			  S03	Mail send error of displayed ID 
+					(RFC821 response related: 450,451,452,552,554)
+[Command Parameter]	Mail ID
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999 and applies the ID managed on the electronic note.
+  * No. of blocks is fixed to decimal 3-digit number. (More than 3-digits is displayed as "***".)
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+  * Result code, DATASENT
+    DATASENT is the command to send the sending status of mail coming from SMTP server to the electronic note. It is
+    returned every time 1 block size (2048bytes) of data is sent.
+    For example:
+      1. In case of the mail containing less than 2K bytes, only SENT + mail ID is returned. (No DATASENT)
+      2. DATASENT is returned every 2K bytes, therefore, it is not necessary to send in case of less than 2K bytes. 
+         Accordingly, in case of 5K-byte mail, two DATASENTs and finally SENT + mail ID are returned.
+         The formats for the first two DATASENTs are as follows:
+         First: DATASENT001/003 -> Second: DATASENT002/003
+    In case of 6K-byte mail, the above two DATASENTs, the third DATASENT (DATASENT003/003), and SENT + mail ID are ret-
+    urned.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 08 ---
+
+
+<<PPP>>
+
+<> Requesting PPP connection
+[Command]		AT+VPCON 
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			PARAMOK		Completed to receive input parameter
+			STOPPED		Stopped receiving input parameter (due to timeout)
+			NETUP		Completed to configure network
+			CONFAULT + error ID
+			  M05		Input parameter receive error
+			  M06		Input parameter syntax error
+			  I02		IrDA connection disconnected 
+			  P01		PPP server connection failed
+[Command Parameter]	-----
+[Input Parameter]			IP header control
+			PPP-ipcomp: on	Compression
+				    off	No compression
+			PPP-user: + character	User name
+			PPP-pass: + character	User password
+[Output Parameter]	-----
+[Remarks]
+  * Input parameter is received from the electronic note after sending CMDOK.
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+  * In case of PPP authentication error, P01 (PPP server connection failed) error ID is outputted.
+
+<> Requesting PPP disconnection
+[Command]		AT+VPDCON 
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			DISCONNECTED	Succeeded disconnection
+			CONFAULT + error ID
+			  I02		IrDA connection disconnected
+			  P03		PPP connection disconnected 
+[Command Parameter]	-----
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * This command process disconnects telephone line also.
+  * IrDA module is in the stand-by state when IrDA is disconnected. (P82(IRSD)=H)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 09 ---
+
+
+<<MFE>>
+
+<> Requesting VTE session start
+[Command]		AT+VMVTESTART 
+[Result]		CMDOK		Accepted command
+			CMDFAULT	Not accepted command; syntax error
+			PARAMOK		Completed to receive input parameter
+			STOPPED		Stopped receiving input parameter (due to timeout)
+			STARTED		Succeeded to start
+			CONFAULT + error ID
+			  M05		Input parameter receive error
+			  M06		Input parameter syntax error
+[Command Parameter]	-----
+[Input Parameter]	DNS-primary: + character	primary DNS server IP address
+			DNS-secondary: + character	secondary DNS server IP address
+			My-ip: + character		My IP address
+			Subnetmask: + character	subnetmask value
+
+[Output Parameter]	-----
+[Remarks]
+  * TCP/IP operations are executed based on the setting specified here.
+  * No DNS setting means that DNS is not used.
+  * In case of no My IP address, IP address is automatically allocated from the server.
+  * Use PAP and CHAP-MD5 for user authentication.
+  * DNS, IP address, subnetmask value is fixed to decimal 12 digits divided every 3 digits with ".".
+    But, it is possible to omit "0" at the head of each value.
+       ex.) 128.001.024.052 -> 128.1.24.52
+  * Input parameter is received from the electronic note after sending CMDOK.
+
+<> Requesting VTE session end
+[Command]		AT+VMVTEEND 
+[Result]		CMDOK		Succeeded to end
+			CMDFAULT	Not accepted command; syntax error
+			CONFAULT + error ID
+			  M02		Data remains in receiving mail spool
+			  M03		Data remains in sending mail spool
+[Command Parameter]	-----
+[Input Parameter] 	-----
+[Output Parameter]	-----
+
+<> Releasing receiving mail spool memory
+[Command]		AT+VMRMREL + mail ID
+[Result]		CMDOK		Succeeded to release
+			CMDFAULT	Not accepted command; syntax error
+			CONFAULT + error ID
+			  M04		Invalid specified mail ID
+[Command Parameter]	Mail ID
+[Input Parameter] 	-----
+[Output Parameter]	-----
+[Remarks]
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999 and applies the ID obtained from AT+VOGLST.
+
+<> Releasing sending mail spool memory
+[Command]		AT+VMTMREL + mail ID
+[Result]		CMDOK		Succeeded to release
+			CMDFAULT	Not accepted command; syntax error
+			CONFAULT + error ID
+			  M04		Invalid specified mail ID
+[Command Parameter]	Mail ID
+[Input Parameter] 	-----
+[Output Parameter]	-----
+[Remarks]
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999 and applies the ID managed on the electronic note.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 10 ---
+
+
+<> Sending received binary data to electronic note - new -
+[Command]		AT+VMRDBD + xxxxID + sending data specification
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+			STOPPED		Stopped sending output parameter (due to ER->OFF on electronic note side)
+			CONFAULT + error ID
+			  M04		Invalid specified mail ID
+			  M07		MIME failed
+[Command Parameter]	xxxxID
+			Specify receiving data
+			T -----	Translated data 
+				(H8 sends input parameter data by MIME encoding.)
+[Input Parameter] 	-----
+[Output Parameter]	Actual body parts
+[Remarks]
+  * xxxxID refers to binary data ID and applies the CbinIDxxxx obtained from AT+VMRDML.
+  * Output parameter is sent to the electronic note after sending CMDOK.
+  * Binary data is coded in ASCII before sending (A1=>41,31)
+
+<> Receiving sending binary data from electronic note - new -
+[Command]		AT+VMWRBD + xxxxID + sending data specification
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+			PARAMOK		Completed to receive input parameter
+			STOPPED		Stopped sending output parameter
+					(due to ER->OFF on electronic note side or timeout)
+			CONFAULT + error ID
+			  M01		Insufficient memory
+			  M05		Input parameter receive error
+			  M06		Input parameter syntax error
+[Command Parameter]	Mail ID
+			Specify sending data
+			T -----	Translated data 
+				(H8 receives input parameter data by MIME encoding.)
+[Input Parameter] 	Actual body parts 
+[Output Parameter]	-----
+[Remarks]
+  * xxxxID refers to binary data ID and applies the xxxxID managed on the electronic note side.
+  * Input parameter is sent to the electronic note after sending CMDOK.
+  * To express attachment data, add boundary characters on the electronic note side if necessary.
+  * Basically, only the above items are sent from the electronic note. However, H8 should be ready to send other items
+    that may be also sent from the electronic note.
+  * Binary data is coded in ASCII before sending  (A1=>41,31)
+
+
+
+
+
+
+
+
+							--- 11 ---
+
+
+<> Sending received mail to electronic note
+[Command]		AT+VMRDML + mail ID + sending data specification
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+			STOPPED		Stopped sending output parameter (due to ER->OFF on electronic note side)
+			CONFAULT + error ID
+			  M04		Invalid specified mail ID
+			  M07		MIME failed
+[Command Parameter]	Mail ID
+					Specify receiving data
+			(MIME process completed)
+			TM ----	Translated data 
+				(main header (header items specified below) only)
+			TB ---- Translated data (main header + message body (including body parts))
+				(The header in each message body part means only the header specified below.)
+			TS ----	Translated data (All of one mail data
+				(all header + all body))
+			TA ----	Translated data (main header + body
+				(excluding binary attachment))
+[Input Parameter] 	-----
+[Output Parameter]			Message header
+			From: + character 		(ex. Dave Roberts<dave@droberts.com>
+			To: + character 		(ex. jeffd@coriolis.com (Jeff Duntemann))
+			Cc: + character 		(ex. dave@droberts.com)
+			Reply-To: + character 		(ex. dave@droberts.com
+			Date: + character 		(ex. Sun, 09 Jul 1995 15:01 PDT)
+			Subject: + character 		(ex. Example)
+			Mime-Version: + character 	(ex. 1.0)
+			Status: + character 		(ex. RO)
+			Content-Type: text/plain;
+					charset=us-ascii
+					       =iso-8859-1
+				    : multipart/mixed;
+					boundary="(ex.)My Boundary"
+				    : message/rfc822;
+					(other send raw)
+			Content-Transfer-Encoding: base64
+						 : quoted-printable
+						 : 7-bit
+				                 (other send raw)
+			(It is set to 7 bits on H8 side unless Content-Transfer-Encoding exits.)
+                        X-***: *** (The optional header item)
+			X-Attbin: CbinIDxxxx
+				  (Repeats for the number of binary files.)
+
+			Actual message body
+
+					Message body parts (at multipart/mixed)
+			--boundary character 		(ex.) My Boundary
+			Content-Type: text/plain;
+				        charset=us-ascii
+					       =iso-8859-1
+					       (other send raw)
+				    : multipart/mixed;
+				        boundary="(ex.)My Boundary"
+				    : message/rfc822;
+				     (other send raw)
+			Content-Transfer-Encoding: base64
+						 : quoted-printable
+						 : 7-bit
+						 (other send raw)
+			(It is set to 7 bits on H8 side unless Content-Transfer-Encoding exits.)
+			X-Attbin: CbinIDxxxx
+				  (number of binary files in actual body parts)
+
+			Actual body parts (Replace with <<CbinIDxxxx>> when X-Attbin exists.)
+					  (Repeats for the number of binary files.)
+
+			--boundary character (ex.) My Boundary
+
+
+
+
+
+
+
+
+							--- 12 ---
+
+
+[Remarks]
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999 and applies the ID obtained from AT+VOGLST.
+  * Input parameter is sent to the electronic note after sending CMDOK.
+  * It is required to analyze the date header on the electronic note side since the received header is sent from POP
+    server without any correction.
+  * Note that there must be a line (empty line) only with CRLF in the end of message header.
+    (There must be also an empty line between message body parts header and actual body parts.)
+  * CRLF must be attached at the end of boundary characters.
+  * In case that any of main header does not exist, its parameter name is not sent.
+  * Note that actual message body and message body parts may not exist.
+  * CbinIDxxxx is binary data ID ,fixed to decimal 4-digit number from 0001 - 9999 and managed in H8.
+
+  * As the optional header item "X-*** : ***" ( The character string that *** is optional ) can be gotten.
+    This is the specification which can receive only the quick data of GSM when receiving an attachment file. 
+    It is possible to use in the following condition.
+            * X-letters number limitation:MAX.40 byte
+            * X-addition line number limitationÅFMAX.3 lines
+            * X-Attbin:CinID**** is the outside of the object (It doesn't reflect in the header).
+    "X-***" can be gotten by "AT+VMRDML****TS"(all header receiving).
+    But,"X-***" can not be gotten by "AT+VMRDML***TA"(main header receiving).
+    As for this, the other header items "X-Mailer" and "X-UIDL" in addition to "X-***", too, are the same.
+
+  * In the receiving of the HTML mail without the attached file, the back of the first boundary characters
+    is a blank line,and the back of the 2nd boundary characters is the text into which code was converted.
+    Please convert the code and extract the text in the application.
+    In the receiving of the HTML mail with attached file,it hands over the text and the attached file.
+
+  *When receiving the mail of about 25(=To), the delimitation space of the To address character string is deleted
+   in some interval.
+
+<> Receiving sending mail from electronic note
+[Command]		AT+VMWRML + mail ID + sending data specification
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+			PARAMOK		Completed to receive input parameter
+			STOPPED		Stopped receiving input parameter
+					(due to ER->OFF on electronic note side or timeout)
+			CONFAULT + error ID
+			  M01		Insufficient memory
+			  M05		Input parameter receive error
+			  M06		Input parameter syntax error
+[Command Parameter]	Mail ID
+					Specify sending data
+			T -----	Translated data 
+				(H8 sends input parameter data by MIME encoding.)
+[Input Parameter] 			Message header
+			From: + character		(ex. Dave Roberts<dave@droberts.com>
+			To: + character 		(ex. jeffd@coriolis.com (Jeff Duntemann))
+			Cc: + character 		(ex. dave@droberts.com)
+			Bcc: + character 		(ex. dave@droberts.com)
+			Reply-To: + character 		(ex. dave@droberts.com
+			Date: + character 		(ex. Sun, 09 Jul 1995 15:01 PDT)
+			Subject: + character 		(ex. Example)
+			Mime-Version: + character 	(ex. 1.0)
+			Content-Type: text/plain;
+					charset=us-ascii
+					       =iso-8859-1
+				    : multipart/mixed;
+					boundary="(ex.)My Boundary"
+				    : message/rfc822;
+					(other send raw)
+			Content-Transfer-Encoding: base64
+						 : quoted-printable
+						 : 7-bit
+				                 (other send raw)
+			(It is set to 7 bits on H8 side unless Content-Transfer-Encoding exits.)
+                        X-***: *** (The optional header item)
+			X-Attbin: CbinIDxxxx
+				  (Repeats for the number of binary files.)
+
+			Actual message body
+
+					Message body parts (at multipart/mixed)
+			--boundary character 		(ex.) My Boundary
+			Content-Type: text/plain;
+				        charset=us-ascii
+					       =iso-8859-1
+					       (other send raw)
+				    : multipart/mixed;
+				        boundary="(ex.)My Boundary"
+				    : message/rfc822;
+				     (other send raw)
+			Content-Transfer-Encoding: base64
+						 : quoted-printable
+						 : 7-bit
+						 (other send raw)
+			(It is set to 7 bits on H8 side unless Content-Transfer-Encoding exits.)
+			X-Attbin: CbinIDxxxx
+				  (number of binary files in actual body parts)
+
+			Actual body parts (Replace with <<CbinIDxxxx>> when X-Attbin exists.)
+					  (Repeats for the number of binary files.)
+
+			--boundary character (ex.) My Boundary
+
+							--- 13 ---
+
+
+[Output Parameter]	-----
+[Remarks]
+  * Mail ID is fixed to decimal 4-digit number from 0001 - 9999 and applies the ID managed on the electronic note side.
+  * Input parameter is sent to the electronic note after sending CMDOK.
+  * The date header sent from the electronic note side is sent to SMTP server without any correction. (Year is express-
+    ed in 4 digits.)
+  * Note that there must be a line (empty line) only with CRLF in the end of message header.
+    (There must be also an empty line between message body parts header and actual body parts.)
+  * CRLF must be attached at the end of boundary characters.
+  * In case that any of main header does not exist, its parameter name is not sent.
+  * Note that actual message body and message body parts may not exist.
+  * Adjust lines on the electronic note so that actual message body or body parts do not include only one character wi-
+    th "." in their lines since such character is considered as input parameter on the H8 side.
+  * To express attachment data, add boundary characters on the electronic note side if necessary.
+  * Basically, only the above items are sent from the electronic note. However, H8 should be ready to send other items
+    that may be also sent from the electronic note.
+  * CbinIDxxxx is binary data ID decimal 4-digit number from 0001 - 9999 and managed on the electronic note.
+  * X-***(*** is the character string of the option) can be added as the optional header item.
+    This is the specification which can receive only the quick data of GSM when receiving an attachment file. 
+    It is possible to use in the following condition.
+            * X-letters number limitation:MAX.40 byte
+            * X-addition line number limitationÅFMAX.3 lines
+            * X-Attbin:CinID**** is the outside of the object (It doesn't reflect in the header).
+  *The address buffer can be used up to 127 bytes.  
+
+<> Starting modem test program
+[Command]		AT+VMATST + test program ID
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+			Test Program Result	Returns result in result code format (put between <CR> and <LF>)
+			  AT+VMATST01 ------- INTROM checksum value = ????h
+			  AT+VMATST02 ------- RAM check OK
+					      RAM check NG (at:????????h)
+			  AT+VMATST03 ------- CASIO Z488 ver. *.**a
+			  AT+VMATST04 ------- EXTROM checksum value = ????h
+			  Except the above -- OK
+[Command Parameter]			Specify test program to start
+			01	INTERNALROM CHECKSUM
+				(Calculates internal MASK and FLASHROM checksum)
+			02	RAM WRITE/READ CHECK
+				(External RAM read/write)
+			03	FARMWARE VERSION
+				(Returns firmware version)
+			04	EXTERNALROM CHECKSUM
+				(Calculates external MASK and ROM checksum) 
+				Adjust so that CMDFAULT is returned without reckless operation in case external ROM is
+				not used.
+			05	Reserve
+			06 	Reserve 
+			07 	Reserve 
+			08 	Reserve 
+			09 	Reserve 
+			10 	Reserve 
+			11 	Reserve 
+			12 	Reserve 
+			13 	Reserve 
+			14 	Reserve 
+			15 	Reserve 
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * "AT+VMATST03 - CASIO Z488 ver.*.**a"
+    Z488 refers to machine type and *.**a to version number.
+  * Execute RAM WRITE/READ CHECK according to the following example.
+
+	WORD Check_Ram(HWORD *ramadd, WORD area, int intvl)
+	{
+		WORD   i;
+		HWORD ramstck = 0;
+		HWORD ramcomp = 0x0101;
+
+		for(i=0; i<area; i+= intvl)
+		{
+		ramstck = *(ramadd + i);
+		*(ramadd + i) = ramcomp;
+		if (ramcomp != *(ramadd + i))
+			break;
+		*(ramadd + i) = ramstck;
+		ramcomp += 0x0101;
+		}
+		return i;
+	}
+
+
+							--- 14 ---
+
+
+<> Setting DTE communication parameter
+[Command]		AT+VMPRM + baud rate + data length + parity + stop bit
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+			SUCCEEDED	Succeeded to set
+[Command Parameter]	01 ------ 300bps	Baud rate
+			11 ------ 600bps
+			21 ----- 1200bps
+			31 ----- 2400bps
+			41 ----- 4800bps
+			51 ----- 9600bps
+			61 ---- 19200bps
+			62 ---- 38400bps
+			71 ---- 57600bps
+			72 --- 115200bps	(It isn't possible to use.)
+			7  ---	7 bit	Data length
+			8  ---	8 bit
+			N  ---	None	Parity
+			O  ---	ODD
+			E  ---	EVEN
+			1  ---	1 bit	Stop bit
+			2  ---	2 bit
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * The above is the commands to set the communication parameter between the electronic note and H8, and does not infl-
+    uence the modem side.
+  * In case of 38400bps, 8bit, NON parity, and 1 stop bit, the command is:
+      AT+VMPRM628N1
+  * Make sure to specify for all parameter. (Total number of digits: 5)
+  * Flow control system is fixed to RS/CS (hard flow control).
+  * The maximum baud rate which can be used is 57.6kbps.  
+  * The result code, CMDOK or CMDFAULT is sent using the communication parameter used before specifying when syntax er-
+    ror is checked and the command is normally received.
+    Then, when the actual process is completed, the result code for CMDOK, SUCCEEDED is sent using the communication
+    parameter used after specifying 1 second later.
+    The electronic note side changes the communication parameter within 1 second from the time when CMDOK is received,
+    and becomes in the result code wait state.
+
+    The process flow is as follows:
+
+
+       <Electronic Note>                                   <H8>
+
+       Issue command             ------->            Accept and analyze
+             |                                               |
+       Accept result            <-------           Send CMDOK or CMDFAULT
+             |                                               |
+   CMDFAULT      CMDOK                               CMDOK     CMDFAULT
+       |           |                                   |           |
+      End          |                                   |          End
+             Change setting                   Wait for 1 second
+                   |                        after changing setting
+                   |                                   |
+             Accept result      <-------    Send the change success
+                                              result , SUCCEEDED.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							--- 15 ---
+
+
+<> Moving to hibernate mode
+[Command]		AT+VMHBNT
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+[Command Parameter]	-----
+[Input Parameter]	-----
+[Output Parameter]	-----
+[Remarks]
+  * It is not possible to return from the hibernate mode.
+  * Judge that moving to hibernate state (moving to hibernate mode) is completed if RS232C DR signal is turned OFF aft-
+    er H8 executes preprocess to move to the hibernate mode such as disconnecting IrDA connection and making IrDA modu-
+    le stand-by state.
+
+    The process flow is as follows: ("1sec. WAIT" shown below for electronic side is for temporary.)
+
+
+       <Electronic Note>                                   <H8>
+
+       Issue command                 ------->        Accept and analyze
+             |                                               |
+       Accept result                <-------       Send CMDOK or CMDFAULT
+             |                                               |
+   CMDFAULT      CMDOK                               CMDOK     CMDFAULT
+       |           |                                   |           |
+      End          |                                   |          End
+           Start DR signal monitor            Moving preprocess
+                   |                                   |
+           Recognize DR signal OFF  <-------  Turn DR signal OFF
+                   |                                   |
+              1sec. WAIT                      Port close process
+                   |                                   |
+           Port close process               Move to hibernate mode
+    (Serial communication BIOS is used. 
+     The power supply for the H8 side
+     also stops here.)
+
+
+<<IrDA>>
+
+<> Connecting to IrDA device
+[Command]		AT+VIC
+[Result]		CMDOK		Accepted command 
+			CMDFAULT	Not accepted command; syntax error
+			CONNECTED	Succeeded to connect
+			CONFAULT + error ID
+			  I01		IrDA connection failed
+[Command Parameter]	-----
+[Input Parameter]	-----
+[Output Parameter]	-----
+
+
+

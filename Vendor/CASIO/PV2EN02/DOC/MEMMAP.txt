@@ -1,0 +1,65 @@
+<PV2 Memory Map>
+
+[Program Execute Area]
+
+		C Compiler Memory Model = P Model
+
+			|		|				C SegmentsName
+		A0000h	+---------------+
+			| Application	|
+			| Program	|
+			| 		|				FAR_DATA,x_n_DATA
+		90000h	|- 	       -|ProgramSize=MAX128KB		x_TEXT
+			|		|				_GHOST_DATA
+			|		|				TEXT
+			|		|
+		80000h	+---------------+
+			|		|
+
+
+		C Compiler Memory Model = S Model
+
+			|		|				C SegmentsName
+		90000h	+---------------+
+			|Application	|				FAR_DATA,x_n_DATA
+			|Program	| ProgramSize=MAX64KB		_GHOST_DATA
+			|		|				TEXT
+		80000h	+---------------+
+			|		|
+
+
+[RAM Map Outline]
+									C SegmentsName
+		1FFFFh	+---------------+			--+
+			|		|			  |
+			| Stack		|8KB			  |- XSTACK	<-+
+			|		|			  |		  |
+		1E000h	|---------------|			--+		  |- DGROUP
+			|		|			  |		  |
+			| C Application	|20KB			  |- DATA,BSS	<-+
+			| Work		|			  |
+			|		|			  |
+		19000h	|---------------|			--+
+			|		|	 		  |
+			| C Application	|3KB	 		  |-SYS_DATA(SYSTEM Reserve)
+			| System Holds	|	 		  |
+			|		|	 		  |
+		18400h	|---------------|			--+
+			|		|
+			| SYSTEM RESERVE|
+			|		|
+		10000h	+---------------+			--+
+			| 		|			  |
+			| C Applicatoin	|32KB			  |- FAR_BSS
+			| Work		|			  |
+			|		|			  |
+		08000h	+---------------+			--+
+			|		|
+			|		|
+			| SYSTEM RESERVE|
+			|		|
+			|		|
+		00400h	|---------------|
+			| INT Vector	|1KB
+		00000h	+---------------+
+

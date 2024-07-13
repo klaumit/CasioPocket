@@ -1,0 +1,67 @@
+1. Application design rules
+
+1) Limitations on coding
+
+ 1> To make the data segment (DATA, BSS) the same in units of links, data using a data 
+   segment, such as static variable in function, static variable in file, or fixed character 
+   string cannot be used.  If it is necessary to use a data segment, all variables used in 
+   such data segment must be global variables.
+
+ 2> Only standard functions defined in stdrom.h can be used.
+ 3> S model is used as a standard memory model.  Use of P model is allowed only if the 
+   size of the CODE area exceeds 64 KB.
+ 4> All of fixed data (graphic image data, etc.) must be far data.  Far declaration may 
+   create one segment for one data and be placed in an area different from the data area.
+
+		Example>		byte far abc [] = {0x80, 0x00, 0x01};
+
+		Cautions
+		The following data declaration may be as if the data is allocated as far data.  
+		However, since both the far pointer (4-byte) and character string are determined as 
+		DATA (near), this data declaration cannot be used.
+			byte far *abc = "acb";		/* This is incorrect. */
+			byte far abc[] = { "abc" };	/* This is correct. */
+
+ 5> Far data having no initial values cannot be used, since there are no RAM areas 
+   where such far data is located.
+		Example>	byte far abc[3];	/* This is invalid. */
+
+ 6> General functions are contained in libraries having a function name of Libxxx.
+
+ 7> The size of one mode including the codes and fixed data must be within one bank (128-Kbyte).
+
+ 8> Fixed data (located in ROM) must be located immediately after the codes, and its 
+   size must be within one bank (128-Kbyte).
+
+ 9> The entire size of the normal data area (DATA, BSS) must be 20-Kbyte and that of 
+   the stack area must be 8-Kbyte.
+
+10> DATA, BSS, and STACK are commonly used in all modes.
+
+11> Since the application is linked individually, data in BIOS and LIB cannot be referred 
+   and updated.
+
+12> A 16-bit integer is declared as int.  At this time, short must not be used.
+
+13> Return values by return must be enclosed by (  ).
+
+14> The following definitions must be used.
+	typedef	unsigned char	byte;
+	typedef	unsigned int	word;
+	typedef	unsigned long	dword;
+
+15> "_" (underscore) must not be used in a function name.
+
+16> Flag must not be used in bit fields.
+
+17> Prototype function declaration must always be used.  Local scope functions are 
+   written in the source file while global scope functions must be written in the header 
+   file.
+
+18> Use of complicate nesting (6 layers or more) must be avoided.
+
+19> Long-file name must not be used.  The compiler, linker, and some utilities are not 
+   applicable to long-file name.
+
+20> The real number calculation and so on use the calculation library of CASIO.
+
