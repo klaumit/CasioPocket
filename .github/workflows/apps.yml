@@ -40,6 +40,10 @@ jobs:
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/Chimpa
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/Collection
       run: .\mk.bat
 
@@ -104,9 +108,17 @@ jobs:
       run: .\mk.bat
 
     - name: Make
+      working-directory: ./Source/Apps/Periodic
+      run: .\mk.bat
+
+    - name: Make
       working-directory: ./Source/Apps/PermLight
       run: .\mk.bat
-      
+
+    - name: Make
+      working-directory: ./Source/Apps/PocketPong
+      run: .\mk.bat
+
     - name: Make
       working-directory: ./Source/Apps/PPlot
       run: .\mk.bat
