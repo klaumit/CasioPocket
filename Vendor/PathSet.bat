@@ -5,6 +5,7 @@ SET PATH=%LUP%\bin;%CUP%\TOOL;
 SET MAKEDEFAULT=%LUP%\bin\makedef
 SET PVC=%CUP%\C
 mkdir ..\Bin
+mkdir ..\Obj
 mkdir ..\User_Bin
 mkdir .\obj
 mkdir .\ForDEBUG
