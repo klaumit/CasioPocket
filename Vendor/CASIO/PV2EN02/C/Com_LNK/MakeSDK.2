@@ -41,7 +41,9 @@ $(APLOBJS): $(HEADFILE) $(COMHEAD) makefile $(PVC)\com_lnk\makeSDK.1 $(PVC)\com_
 
 $(HEX): $(ALLOBJS) $(CLDIR)\libc.lib
 	lld @${$(LINKINF)} $(PVC)\com_lib\$(MODEL)\libc.lib -L$(LUP)\lib -l$(MODEL)\doslib
+ifndef RAWMAIN
 	@HEADSET $(ODIR)\$@ -v$(VERSION) -pP$(SECRET) -dU -m$(MCODE) -s$(SCODE) $(MICONBMP) $(LICONBMP)
+endif
 #	@if exist $*.BIN DEL $*.BIN
 #	@hex2bin $@ $*.bin
 ifdef DEBUG
@@ -49,10 +51,14 @@ ifdef DEBUG
 	@if exist $(ODIR)\$*.dbg copy $(ODIR)\$*.dbg ForDebug.DBG> nul
 	@if exist $(ODIR)\$*.map copy $(ODIR)\$*.map ForDebug.MAP> nul
 	@hex2bin $(ODIR)\$@ ..\BIN\$*.bin
+ifndef RAWMAIN
 	@PUTNAME ..\BIN\$*.bin $(PROGNAME)
+endif
 #	copy $*.bin ..\BIN > NUL
 else
 	@hex2bin $(ODIR)\$@ ..\USER_BIN\$*.bin
+ifndef RAWMAIN
 	@PUTNAME ..\USER_BIN\$*.bin $(PROGNAME)
+endif
 #	copy $*.bin ..\USER_BIN > NUL
 endif
