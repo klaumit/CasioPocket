@@ -20,13 +20,12 @@ endif
 LINK1 = -Fh -TDATA 19000 -TSYS_EXTDATA 18000 -TSYS_DATA 18400 -TXSTACK 1E000 -TFAR_BSS 08000 -M
 
 COMHEAD = $(CHDIR)\define.h $(CHDIR)\libc.h $(LHDIR)\l_define.h $(LHDIR)\l_libc.h 
-
-ifdef RAWMAIN
-COMOBJS =
-STARTUP =
-else
 COMOBJS = $(CODIR)\libdata.obj
 STARTUP = $(CODIR)\start.obj
+
+ifdef NOLIB
+COMOBJS =
+STARTUP =
 endif
 
 ALLOBJS = $(STARTUP) $(COMOBJS) $(APLOBJS)
