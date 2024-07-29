@@ -29,5 +29,8 @@ CC    = lcc86
 VPATH = c
 
 .c.obj:
+ifdef GETSECT
 	$(CC) $(CFLAG) -SC -o..\$@.s $<
+else
 	$(CC) $(CFLAG) -o$@ $<
+endif
