@@ -24,9 +24,3 @@ jobs:
       with:
         name: All binary results
         path: ./Source/Apps/User_Bin
-
-    - name: Upload
-      uses: actions/upload-artifact@v4
-      with:
-        name: All assembler results
-        path: ./Source/Apps/Obj
