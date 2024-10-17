@@ -1,6 +1,7 @@
 @echo off
 
 cmd /c "cd AssTest && mk.bat"
+cmd /c "cd AssDisp && mk.bat"
 cmd /c "cd Ataxx && mk.bat"
 cmd /c "cd Autostart && mk.bat"
 cmd /c "cd BallLine && mk.bat"
